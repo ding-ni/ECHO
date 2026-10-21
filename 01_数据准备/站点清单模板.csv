@@ -1,1 +1,1 @@
-station_id,terminal_system_id,topology_evidence,area_km2,slope_degrees,relief_m,latitude,longitude,support_coverage,query_coverage,time_support_verified,datum_verified,datum_id,Q_provenance_class,notes
+station_id,terminal_system_id,topology_evidence,area_km2,slope_degrees,relief_m,latitude,longitude,support_coverage,query_coverage,time_support_verified,datum_verified,datum_id,datum_evidence,Q_provenance_class,qh_path,weather_path,weather_available,notes

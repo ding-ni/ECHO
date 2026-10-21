@@ -67,6 +67,7 @@ def build_inventory(qh_root, weather_root, attribute_root, output, topology_path
                     "time_support_verified": False,
                     "datum_verified": False,
                     "datum_id": "unknown",
+                    "datum_evidence": "",
                     "Q_provenance_class": "archive_rating_derived_or_unknown",
                     "qh_path": str(path.resolve()),
                     "weather_path": str(weather_paths.get(sid, "")),

@@ -60,8 +60,10 @@ def fetch(spec, root, attempts=6, progress=True, snapshot=True):
     root = Path(root)
     root.mkdir(parents=True, exist_ok=True)
     name = spec["filename"]
-    if Path(name).name != name:
+    if name in {"", ".", ".."} or any(c in name for c in ["/", "\\", ":"]) or Path(name).name != name:
         raise ValueError("资产名不能包含路径")
+    if not ({"md5", "sha256"} & spec.keys()):
+        raise ValueError("资产必须带有可信来源校验值")
     dest = root / name
     audit = root / (name + ".audit.json")
     part = root / (name + ".part")
@@ -256,6 +258,7 @@ def fetch_parallel(spec, root, connections=4, chunk_bytes=8 * 1024**2, snapshot=
                 },
             )
             print(f"{spec['filename']}: {done / spec['bytes']:.1%}（已完成分片）", flush=True)
+    # 合并续传时从当前前缀开始，已存在的字节只追加剩余分片。
     with part.open("ab") as out:
         for start, end in ranges:
             with (directory / f"{start}-{end}.bin").open("rb") as stream:

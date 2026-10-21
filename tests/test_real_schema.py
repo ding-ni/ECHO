@@ -4,7 +4,7 @@ import pytest
 import xarray as xr
 
 from echo.data.audit import inspect_file
-from echo.data.prepare import prepare, read_series
+from echo.data.prepare import prepare, read_series, require_verified_origin
 from echo.utils import write_json
 
 
@@ -30,3 +30,10 @@ def test_unverified_mapping_cannot_prepare_training_data(tmp_path):
     write_json(path, {"verified": False})
     with pytest.raises(ValueError, match="核验"):
         prepare(tmp_path / "nonexistent.csv", path, tmp_path / "out")
+
+
+def test_partial_schema_probe_cannot_become_training_input(tmp_path):
+    path = tmp_path / "probe.nc"
+    path.write_bytes(b"schema probe")
+    with pytest.raises(ValueError, match="完整校验"):
+        require_verified_origin(path)

@@ -1,5 +1,6 @@
 """按站标准化，来源/目标输入/评分标签物理分开。"""
 
+from functools import lru_cache
 from pathlib import Path
 
 import numpy as np
@@ -8,6 +9,27 @@ import pandas as pd
 from echo.data.netcdf import open_netcdf
 from echo.geo.features import FeatureScaler, validate_features
 from echo.utils import digest, read_json, write_json
+
+
+@lru_cache(maxsize=32)
+def verified_extraction_root(directory):
+    marker = Path(directory) / "extraction.json"
+    record = read_json(marker)
+    archive = Path(record["archive"])
+    audit = read_json(archive.with_name(archive.name + ".audit.json"))
+    if record.get("preview") or digest(archive) != record["archive_sha256"]:
+        raise ValueError("提取目录与完整校验归档不一致")
+    if audit.get("status") not in {"downloaded_verified", "verified_existing"}:
+        raise ValueError("原始归档未完成校验")
+    return True
+
+
+def require_verified_origin(path):
+    path = Path(path).resolve()
+    for parent in path.parents:
+        if (parent / "extraction.json").is_file():
+            return verified_extraction_root(str(parent))
+    raise ValueError("只接受从完整校验归档提取的数据，局部模式探查不能用于训练")
 
 
 def convert(values, unit, kind):
@@ -62,6 +84,9 @@ def read_series(path, spec, time_name, kind):
             t = t.tz_convert("UTC")
         if t.has_duplicates or not t.is_monotonic_increasing:
             raise ValueError("重复或逆序时间必须先审计，禁止静默整理")
+        hour_ns = 3600 * 10**9
+        if not t.equals(t.floor("h")) or np.any(np.diff(t.asi8) % hour_ns):
+            raise ValueError("输入不是已核验的UTC整小时序列，不能通过取样冒充小时聚合")
         raw_units = str(value.attrs.get("units", ""))
         if raw_units and raw_units != spec["unit"] and not spec.get("metadata_override_evidence"):
             raise ValueError(f"映射与文件单位不一致: {raw_units} / {spec['unit']}")
@@ -82,7 +107,7 @@ def prepare(manifest_path, mapping_path, output, features=None):
         "instantaneous",
     }:
         raise ValueError("时间支持和UTC尚未核验")
-    features = features or ["area_km2", "latitude", "longitude"]
+    features = features or ["area_km2", "slope_degrees", "relief_m", "latitude", "longitude"]
     validate_features(features)
     df = pd.read_csv(manifest_path, dtype={"station_id": str, "terminal_system_id": str})
     if df.groupby("terminal_system_id").split.nunique().max() > 1:
@@ -97,8 +122,17 @@ def prepare(manifest_path, mapping_path, output, features=None):
     for _, row in active.iterrows():
         sid = row.station_id
         try:
-            if not row.time_support_verified or not row.datum_verified:
+            if row.time_support_verified not in (True,):
+                raise ValueError("时间支持未核验")
+            if row.datum_verified not in (True,):
                 raise ValueError("时间支持或基准未核验")
+            if (
+                str(row.get("datum_id", "unknown")) in {"unknown", "", "nan"}
+                or not str(row.get("datum_evidence", "")).strip()
+            ):
+                raise ValueError("缺少基准标识及独立依据")
+            require_verified_origin(row.qh_path)
+            require_verified_origin(row.weather_path)
             times = pd.date_range("2011-10-01", "2021-10-01", freq="h", inclusive="left", tz="UTC")
             h = (
                 read_series(row.qh_path, mapping["H"], mapping["time_variable"], "H")

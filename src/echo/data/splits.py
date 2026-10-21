@@ -30,11 +30,13 @@ def build_splits(manifest, seed=20261019, max_sites=100):
         "unknown_terminal": df.terminal_system_id.isna() | (df.terminal_system_id.astype(str) == ""),
         "unknown_topology": df.topology_evidence.isna() | (df.topology_evidence.astype(str) == ""),
         "area_outside_range": ~df.area_km2.between(20, 5000),
-        "support_coverage": df.support_coverage < 0.8,
-        "query_coverage": df.query_coverage < 0.9,
+        "support_coverage": ~df.support_coverage.ge(0.8),
+        "query_coverage": ~df.query_coverage.ge(0.9),
         "unverified_time": ~df.time_support_verified.eq(True),
         "unverified_datum": ~df.datum_verified.eq(True),
     }
+    if "weather_available" in df:
+        checks["weather_unavailable"] = ~df.weather_available.eq(True)
     for reason, mask in checks.items():
         df.loc[mask, "exclusion_reason"] += reason + ";"
     df["split"] = "excluded"
