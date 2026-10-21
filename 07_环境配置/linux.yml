@@ -1,0 +1,8 @@
+name: echo-train
+channels: [conda-forge]
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+      - -e .[dev]
+# CUDA版torch先按官方环境安装。Mamba-3在目标Linux GPU冒烟通过后固定提交号，开发版不自动安装。
