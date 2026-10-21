@@ -1,0 +1,14 @@
+{
+  "checked_date_Asia_Shanghai": "2026-10-22",
+  "evidence_scope": "engineering_and_synthetic_not_real_prediction_performance",
+  "python": "3.11.17",
+  "torch": "2.8.0+cu126",
+  "cuda": "12.6",
+  "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU",
+  "gpu_forward_backward": true,
+  "tests_passed": 40,
+  "test_log_sha256": "f93ab9a4229dde7a1bcc705ae5a5c2c669fd692fb3666b92733acd3ad74f8f46",
+  "test_summary": "40 passed in 109.44s (0:01:49)",
+  "real_100_site_training_complete": false,
+  "release_v0p1p0_accepted": false
+}

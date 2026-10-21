@@ -6,3 +6,4 @@ Get-ChildItem -LiteralPath (Join-Path $projectRoot '本地数据\原始') -Recur
     Get-Content -LiteralPath $_.FullName -Encoding utf8
 }
 Get-Content -LiteralPath (Join-Path $projectRoot '本地运行\环境与测试\执行状态.json') -Encoding utf8
+Get-Content -LiteralPath (Join-Path $projectRoot '本地运行\后台任务.json') -Encoding utf8

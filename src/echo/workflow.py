@@ -28,6 +28,21 @@ def main():
                 extract_verified(archive, target)
                 write_json(ROOT / "本地运行" / (target.name + "_schema.json"), audit_tree(target, 20))
                 done.add(target)
+                if target.name == "qh":
+                    early_inventory = ROOT / "本地数据/审计/QH候选站点.csv"
+                    if not early_inventory.exists():
+                        write_json(
+                            state,
+                            {
+                                "status": "auditing_complete_QH_archive",
+                                "updated_utc": utc_now(),
+                                "real_training_complete": False,
+                            },
+                        )
+                        build_inventory(target, raw / "weather", raw / "attributes", early_inventory)
+                        from echo.data.coverage_report import render_coverage
+
+                        render_coverage(early_inventory, ROOT / "本地运行/完整QH数据覆盖")
         if len(done) < len(tasks):
             write_json(
                 state,
