@@ -1,4 +1,5 @@
 """路径、审计与可复现元数据。"""
+
 from __future__ import annotations
 
 import hashlib
@@ -7,7 +8,6 @@ import platform
 import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
-
 
 ROOT = Path(__file__).resolve().parents[2]
 if ROOT.name == "src":
@@ -40,11 +40,18 @@ def utc_now():
 
 def run_metadata(config, inputs=()):
     try:
-        commit = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT,
-                                         stderr=subprocess.DEVNULL, text=True).strip()
+        commit = subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], cwd=ROOT, stderr=subprocess.DEVNULL, text=True
+        ).strip()
         dirty = bool(subprocess.check_output(["git", "status", "--porcelain"], cwd=ROOT, text=True))
     except (OSError, subprocess.CalledProcessError):
         commit, dirty = "uncommitted", True
-    return {"created_utc": utc_now(), "commit": commit, "working_tree_dirty": dirty,
-            "python": platform.python_version(), "platform": platform.platform(), "config": config,
-            "inputs": {str(p): digest(p) for p in inputs if Path(p).is_file()}}
+    return {
+        "created_utc": utc_now(),
+        "commit": commit,
+        "working_tree_dirty": dirty,
+        "python": platform.python_version(),
+        "platform": platform.platform(),
+        "config": config,
+        "inputs": {str(p): digest(p) for p in inputs if Path(p).is_file()},
+    }

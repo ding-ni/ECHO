@@ -1,0 +1,48 @@
+{
+  "verified_metadata_date": "2026-10-21",
+  "assets": {
+    "info": {
+      "record": "15066778",
+      "filename": "info.csv",
+      "bytes": 1162939,
+      "md5": "cb5872491b17c077a27fa24dc9aaac98",
+      "url": "https://zenodo.org/api/records/15066778/files/info.csv/content"
+    },
+    "attributes": {
+      "record": "15066778",
+      "filename": "attributes.7z",
+      "bytes": 19067073,
+      "md5": "3c43c3df3809e69f5f1798f58d5dc62a",
+      "url": "https://zenodo.org/api/records/15066778/files/attributes.7z/content"
+    },
+    "shapefiles": {
+      "record": "15066778",
+      "filename": "shapefiles.7z",
+      "bytes": 530604106,
+      "md5": "b16c335e73a5532f1c0f8117a3c53448",
+      "url": "https://zenodo.org/api/records/15066778/files/shapefiles.7z/content"
+    },
+    "qh": {
+      "record": "16729675",
+      "filename": "Hourly2.zip",
+      "bytes": 4176462827,
+      "md5": "8bab1c99329db3fa6b1b6cb464a2a573",
+      "url": "https://zenodo.org/api/records/16729675/files/Hourly2.zip/content"
+    },
+    "weather": {
+      "record": "15066778",
+      "filename": "timeseries.7z",
+      "bytes": 21247136353,
+      "md5": "68faf47c89cb96c513e89343f87f3f0e",
+      "url": "https://zenodo.org/api/records/15066778/files/timeseries.7z/content"
+    },
+    "weather_extra": {
+      "record": "15070091",
+      "filename": "timeseries_nonobs.7z",
+      "bytes": 35655472043,
+      "md5": "ef76e71d97953ed62c2cb24c0ccb23b1",
+      "url": "https://zenodo.org/api/records/15070091/files/timeseries_nonobs.7z/content"
+    }
+  },
+  "license": "CC-BY-4.0 (official record metadata saved alongside downloads)"
+}

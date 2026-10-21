@@ -1,0 +1,14 @@
+{
+  "scope": "20_real_NetCDF_schema_probe_from_partial_archive",
+  "full_archive_md5_verified": false,
+  "H": {"variable": "water_level", "unit": "m", "long_name": "Gage height"},
+  "Q": {"variable": "streamflow", "unit": "m3 s-1", "long_name": "Streamflow"},
+  "time_variable": "time",
+  "sample_start": "1980-01-01T00:00:00",
+  "sample_end": "2024-12-31T23:00:00",
+  "sample_hourly_regular": true,
+  "sample_duplicates": 0,
+  "time_support": "unknown",
+  "datum_comparability_verified": false,
+  "evidence": "2026-10-21读取20个CRC校验通过的真实NetCDF文件元数据。不能替代整包校验、逐站质量与基准审计。"
+}

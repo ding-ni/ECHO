@@ -1,0 +1,12 @@
+{
+  "verified": false,
+  "time_variable": "待真实文件探查",
+  "time_support": "unknown",
+  "timezone": "UTC",
+  "H": {"variable": "待核验", "unit": "待核验"},
+  "Q": {"variable": "待核验", "unit": "待核验"},
+  "P": {"variable": "待核验", "unit": "待核验"},
+  "T": {"variable": "待核验", "unit": "待核验"},
+  "PET": {"variable": "待核验", "unit": "待核验"},
+  "evidence": "记录元数据或官方文档依据，不能根据数值范围猜单位"
+}
