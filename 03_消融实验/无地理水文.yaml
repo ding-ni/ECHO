@@ -1,0 +1,9 @@
+model: hydrology
+no_geo: true
+seed: 20261019
+hydro_epochs: 5
+hydro_lr: 0.002
+hydro_blocks_per_station: 8
+query_hours: 168
+cpu_threads: 2
+device: cpu

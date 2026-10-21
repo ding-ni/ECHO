@@ -1,0 +1,7 @@
+experiment,status,configuration,readout
+no_memory,implemented_not_run,echo_static_vs_dynamic,event_RMSE_m
+no_geography,implemented_not_run,no_geo_full_retrain,event_RMSE_m
+support_budget,implemented_not_run,7_30_90_complete_water_year,error_budget_curve
+spatial_rainfall,planned,requires_grid_forcing,stage_timing
+joint_recombination,planned,requires_full_joint_posterior,CRPS
+forecast,planned,requires_issued_forecast,warning_lead

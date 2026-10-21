@@ -1,0 +1,179 @@
+model: official_mamba3_main
+status: reference_not_implemented
+source_zip_sha256: 10a383cd7822f48095a98c3adfa4e688605e3d0df07d2aa5844f365944383d51
+protocol_reference:
+  protocol: ECHO_NatureWater_main_v1
+  seed: 20261019
+  status: research_configuration_not_trained_model
+  task:
+    timestep_hours: 1
+    target_local_discharge_available: false
+    target_output: gauge_relative_stage_meters
+    support_budget: complete_water_year
+    additional_support_days:
+    - 7
+    - 30
+    - 90
+    future_stage_in_context: false
+    future_weather_shortcut_to_stage: false
+    target_adaptation: frozen_shared_weights_forward_inference
+  splits:
+    spatial_unit: disjoint_terminal_river_systems
+    source_train_end: '2018-09-30T23:00:00Z'
+    source_validation_start: '2018-10-01T00:00:00Z'
+    source_validation_end: '2019-09-30T23:00:00Z'
+    target_support_start: '2019-10-01T00:00:00Z'
+    target_support_end: '2020-09-30T23:00:00Z'
+    target_primary_test_start: '2020-10-01T00:00:00Z'
+    target_primary_test_end: '2021-09-30T23:00:00Z'
+    forecast_2025_support: complete_calendar_year_2024
+    target_Q_exclusion_scope: all_years_and_connected_source_gauges
+  geography:
+    default_incremental_nodes: 8
+    max_incremental_nodes: 32
+    node_areas_are_incremental: true
+    basin_encoder: GATv2
+    basin_layers: 3
+    basin_width: 128
+    local_encoder: SetTransformer
+    local_layers: 2
+    local_width: 128
+    local_heads: 4
+    local_terrain_tokens: 16
+    neighborhood_scales_km:
+    - 1
+    - 5
+    - 10
+    climate_code_dim: 64
+    fused_code_dim: 256
+    prohibited_features:
+    - observed_target_Q_quantiles
+    - observed_runoff_ratio
+    - observed_baseflow_index
+  hydrology:
+    family: differentiable_HBV
+    geography_conditioned_parameters: true
+    low_rank_local_offset_dim: 8
+    time_varying_free_parameters: false
+    routing: positive_linear_reservoir_mass_closed
+    forcing_channels_core:
+    - P_mm_per_hour
+    - T_C
+    - PET_mm_per_hour
+    spinup_years: 2
+    source_reference_Q: river_system_cross_fitted
+    target_reference_Q: source_only_trained
+  context:
+    backbone: official_mamba3
+    blocks: 6
+    d_model: 256
+    d_state: 128
+    headdim: 64
+    is_mimo: true
+    mimo_rank: 4
+    chunk_size: 16
+    is_outproj_norm: false
+    dtype: bfloat16
+    geo_conditioning: FiLM_between_blocks
+    pooling: geography_conditioned_cross_attention
+    pooling_queries: 16
+    pooling_heads: 4
+    target_H_missing_mask: true
+    time_since_last_H: true
+  posterior:
+    family: conditional_rational_quadratic_spline_flow
+    code_groups:
+      hydro: 8
+      static: 16
+      dynamic: 8
+    total_code_dim: 32
+    layers: 8
+    bins: 8
+    conditioner_hidden:
+    - 128
+    - 128
+    permutations_across_groups: true
+    one_sample_per_full_trajectory: true
+  curve:
+    family: integrated_positive_piecewise_constant_slopes
+    segments: 32
+    hypernetwork_hidden:
+    - 128
+    - 128
+    - 128
+    flow_reference: area_km2_divided_by_86p4_m3s
+    flow_transform: log1p_Q_divided_by_qref
+    stage_center: support_H_median
+    stage_scale: max_support_H_IQR_and_0p1m
+    extrapolation: positive_linear_tail
+    silent_clipping: false
+  dynamics:
+    family: contracting_input_selective_rotation_blocks
+    rotation_blocks: 8
+    effective_state_dim: 16
+    tau_hours_min: 0.25
+    tau_hours_max: 720
+    tau_hours_initial:
+    - 1
+    - 3
+    - 6
+    - 12
+    - 24
+    - 72
+    - 168
+    - 720
+    drive: delta_u_and_delta2_u
+    zero_drive_at_constant_Q: true
+    gates_depend_on_previous_state: false
+    phase_initial: near_zero
+    input_and_readout_hidden:
+    - 64
+    - 64
+    Q_spinup_days_before_support: 90
+  training:
+    optimizer: AdamW
+    learning_rate: 0.0002
+    final_joint_learning_rate: 2.0e-05
+    weight_decay: 0.01
+    gradient_norm_clip: 1.0
+    members_start: 4
+    members_full: 8
+    inference_members: 64
+    convergence_members: 128
+    lambda_query_CRPS: 1.0
+    lambda_source_Q: 0.2
+    lambda_regularizer: 0.001
+    KL_beta_schedule: linear_0_to_1_on_source_training
+    query_hours: 168
+    evaluation_subwindow_hours: 72
+    actual_batch_size: benchmark_before_setting
+    mixed_precision_neural: true
+    physical_states_dtype: float32
+    unit_test_dtype: float64
+  evaluation:
+    primary: per_site_event_stage_RMSE_meters
+    secondary:
+    - full_period_MAE
+    - peak_stage_error
+    - peak_time_error
+    - CRPS
+    - interval_coverage
+    - interval_width
+    bootstrap_unit: terminal_river_system
+    primary_random_seeds:
+    - 20261019
+    - 20261020
+    - 20261021
+    operational_leads_hours:
+    - 6
+    - 12
+    - 18
+    same_observation_permissions_all_baselines: true
+    report_meteorological_grid_coverage: true
+    independent_field_QH: diagnostic_not_main_input
+  reproducibility:
+    mamba_commit: RECORD_AFTER_LOCAL_SMOKE_TEST
+    hydrology_commit: RECORD_AFTER_LOCAL_SMOKE_TEST
+    torch_version: RECORD_FROM_ENVIRONMENT
+    data_manifest_hash: RECORD_AFTER_AUDIT
+    split_manifest_hash: RECORD_BEFORE_TRAINING

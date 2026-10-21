@@ -1,0 +1,11 @@
+model: direct_lstm
+seed: 20261019
+hydrology_run: 区域水文
+hidden: 64
+epochs: 10
+episodes_per_station: 4
+support_days: [7, 30, 90, 366]
+query_hours: 168
+learning_rate: 0.0002
+cpu_threads: 2
+device: cpu
