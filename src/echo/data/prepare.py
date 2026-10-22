@@ -69,7 +69,7 @@ def convert(values, unit, kind):
     return x * factors[unit]
 
 
-def read_series(path, spec, time_name, kind):
+def read_series(path, spec, time_name, kind, time_reference="step_start"):
     with open_netcdf(path) as ds:
         variable = spec["variable"]
         if variable not in ds:
@@ -90,7 +90,28 @@ def read_series(path, spec, time_name, kind):
         raw_units = str(value.attrs.get("units", ""))
         if raw_units and raw_units != spec["unit"] and not spec.get("metadata_override_evidence"):
             raise ValueError(f"映射与文件单位不一致: {raw_units} / {spec['unit']}")
-        return pd.Series(convert(value.values, spec["unit"], kind), index=t)
+        unit = spec["unit"]
+        if kind in {"P", "PET"} and unit in {"kg/m2", "kg m-2"}:
+            if spec.get("accumulation_hours") != 1 or not spec.get("unit_evidence"):
+                raise ValueError("累计量必须有一小时累积时长及单位依据，不能当成每秒速率")
+            unit = "mm/h"
+        x = convert(value.values, unit, kind)
+        policy = spec.get("negative_policy", "reject")
+        if policy != "reject":
+            if kind != "PET" or policy != "positive_part" or not spec.get("negative_policy_evidence"):
+                raise ValueError("负值变换仅允许有依据的PET正部蒸发需求，不能用于降水或水位")
+            x = np.maximum(x, 0)
+        support = spec.get("time_support")
+        if support is not None:
+            if support not in {"step_start", "step_end", "instantaneous"} or not spec.get("time_evidence"):
+                raise ValueError("变量时间支持未核验")
+            if time_reference not in {"step_start", "step_end"}:
+                raise ValueError("统一时间参考必须为步首或步末")
+            if support == "step_end" and time_reference == "step_start":
+                t = t - pd.Timedelta(hours=1)
+            elif support == "step_start" and time_reference == "step_end":
+                t = t + pd.Timedelta(hours=1)
+        return pd.Series(x, index=t)
 
 
 def date_mask(times, start, end):
@@ -108,10 +129,18 @@ def prepare(manifest_path, mapping_path, output, features=None):
     }:
         raise ValueError("时间支持和UTC尚未核验")
     features = features or ["area_km2", "slope_degrees", "relief_m", "latitude", "longitude"]
+    time_reference = mapping.get("time_reference", "step_start")
     validate_features(features)
     df = pd.read_csv(manifest_path, dtype={"station_id": str, "terminal_system_id": str})
-    if df.groupby("terminal_system_id").split.nunique().max() > 1:
+    assigned = df[df.split != "excluded"]
+    if assigned.groupby("terminal_system_id").split.nunique().max() > 1:
         raise ValueError("同终端水系跨集合")
+    if "system_split" in df:
+        if (
+            df.groupby("terminal_system_id").system_split.nunique().max() > 1
+            or not assigned.split.eq(assigned.system_split).all()
+        ):
+            raise ValueError("站点集合与完整水系归属不一致")
     active = df[df.split.isin(["train", "validation", "development_test"])].copy()
     if active.empty or not (active.split == "train").any():
         raise ValueError("没有许可来源站")
@@ -124,6 +153,8 @@ def prepare(manifest_path, mapping_path, output, features=None):
         try:
             if row.time_support_verified not in (True,):
                 raise ValueError("时间支持未核验")
+            if "topology_verified" in row.index and row.topology_verified not in (True,):
+                raise ValueError("终端水系边界复核未通过")
             if row.datum_verified not in (True,):
                 raise ValueError("时间支持或基准未核验")
             if (
@@ -135,7 +166,7 @@ def prepare(manifest_path, mapping_path, output, features=None):
             require_verified_origin(row.weather_path)
             times = pd.date_range("2011-10-01", "2021-10-01", freq="h", inclusive="left", tz="UTC")
             h = (
-                read_series(row.qh_path, mapping["H"], mapping["time_variable"], "H")
+                read_series(row.qh_path, mapping["H"], mapping["time_variable"], "H", time_reference)
                 .reindex(times)
                 .to_numpy()
             )
@@ -146,6 +177,7 @@ def prepare(manifest_path, mapping_path, output, features=None):
                         mapping[k],
                         mapping.get("weather_time_variable", mapping["time_variable"]),
                         k,
+                        time_reference,
                     )
                     .reindex(times)
                     .to_numpy()
@@ -175,7 +207,7 @@ def prepare(manifest_path, mapping_path, output, features=None):
                 allowed = date_mask(times, "2013-10-01", "2019-10-01")
                 source_h = np.where(allowed, h, np.nan)
                 q = (
-                    read_series(row.qh_path, mapping["Q"], mapping["time_variable"], "Q")
+                    read_series(row.qh_path, mapping["Q"], mapping["time_variable"], "Q", time_reference)
                     .reindex(times)
                     .to_numpy()
                 )

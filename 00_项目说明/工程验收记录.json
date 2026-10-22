@@ -6,9 +6,10 @@
   "cuda": "12.6",
   "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU",
   "gpu_forward_backward": true,
-  "tests_passed": 40,
-  "test_log_sha256": "f93ab9a4229dde7a1bcc705ae5a5c2c669fd692fb3666b92733acd3ad74f8f46",
-  "test_summary": "40 passed in 109.44s (0:01:49)",
+  "tests_passed": 46,
+  "test_log_sha256": "60075ba2f10b36f41a4680a19731173a4e724065f27a2c6dc6a7652990ab7a1c",
+  "test_summary": "46 passed in 139.92s (0:02:19)",
   "real_100_site_training_complete": false,
-  "release_v0p1p0_accepted": false
+  "release_v0p1p0_accepted": false,
+  "initial_test_summary": "40 passed in 109.44s (0:01:49)"
 }

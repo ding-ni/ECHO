@@ -37,6 +37,8 @@ def build_splits(manifest, seed=20261019, max_sites=100):
     }
     if "weather_available" in df:
         checks["weather_unavailable"] = ~df.weather_available.eq(True)
+    if "topology_verified" in df:
+        checks["unverified_topology_crosscheck"] = ~df.topology_verified.eq(True)
     for reason, mask in checks.items():
         df.loc[mask, "exclusion_reason"] += reason + ";"
     df["split"] = "excluded"
@@ -71,10 +73,16 @@ def build_splits(manifest, seed=20261019, max_sites=100):
         s: ("train" if i < train_n else "validation" if i < train_n + val_n else "development_test")
         for i, s in enumerate(dev_systems)
     }
+    # 水系归属覆盖全部站点，抽样/质量排除是另一维；同水系的未选站不能成为另一集合来源。
+    system_labels = {**dict.fromkeys(blind, "blind_holdout"), **labels}
+    df["system_split"] = df.terminal_system_id.map(system_labels).fillna("excluded")
     df.loc[selected, "split"] = pool.loc[selected].terminal_system_id.map(labels)
+    df.loc[(df.split == "excluded") & (df.exclusion_reason == ""), "exclusion_reason"] = (
+        "not_selected_development_budget;"
+    )
     df["crossfit_fold"] = -1
     trains = [s for s in dev_systems if labels[s] == "train"]
     fold = {s: i % 3 for i, s in enumerate(trains)}
     df.loc[df.split == "train", "crossfit_fold"] = df.loc[df.split == "train", "terminal_system_id"].map(fold)
-    df["target_Q_forbidden"] = df.split != "train"
+    df["target_Q_forbidden"] = df.system_split != "train"
     return df

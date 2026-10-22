@@ -87,6 +87,47 @@ def dispatch(command, argv):
         a = p.parse_args(argv)
         shape = a.shapefile or download_topology(ROOT / "本地数据/原始/HydroBASINS")
         result = map_terminals(shape, a.stations, a.output)
+    elif command == "boundary-audit":
+        from echo.geo.overlap import audit_boundaries
+
+        p.add_argument("--manifest", required=True, type=Path)
+        p.add_argument("--shapefile", required=True, type=Path)
+        p.add_argument("--source-crs")
+        p.add_argument("--crs-evidence")
+        p.add_argument("--output", required=True, type=Path)
+        a = p.parse_args(argv)
+        result = audit_boundaries(a.manifest, a.shapefile, a.output, a.source_crs, a.crs_evidence)
+        result = {k: v for k, v in result.items() if k != "cross_terminal_conflicts"}
+    elif command == "weather-audit":
+        from echo.data.meteorology import audit_meteorology
+
+        p.add_argument("--manifest", required=True, type=Path)
+        p.add_argument("--output", required=True, type=Path)
+        p.add_argument("--limit", type=int, default=20)
+        a = p.parse_args(argv)
+        if a.limit < 1:
+            p.error("limit必须为正")
+        result = audit_meteorology(a.manifest, a.output, a.limit)
+        result = {"output": str(a.output), "files": len(result["files"]), "failures": result["failures"]}
+    elif command == "weather-prepare":
+        from echo.data.meteorology import prepare_weather
+
+        p.add_argument("--manifest", required=True, type=Path)
+        p.add_argument("--mapping", required=True, type=Path)
+        p.add_argument("--output", required=True, type=Path)
+        a = p.parse_args(argv)
+        result = prepare_weather(a.manifest, a.mapping, a.output)
+    elif command == "station-evidence":
+        from echo.data.usgs_evidence import audit_station_evidence
+
+        p.add_argument("--manifest", required=True, type=Path)
+        p.add_argument("--output", required=True, type=Path)
+        p.add_argument("--snapshots", required=True, type=Path)
+        p.add_argument("--limit", type=int, default=20)
+        a = p.parse_args(argv)
+        if a.limit < 1:
+            p.error("limit必须为正")
+        result = audit_station_evidence(a.manifest, a.output, a.snapshots, a.limit)
     elif command == "split":
         import pandas as pd
 

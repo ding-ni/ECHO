@@ -43,7 +43,8 @@ def run_metadata(config, inputs=()):
         commit = subprocess.check_output(
             ["git", "rev-parse", "HEAD"], cwd=ROOT, stderr=subprocess.DEVNULL, text=True
         ).strip()
-        dirty = bool(subprocess.check_output(["git", "status", "--porcelain"], cwd=ROOT, text=True))
+        # 只需判断是否有输出，不按Windows默认GBK解码含中文的Git UTF-8路径。
+        dirty = bool(subprocess.check_output(["git", "status", "--porcelain"], cwd=ROOT))
     except (OSError, subprocess.CalledProcessError):
         commit, dirty = "uncommitted", True
     return {

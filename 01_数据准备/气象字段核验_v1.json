@@ -1,0 +1,53 @@
+{
+  "verified": false,
+  "mapping_version": 2,
+  "timezone": "UTC",
+  "timezone_verified": true,
+  "time_variable": "time",
+  "weather_time_variable": "DateTime",
+  "time_support": "unknown",
+  "H": {
+    "variable": "water_level",
+    "unit": "m",
+    "time_support": "instantaneous",
+    "time_evidence": "USGS parameter00065 support-only snapshots: 2019-10-01..03 and 2020-03-07..10; per-station results in 本地数据/审计/USGS支持期水位核验.json; other stations remain unverified"
+  },
+  "Q": {
+    "variable": "streamflow",
+    "unit": "m3 s-1",
+    "time_support": "unknown",
+    "time_evidence": "只核验来源站；不读取目标及相连水系Q"
+  },
+  "T": {
+    "variable": "Tair",
+    "unit": "degC",
+    "units_verified": true,
+    "time_support": "instantaneous",
+    "time_evidence": "https://docserver.gesdisc.eosdis.nasa.gov/public/project/hydrology/NLDAS2_README.pdf pp14,22 tables3,8; author readNLDAS.m preserves time coordinate",
+    "unit_evidence": "https://www.nature.com/articles/s41597-025-05612-6/tables/1；固定作者代码datatransform.m已执行K减273.15"
+  },
+  "P": {
+    "variable": "Rainf",
+    "unit": "kg/m2",
+    "accumulation_hours": 1,
+    "units_verified": true,
+    "time_support": "step_end",
+    "time_evidence": "https://docserver.gesdisc.eosdis.nasa.gov/public/project/hydrology/NLDAS2_README.pdf pp14-15,22 tables3,8: hourly backward-accumulated; author readNLDAS.m preserves time coordinate",
+    "unit_evidence": "https://ldas.gsfc.nasa.gov/nldas/v2/forcing；固定作者代码datatransform.m逐小时值不乘3600"
+  },
+  "PET": {
+    "variable": "PotEvap",
+    "unit": "kg/m2",
+    "accumulation_hours": 1,
+    "units_verified": true,
+    "time_support": "step_end",
+    "time_evidence": "https://docserver.gesdisc.eosdis.nasa.gov/public/project/hydrology/NLDAS2_README.pdf pp14-15,22 tables3,8: hourly backward-accumulated; author readNLDAS.m preserves time coordinate",
+    "unit_evidence": "https://www.nature.com/articles/s41597-025-05612-6/tables/1；NASA说明为NARR的Mahrt-Ek修正Penman潜在蒸发",
+    "negative_policy": "positive_part",
+    "negative_policy_evidence": "开发期HBV非负蒸发需求定义为max(原始PotEvap,0)；原始负值保留在原始归档，审计记录负值数量及总量；不把负值归为缺测，不将凝结计入HBV水量输入。所有模型共用此变换。"
+  },
+  "author_code_commit": "4907675820a5f1aad37d5ba5156095ebbd4600ba",
+  "evidence": "2026-10-22官方论文、NASA README表3/8、固定作者提交、USGS支持期原始记录交叉核验。统一步末：P/PET累计此前1h，T/H整点瞬时。来源Q小时支持与逐站水尺基准仍待核验，整体verified保持false。",
+  "weather_semantics_verified": true,
+  "time_reference": "step_end"
+}

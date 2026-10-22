@@ -1,0 +1,10 @@
+{
+  "verified": false,
+  "station_id": "填写原始站号并保留前导零",
+  "scope": "historical_gage_zero_evidence",
+  "epochs": [],
+  "required_epoch_fields": ["start", "end", "datum_id", "evidence"],
+  "source_requirements": "独立站点历史材料；记录来源URL、原文位置、有效时期和本地快照SHA256。站点海拔/垂直基准不是水尺零点历史。",
+  "target_period": {"start": "2019-10-01T00:00:00Z", "end": "2021-10-01T00:00:00Z"},
+  "source_period": {"start": "2013-10-01T00:00:00Z", "end": "2019-10-01T00:00:00Z"}
+}

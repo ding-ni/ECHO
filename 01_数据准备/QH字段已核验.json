@@ -1,8 +1,16 @@
 {
-  "scope": "20_real_NetCDF_schema_probe_from_partial_archive",
-  "full_archive_md5_verified": false,
-  "H": {"variable": "water_level", "unit": "m", "long_name": "Gage height"},
-  "Q": {"variable": "streamflow", "unit": "m3 s-1", "long_name": "Streamflow"},
+  "scope": "20_real_NetCDF_schema_probe_with_full_archive_verified",
+  "full_archive_md5_verified": true,
+  "H": {
+    "variable": "water_level",
+    "unit": "m",
+    "long_name": "Gage height"
+  },
+  "Q": {
+    "variable": "streamflow",
+    "unit": "m3 s-1",
+    "long_name": "Streamflow"
+  },
   "time_variable": "time",
   "sample_start": "1980-01-01T00:00:00",
   "sample_end": "2024-12-31T23:00:00",
@@ -10,5 +18,7 @@
   "sample_duplicates": 0,
   "time_support": "unknown",
   "datum_comparability_verified": false,
-  "evidence": "2026-10-21读取20个CRC校验通过的真实NetCDF文件元数据。不能替代整包校验、逐站质量与基准审计。"
+  "evidence": "2026-10-21读取20个CRC校验通过的真实NetCDF文件元数据。不能替代整包校验、逐站质量与基准审计。",
+  "archive_update": "完整Hourly2.zip已通过官方MD5 8bab1c99329db3fa6b1b6cb464a2a573并提取；原样本字段不变。",
+  "H_time_support_followup": "仅USGS支持期水位核验.review.csv列为true的20站确认整点instantaneous；不得外推到全部站。"
 }
