@@ -1,0 +1,316 @@
+{
+  "scope": "real_pilot_two_baselines_not_phase1_acceptance",
+  "created_utc": "2026-10-22T06:35:57.053722+00:00",
+  "index_sha256": "249fbb28fa30cfcc2c8da2b340323971a6d570690686841276aa95fc6d4740ea",
+  "hydro_checkpoint_sha256": "7b20285f71a56296ee7f37850da7fd491f2b2cb116e80d28fccb6c6f67e7739c",
+  "models": {
+    "persistence": {
+      "validation": {
+        "summary": {
+          "scope": "real_development",
+          "mode": "conditional_simulation_no_H_updates",
+          "model": "persistence",
+          "budget_days": "complete_water_year",
+          "sites": 1,
+          "failures": [],
+          "primary": {
+            "mean": 0.12058147188295158,
+            "ci95": [
+              0.12058147188295158,
+              0.12058147188295158
+            ],
+            "sites": 1,
+            "systems": 1,
+            "resampling_unit": "terminal_river_system"
+          },
+          "all_period": {
+            "MAE_m": 0.05278126952312956,
+            "RMSE_m": 0.06804464203077767,
+            "CRPS_m": 0.05278126952312956
+          },
+          "tolerance_pass_fraction": {
+            "0.1": 1.0,
+            "0.2": 1.0,
+            "0.5": 1.0
+          }
+        },
+        "prediction_metadata": {
+          "created_utc": "2026-10-22T06:26:07.337195+00:00",
+          "commit": "a8c98b0b7b559e93825710b67df17b0c7954371b",
+          "working_tree_dirty": false,
+          "python": "3.11.17",
+          "platform": "Windows-10-10.0.26200-SP0",
+          "config": {},
+          "inputs": {
+            "本地数据\\模型视图\\首批八站_v2\\index.json": "249fbb28fa30cfcc2c8da2b340323971a6d570690686841276aa95fc6d4740ea"
+          }
+        },
+        "station_metrics": [
+          {
+            "station_id": "11465200",
+            "terminal_system_id": "HYBAS_7120013800",
+            "MAE_m": 0.0527812695231295,
+            "RMSE_m": 0.0680446420307776,
+            "valid_hours": 8592,
+            "query_hours": 8760,
+            "event_RMSE_m": 0.1205814718829515,
+            "peak_error_m": 0.3474719822406769,
+            "peak_time_error_h": 168.66666666666666,
+            "events": 3,
+            "research_threshold_m": 0.4663439989089966,
+            "CRPS_m": 0.0527812695231295
+          }
+        ],
+        "score_file_sha256": "eab91fab712f1709649ccb7dba2342d836771b0c4f0c5d8353b27e726c3b99fb",
+        "prediction_file_sha256": {
+          "11465200": "1fb804296562b7221dcc959e1cd6af686a9d71ff0bbfbcc33a891518bd6850bb"
+        }
+      },
+      "development_test": {
+        "summary": {
+          "scope": "real_development",
+          "mode": "conditional_simulation_no_H_updates",
+          "model": "persistence",
+          "budget_days": "complete_water_year",
+          "sites": 2,
+          "failures": [],
+          "primary": {
+            "mean": 2.3252813277964126,
+            "ci95": [
+              2.109074480685757,
+              2.5414881749070686
+            ],
+            "sites": 2,
+            "systems": 2,
+            "resampling_unit": "terminal_river_system"
+          },
+          "all_period": {
+            "MAE_m": 0.7409625174838346,
+            "RMSE_m": 0.9440824391833582,
+            "CRPS_m": 0.7409625174838346
+          },
+          "tolerance_pass_fraction": {
+            "0.1": 0.0,
+            "0.2": 0.0,
+            "0.5": 0.0
+          }
+        },
+        "prediction_metadata": {
+          "created_utc": "2026-10-22T06:26:09.338066+00:00",
+          "commit": "a8c98b0b7b559e93825710b67df17b0c7954371b",
+          "working_tree_dirty": false,
+          "python": "3.11.17",
+          "platform": "Windows-10-10.0.26200-SP0",
+          "config": {},
+          "inputs": {
+            "本地数据\\模型视图\\首批八站_v2\\index.json": "249fbb28fa30cfcc2c8da2b340323971a6d570690686841276aa95fc6d4740ea"
+          }
+        },
+        "station_metrics": [
+          {
+            "station_id": "01017000",
+            "terminal_system_id": "HYBAS_7120038320",
+            "MAE_m": 0.936249574158518,
+            "RMSE_m": 1.1150255151872897,
+            "valid_hours": 8736,
+            "query_hours": 8760,
+            "event_RMSE_m": 2.109074480685757,
+            "peak_error_m": 2.888487959901492,
+            "peak_time_error_h": 41.0,
+            "events": 3,
+            "research_threshold_m": 2.368295907974243,
+            "CRPS_m": 0.936249574158518
+          },
+          {
+            "station_id": "02371500",
+            "terminal_system_id": "HYBAS_7120046390",
+            "MAE_m": 0.5456754608091511,
+            "RMSE_m": 0.7731393631794269,
+            "valid_hours": 8582,
+            "query_hours": 8760,
+            "event_RMSE_m": 2.541488174907069,
+            "peak_error_m": 3.083052158355713,
+            "peak_time_error_h": 36.5,
+            "events": 2,
+            "research_threshold_m": 3.944112062454224,
+            "CRPS_m": 0.5456754608091511
+          }
+        ],
+        "score_file_sha256": "41f644fea38022f6c7896965d7bfa9595020f2e911e7500ce5bef16ff2d3ccc8",
+        "prediction_file_sha256": {
+          "01017000": "7116c83ae504838f1159311fac68f17b6ca33addd5dce9f3d8c371e0886291d8",
+          "02371500": "2cccbed1f83de37d28e9b9e255881fe1ef2893b6a095e9374554fe42eff510ab"
+        }
+      }
+    },
+    "local_spline": {
+      "validation": {
+        "summary": {
+          "scope": "real_development",
+          "mode": "conditional_simulation_no_H_updates",
+          "model": "local_spline",
+          "budget_days": "complete_water_year",
+          "sites": 1,
+          "failures": [],
+          "primary": {
+            "mean": 0.13815052388858787,
+            "ci95": [
+              0.13815052388858787,
+              0.13815052388858787
+            ],
+            "sites": 1,
+            "systems": 1,
+            "resampling_unit": "terminal_river_system"
+          },
+          "all_period": {
+            "MAE_m": 0.051206898595604594,
+            "RMSE_m": 0.07077706405264356,
+            "CRPS_m": 0.051206898595604594
+          },
+          "tolerance_pass_fraction": {
+            "0.1": 1.0,
+            "0.2": 1.0,
+            "0.5": 1.0
+          }
+        },
+        "prediction_metadata": {
+          "created_utc": "2026-10-22T06:31:41.991295+00:00",
+          "commit": "70fb8d20dd1cedc242b17912031a4097a7dc9f03",
+          "working_tree_dirty": false,
+          "python": "3.11.17",
+          "platform": "Windows-10-10.0.26200-SP0",
+          "config": {},
+          "inputs": {
+            "本地数据\\模型视图\\首批八站_v2\\index.json": "249fbb28fa30cfcc2c8da2b340323971a6d570690686841276aa95fc6d4740ea"
+          }
+        },
+        "station_metrics": [
+          {
+            "station_id": "11465200",
+            "terminal_system_id": "HYBAS_7120013800",
+            "MAE_m": 0.0512068985956045,
+            "RMSE_m": 0.0707770640526435,
+            "valid_hours": 8592,
+            "query_hours": 8760,
+            "event_RMSE_m": 0.1381505238885878,
+            "peak_error_m": 0.3683439409365158,
+            "peak_time_error_h": 202.66666666666663,
+            "events": 3,
+            "research_threshold_m": 0.4663439989089966,
+            "CRPS_m": 0.0512068985956045
+          }
+        ],
+        "score_file_sha256": "5ca8a2a0f67300676691868931d63bbff78da1708df34feaa8584167a637a735",
+        "prediction_file_sha256": {
+          "11465200": "5a2449665947805a0a61e8c526960fbfd4b7ddf2cee6fa5aa7c5ca565959b299"
+        }
+      },
+      "development_test": {
+        "summary": {
+          "scope": "real_development",
+          "mode": "conditional_simulation_no_H_updates",
+          "model": "local_spline",
+          "budget_days": "complete_water_year",
+          "sites": 2,
+          "failures": [],
+          "primary": {
+            "mean": 2.038110562505514,
+            "ci95": [
+              1.253757067411276,
+              2.8224640575997517
+            ],
+            "sites": 2,
+            "systems": 2,
+            "resampling_unit": "terminal_river_system"
+          },
+          "all_period": {
+            "MAE_m": 0.5575095412468902,
+            "RMSE_m": 0.7495094494524335,
+            "CRPS_m": 0.5575095412468902
+          },
+          "tolerance_pass_fraction": {
+            "0.1": 0.0,
+            "0.2": 0.0,
+            "0.5": 0.0
+          }
+        },
+        "prediction_metadata": {
+          "created_utc": "2026-10-22T06:32:29.166153+00:00",
+          "commit": "70fb8d20dd1cedc242b17912031a4097a7dc9f03",
+          "working_tree_dirty": false,
+          "python": "3.11.17",
+          "platform": "Windows-10-10.0.26200-SP0",
+          "config": {},
+          "inputs": {
+            "本地数据\\模型视图\\首批八站_v2\\index.json": "249fbb28fa30cfcc2c8da2b340323971a6d570690686841276aa95fc6d4740ea"
+          }
+        },
+        "station_metrics": [
+          {
+            "station_id": "01017000",
+            "terminal_system_id": "HYBAS_7120038320",
+            "MAE_m": 0.5057877080787496,
+            "RMSE_m": 0.6093741071321104,
+            "valid_hours": 8736,
+            "query_hours": 8760,
+            "event_RMSE_m": 1.253757067411276,
+            "peak_error_m": 2.019621392711997,
+            "peak_time_error_h": 68.66666666666667,
+            "events": 3,
+            "research_threshold_m": 2.368295907974243,
+            "CRPS_m": 0.5057877080787496
+          },
+          {
+            "station_id": "02371500",
+            "terminal_system_id": "HYBAS_7120046390",
+            "MAE_m": 0.609231374415031,
+            "RMSE_m": 0.8896447917727566,
+            "valid_hours": 8582,
+            "query_hours": 8760,
+            "event_RMSE_m": 2.822464057599752,
+            "peak_error_m": 3.306487690650947,
+            "peak_time_error_h": 52.5,
+            "events": 2,
+            "research_threshold_m": 3.944112062454224,
+            "CRPS_m": 0.6092313744150308
+          }
+        ],
+        "score_file_sha256": "668033681f6cc990a3f9f5204ed525f84780a76080fd06820f0f3dfe488319ff",
+        "prediction_file_sha256": {
+          "01017000": "ac3050d7aca1cc639279ea35e9e3b0c9f2568446a0712d37dcaba0024b664897",
+          "02371500": "7f06684e301e624491a216261b0cc76409df36502c7296797bdc53cdef72f63d"
+        }
+      }
+    }
+  },
+  "label_sha256": {
+    "01017000": "40d3660e6ae3426aa03c6acf6291e5a55ca973fd13a14bb2db398671af137686",
+    "02371500": "84dfdbc3fa37d8c8b2bd59f8edacc638b99fc6d7c7d1639390f418e10fb9aae3",
+    "11465200": "08dcd662cb48bac0cb6dd7f3a3f65b08a8e58bab782895a6483e3ada6c8601b9"
+  },
+  "formal_blind_scored": false,
+  "ECHO_real_training_complete": false,
+  "source_crossfit_complete": false,
+  "paired_event_effect": {
+    "scope": "real_development",
+    "effects": [
+      {
+        "reference": "persistence",
+        "other": "local_spline",
+        "difference_other_minus_reference": {
+          "mean": -0.287170765290899,
+          "ci95": [
+            -0.8553174132744812,
+            0.28097588269268314
+          ],
+          "sites": 2,
+          "systems": 2,
+          "resampling_unit": "terminal_river_system"
+        },
+        "paired_sites": 2,
+        "reference_sites": 2,
+        "other_sites": 2
+      }
+    ]
+  }
+}
