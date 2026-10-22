@@ -57,7 +57,7 @@ def freeze_cases(index_path, labels_root, output):
               "selection_uses_predictions": False, "threshold_support_quantile": .95,
               "merge_gap_hours": 24, "pre_hours": 24, "post_hours": 48,
               "coverage": "same_168h_90pct_scoring_mask_and_event_90pct",
-              "scope": "eight_site_development_case_selection_not_prospective_preregistration",
+              "scope": "development_case_selection_not_prospective_preregistration",
               "shortages": shortages, "cases": cases}
     write_json(output, record)
     return record

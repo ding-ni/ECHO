@@ -1,0 +1,2787 @@
+{
+  "created_utc": "2026-10-22T10:13:04.717170+00:00",
+  "source_Q_index_sha256": "8770d8f8a23e48739f9c358f905395c1a32dc7b3cdbccb919e57a0826d4a9b77",
+  "H_index_sha256": "8796d2e072284be5e08af2af5835b9982e90bdb74bc7f0820288314157509de9",
+  "Q_sources": [
+    {
+      "station_id": "01027200",
+      "terminal_system_id": "HYBAS_7120038810",
+      "crossfit_fold": 0,
+      "sha256": "bcbf93e3e71370063e2fc570a0858743afd609cb91a0720fd10e115626baecbb",
+      "Q_coverage": {
+        "train": 0.6051478641840088,
+        "validation": 0.5562785388127854
+      }
+    },
+    {
+      "station_id": "01029200",
+      "terminal_system_id": "HYBAS_7120038810",
+      "crossfit_fold": 0,
+      "sha256": "d7e8005f0aaf473325ed77b460ea37e32b93109359bd670b95b6193223afe832",
+      "Q_coverage": {
+        "train": 0.596613727637824,
+        "validation": 0.4917808219178082
+      }
+    },
+    {
+      "station_id": "01031300",
+      "terminal_system_id": "HYBAS_7120038810",
+      "crossfit_fold": 0,
+      "sha256": "74654b1d06020e4de57202a1e8b242627f836cb542a0bbc34a8529beeafba78a",
+      "Q_coverage": {
+        "train": 0.6632438846294268,
+        "validation": 0.5922374429223745
+      }
+    },
+    {
+      "station_id": "01031450",
+      "terminal_system_id": "HYBAS_7120038810",
+      "crossfit_fold": 0,
+      "sha256": "3da145017a45859f7fb41eabd8101b2669820ff88e9f7ad3b7539801b36066f4",
+      "Q_coverage": {
+        "train": 0.6582238043081416,
+        "validation": 0.5905251141552511
+      }
+    },
+    {
+      "station_id": "01031500",
+      "terminal_system_id": "HYBAS_7120038810",
+      "crossfit_fold": 0,
+      "sha256": "f423e272879457bf0a2cb3f8d261b8adcdd97879784fccab51a9da1c1825ede6",
+      "Q_coverage": {
+        "train": 0.6673055859802848,
+        "validation": 0.6003424657534246
+      }
+    },
+    {
+      "station_id": "01037380",
+      "terminal_system_id": "HYBAS_7120038840",
+      "crossfit_fold": 2,
+      "sha256": "a928660c47c4bc61976c9addf7eb5e801e5b18333fe7aec150f192e98f2cb443",
+      "Q_coverage": {
+        "train": 0.7524872216137276,
+        "validation": 0.5906392694063927
+      }
+    },
+    {
+      "station_id": "01044550",
+      "terminal_system_id": "HYBAS_7120038980",
+      "crossfit_fold": 0,
+      "sha256": "36c484694ad851d148f0558abefce87958f66747afa4fdf9efa284ae2e93ff38",
+      "Q_coverage": {
+        "train": 0.6559647681635633,
+        "validation": 0.556392694063927
+      }
+    },
+    {
+      "station_id": "01047200",
+      "terminal_system_id": "HYBAS_7120038980",
+      "crossfit_fold": 0,
+      "sha256": "dc00d178e49f0bad321080ee7fff7d94551fc4fbf9e250d015c506a9240c5528",
+      "Q_coverage": {
+        "train": 0.664864001460387,
+        "validation": 0.6046803652968037
+      }
+    },
+    {
+      "station_id": "01052500",
+      "terminal_system_id": "HYBAS_7120038980",
+      "crossfit_fold": 0,
+      "sha256": "4ef2a8a390964c584a8efb2828577fed775e0128b56462b8828961e545c44015",
+      "Q_coverage": {
+        "train": 0.6487769258853596,
+        "validation": 0.6204337899543378
+      }
+    },
+    {
+      "station_id": "01054300",
+      "terminal_system_id": "HYBAS_7120038980",
+      "crossfit_fold": 0,
+      "sha256": "3ca171acd1f3b13709d02377718296bee9e90a48572061f09a78e20ee148d478",
+      "Q_coverage": {
+        "train": 0.6992287331142752,
+        "validation": 0.6141552511415526
+      }
+    },
+    {
+      "station_id": "01064801",
+      "terminal_system_id": "HYBAS_7120039060",
+      "crossfit_fold": 1,
+      "sha256": "6b2afe47bf47a2135843cea85c6749e6494b3e45281910e34cccf1e0f879019e",
+      "Q_coverage": {
+        "train": 0.8267615918218327,
+        "validation": 0.6904109589041096
+      }
+    },
+    {
+      "station_id": "01067950",
+      "terminal_system_id": "HYBAS_7120039090",
+      "crossfit_fold": 0,
+      "sha256": "5115918a0f4a95617c6153a0dab1e3f927458f76b74e9578e1e321f5ef94e347",
+      "Q_coverage": {
+        "train": 0.7977135815991238,
+        "validation": 0.6867579908675799
+      }
+    },
+    {
+      "station_id": "01072800",
+      "terminal_system_id": "HYBAS_7120039130",
+      "crossfit_fold": 2,
+      "sha256": "8d10b593513f6fa3efe79f7ab14cef0779bf85ee52492e72ed75fdeaf549d898",
+      "Q_coverage": {
+        "train": 0.8670819642205184,
+        "validation": 0.9065068493150685
+      }
+    },
+    {
+      "station_id": "01073000",
+      "terminal_system_id": "HYBAS_7120039130",
+      "crossfit_fold": 2,
+      "sha256": "65dcf3da617b05a0887dccdedbcee4558a0d2cecd66a93195768301c955dcdfe",
+      "Q_coverage": {
+        "train": 0.8808871851040526,
+        "validation": 0.8231735159817352
+      }
+    },
+    {
+      "station_id": "01073319",
+      "terminal_system_id": "HYBAS_7120039130",
+      "crossfit_fold": 2,
+      "sha256": "3e912ad7ec1c72c0dc47ec5e81d15996436037ecc148e889153c116aea3a9dc6",
+      "Q_coverage": {
+        "train": 0.8732201533406353,
+        "validation": 0.8581050228310503
+      }
+    },
+    {
+      "station_id": "01073500",
+      "terminal_system_id": "HYBAS_7120039130",
+      "crossfit_fold": 2,
+      "sha256": "6155810f33d81e2012e26e83f6345d2a0ed3ee609fa066f72c94782fdf348961",
+      "Q_coverage": {
+        "train": 0.9134492515516612,
+        "validation": 0.9600456621004566
+      }
+    },
+    {
+      "station_id": "010735562",
+      "terminal_system_id": "HYBAS_7120039130",
+      "crossfit_fold": 2,
+      "sha256": "e387303fb2d7e549192022751adde686647ba0eef040d0396b5e6880da90d230",
+      "Q_coverage": {
+        "train": 0.8491009492515517,
+        "validation": 0.9422374429223744
+      }
+    },
+    {
+      "station_id": "01073587",
+      "terminal_system_id": "HYBAS_7120039130",
+      "crossfit_fold": 2,
+      "sha256": "c8f00052a069dca5a91948ee07d47640506e45131fca7e39e5172d2c454309a3",
+      "Q_coverage": {
+        "train": 0.8642752829499818,
+        "validation": 0.8617579908675799
+      }
+    },
+    {
+      "station_id": "01075000",
+      "terminal_system_id": "HYBAS_7120039160",
+      "crossfit_fold": 1,
+      "sha256": "e7b76d98b43efcf5ae2c04c205af4b440bde58c47ee5758046ac603ecf13a9ef",
+      "Q_coverage": {
+        "train": 0.8629289886820007,
+        "validation": 0.8931506849315068
+      }
+    },
+    {
+      "station_id": "01076000",
+      "terminal_system_id": "HYBAS_7120039160",
+      "crossfit_fold": 1,
+      "sha256": "454d06f248bae9ddc429a87e6a2e8c03395f0b8c653538974fb35c7a179f7060",
+      "Q_coverage": {
+        "train": 0.923626323475721,
+        "validation": 0.909703196347032
+      }
+    },
+    {
+      "station_id": "01076500",
+      "terminal_system_id": "HYBAS_7120039160",
+      "crossfit_fold": 1,
+      "sha256": "fb5d4c80a64bbdf77b34e7fafe101930e8ba659e35f641edd39dd56ba831c3c9",
+      "Q_coverage": {
+        "train": 0.7719970792259949,
+        "validation": 0.7006849315068493
+      }
+    },
+    {
+      "station_id": "01077400",
+      "terminal_system_id": "HYBAS_7120039160",
+      "crossfit_fold": 1,
+      "sha256": "3729dcdb9345820bb4866f3a804129f2220c3afc28112880f7d33c9d07536e35",
+      "Q_coverage": {
+        "train": 0.9602044541803578,
+        "validation": 0.9864155251141552
+      }
+    },
+    {
+      "station_id": "01078000",
+      "terminal_system_id": "HYBAS_7120039160",
+      "crossfit_fold": 1,
+      "sha256": "375cf4dd00b4600166b647c594540891e5b6ded6949e39f91ae81be9cd75fa65",
+      "Q_coverage": {
+        "train": 0.9536555312157722,
+        "validation": 0.7504566210045662
+      }
+    },
+    {
+      "station_id": "01081500",
+      "terminal_system_id": "HYBAS_7120039160",
+      "crossfit_fold": 1,
+      "sha256": "3636bab391bd80e8c00aaf417852f019ebbaf077f659478b98a0dd6cfc1136ba",
+      "Q_coverage": {
+        "train": 0.9615279299014239,
+        "validation": 0.9568493150684931
+      }
+    },
+    {
+      "station_id": "01082000",
+      "terminal_system_id": "HYBAS_7120039160",
+      "crossfit_fold": 1,
+      "sha256": "c487f23dbfefd24039e56d06b4ae4366865cb2d692c1c29f6e114c71edb95c89",
+      "Q_coverage": {
+        "train": 0.8659182183278569,
+        "validation": 0.932648401826484
+      }
+    },
+    {
+      "station_id": "01085000",
+      "terminal_system_id": "HYBAS_7120039160",
+      "crossfit_fold": 1,
+      "sha256": "8879269735d9964b74397c5c693ad06c6bc7e5a2eaee39eb9755452a58c0f754",
+      "Q_coverage": {
+        "train": 0.5742059145673604,
+        "validation": 0.9560502283105022
+      }
+    },
+    {
+      "station_id": "01085500",
+      "terminal_system_id": "HYBAS_7120039160",
+      "crossfit_fold": 1,
+      "sha256": "25fa36b7b8dc556320dd02b3e70f4771304a87ff16fdc8301d58cdc9cd83b5dd",
+      "Q_coverage": {
+        "train": 0.9303806133625411,
+        "validation": 0.9680365296803652
+      }
+    },
+    {
+      "station_id": "01086000",
+      "terminal_system_id": "HYBAS_7120039160",
+      "crossfit_fold": 1,
+      "sha256": "0fdb4ae30c093b07957bf3504be40ac02ff066a3f02a2ec1e15d183930fc8083",
+      "Q_coverage": {
+        "train": 0.9137230741146404,
+        "validation": 0.9831050228310503
+      }
+    },
+    {
+      "station_id": "01091000",
+      "terminal_system_id": "HYBAS_7120039160",
+      "crossfit_fold": 1,
+      "sha256": "14c65dae1cb0e88a545da3aea9966d737e99e39611be83d12069d6969a181d69",
+      "Q_coverage": {
+        "train": 0.8606927710843374,
+        "validation": 0.8401826484018264
+      }
+    },
+    {
+      "station_id": "01093852",
+      "terminal_system_id": "HYBAS_7120039160",
+      "crossfit_fold": 1,
+      "sha256": "3b96a077f26d9bf8af6af6898732962bdf9b96c9a31b9374b6f0f18e10b5f7a6",
+      "Q_coverage": {
+        "train": 0.8626095290251917,
+        "validation": 0.8075342465753425
+      }
+    },
+    {
+      "station_id": "01094000",
+      "terminal_system_id": "HYBAS_7120039160",
+      "crossfit_fold": 1,
+      "sha256": "9b7ad22c7ded0b584cb1a255ae7693b1cf2b2dec798834f45846fffba4141894",
+      "Q_coverage": {
+        "train": 0.9497307411464038,
+        "validation": 0.9622146118721461
+      }
+    },
+    {
+      "station_id": "01096000",
+      "terminal_system_id": "HYBAS_7120039160",
+      "crossfit_fold": 1,
+      "sha256": "6c7ea0870019c4553f15ed9c4694ed40264cc7e0bc2bd8bd5c055e7934cf0ca8",
+      "Q_coverage": {
+        "train": 0.9450757575757576,
+        "validation": 0.9712328767123287
+      }
+    },
+    {
+      "station_id": "01096500",
+      "terminal_system_id": "HYBAS_7120039160",
+      "crossfit_fold": 1,
+      "sha256": "bab851ca631c12ecafc36df922a65b61e439ba8898a330ebb5cabbef1abb9697",
+      "Q_coverage": {
+        "train": 0.9862632347572107,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "010965852",
+      "terminal_system_id": "HYBAS_7120039160",
+      "crossfit_fold": 1,
+      "sha256": "457880985f376eaa8d331fb925d6a8c20b1b937850b8f9a9441ad156aea64c58",
+      "Q_coverage": {
+        "train": 0.9126734209565535,
+        "validation": 0.9603881278538813
+      }
+    },
+    {
+      "station_id": "01097000",
+      "terminal_system_id": "HYBAS_7120039160",
+      "crossfit_fold": 1,
+      "sha256": "ef0c39b6b2068c63c47044ab0eddfb88a0f090d4b0c4796d925a9baf1f55a362",
+      "Q_coverage": {
+        "train": 0.9551615553121577,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "01097300",
+      "terminal_system_id": "HYBAS_7120039160",
+      "crossfit_fold": 1,
+      "sha256": "2a40ea136513a3e92e3987372d962c9a3316a5a89b97ba9fb90305d6c1fed69c",
+      "Q_coverage": {
+        "train": 0.8460889010587805,
+        "validation": 0.9918949771689498
+      }
+    },
+    {
+      "station_id": "01098530",
+      "terminal_system_id": "HYBAS_7120039160",
+      "crossfit_fold": 1,
+      "sha256": "9903c70edbc027f9734d5c62774767286a2ae6267692c2ca395c2e6a77b27cc1",
+      "Q_coverage": {
+        "train": 0.997626871120847,
+        "validation": 0.9998858447488584
+      }
+    },
+    {
+      "station_id": "01100505",
+      "terminal_system_id": "HYBAS_7120039160",
+      "crossfit_fold": 1,
+      "sha256": "c201d794e8af0c29233ec5f7026e70518b7f670e0cd478ddccb19efa520ea162",
+      "Q_coverage": {
+        "train": 0.946285140562249,
+        "validation": 0.9819634703196347
+      }
+    },
+    {
+      "station_id": "01100561",
+      "terminal_system_id": "HYBAS_7120039160",
+      "crossfit_fold": 1,
+      "sha256": "c2f7ac5c655f73d05f5537ad2c6f5755eb4dd0803b126c94a02eed34ff092249",
+      "Q_coverage": {
+        "train": 0.9328221978824388,
+        "validation": 0.9979452054794521
+      }
+    },
+    {
+      "station_id": "01101500",
+      "terminal_system_id": "HYBAS_7120039200",
+      "crossfit_fold": 0,
+      "sha256": "1107e5028446cf532bc27d7f02285d4002be97819d84a2ffec7121f552f9a4ef",
+      "Q_coverage": {
+        "train": 0.8966548010222709,
+        "validation": 0.9998858447488584
+      }
+    },
+    {
+      "station_id": "01115630",
+      "terminal_system_id": "HYBAS_7120039540",
+      "crossfit_fold": 1,
+      "sha256": "1cbf20942d07797a02809bca12d06437d493df1d809c29a0c69f706d000050bc",
+      "Q_coverage": {
+        "train": 0.9680312157721797,
+        "validation": 0.9997716894977169
+      }
+    },
+    {
+      "station_id": "01208990",
+      "terminal_system_id": "HYBAS_7120039750",
+      "crossfit_fold": 1,
+      "sha256": "0d36970f983dc535e9c9a58096fade815eff214990e4e08e4669ed901d126291",
+      "Q_coverage": {
+        "train": 0.904709748083242,
+        "validation": 0.9818493150684932
+      }
+    },
+    {
+      "station_id": "01661050",
+      "terminal_system_id": "HYBAS_7120041260",
+      "crossfit_fold": 1,
+      "sha256": "d1529c81dfb4ab4e335e23fad1963ae159136423a0df45205f2e58544025c493",
+      "Q_coverage": {
+        "train": 0.9631024096385542,
+        "validation": 0.9950913242009133
+      }
+    },
+    {
+      "station_id": "01669520",
+      "terminal_system_id": "HYBAS_7120041710",
+      "crossfit_fold": 2,
+      "sha256": "3407d11d8b8d2558203bec8ab30ba17b6aa1d53817bcb889c16f7d4beeaa52d0",
+      "Q_coverage": {
+        "train": 0.9852364001460387,
+        "validation": 0.9910958904109589
+      }
+    },
+    {
+      "station_id": "02038850",
+      "terminal_system_id": "HYBAS_7120041920",
+      "crossfit_fold": 2,
+      "sha256": "077bf695ac6552b45f6393e1c0034079685960db25b1c9d7e99040b11bfb0a8d",
+      "Q_coverage": {
+        "train": 0.9511683096020446,
+        "validation": 0.9934931506849315
+      }
+    },
+    {
+      "station_id": "02039000",
+      "terminal_system_id": "HYBAS_7120041920",
+      "crossfit_fold": 2,
+      "sha256": "f9b0007366a5ed6e3805eead5627ab649f26a6ca628186c39af75b22043b096b",
+      "Q_coverage": {
+        "train": 0.9786646586345381,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "02039500",
+      "terminal_system_id": "HYBAS_7120041920",
+      "crossfit_fold": 2,
+      "sha256": "bc106ba716b1e1b5a724b3ebf92e12e27b1cd474d74b35ef76f92d42d426e37b",
+      "Q_coverage": {
+        "train": 0.9884081781672143,
+        "validation": 0.9949771689497717
+      }
+    },
+    {
+      "station_id": "02040000",
+      "terminal_system_id": "HYBAS_7120041920",
+      "crossfit_fold": 2,
+      "sha256": "eb5bfabba8f5bac0d93d6b41f414c8f6949c3fdcef0243343c6f8aecbb5df640",
+      "Q_coverage": {
+        "train": 0.9434556407447974,
+        "validation": 0.9644977168949772
+      }
+    },
+    {
+      "station_id": "02041000",
+      "terminal_system_id": "HYBAS_7120041920",
+      "crossfit_fold": 2,
+      "sha256": "1fc6e285fd58845aaeec1c542cbe59855658556095171966746dddc2bcb11a0c",
+      "Q_coverage": {
+        "train": 0.9748083242059146,
+        "validation": 0.9670091324200913
+      }
+    },
+    {
+      "station_id": "02041650",
+      "terminal_system_id": "HYBAS_7120041920",
+      "crossfit_fold": 2,
+      "sha256": "4667be2641efd281ce59fb7e1bffb126b4868fbe3effa177a6fe5d8db471a3cf",
+      "Q_coverage": {
+        "train": 0.9960295728368017,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "02231342",
+      "terminal_system_id": "HYBAS_7120043860",
+      "crossfit_fold": 0,
+      "sha256": "3e990cc6d006a96d56ba3f7be9abafa4156c95ed119798a1025cd481caeed02d",
+      "Q_coverage": {
+        "train": 0.9880202628696605,
+        "validation": 0.923972602739726
+      }
+    },
+    {
+      "station_id": "02231396",
+      "terminal_system_id": "HYBAS_7120043860",
+      "crossfit_fold": 0,
+      "sha256": "c7127f400d1f957496938a4132f4b8b008bf87e56f9ba7c4d529be89df7e5e01",
+      "Q_coverage": {
+        "train": 0.9936108068638189,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "02231600",
+      "terminal_system_id": "HYBAS_7120043860",
+      "crossfit_fold": 0,
+      "sha256": "7379e8be7555d637bde1ef0e5fa15071848bf599a2d5788743630d32a343d8f6",
+      "Q_coverage": {
+        "train": 0.9960752099306316,
+        "validation": 0.9744292237442922
+      }
+    },
+    {
+      "station_id": "02232000",
+      "terminal_system_id": "HYBAS_7120043860",
+      "crossfit_fold": 0,
+      "sha256": "67dddb1f30768b9775c76fcaf11a1a12826c0a298a152236920c024c7bca6b08",
+      "Q_coverage": {
+        "train": 0.9386637458926615,
+        "validation": 0.9065068493150685
+      }
+    },
+    {
+      "station_id": "02232155",
+      "terminal_system_id": "HYBAS_7120043860",
+      "crossfit_fold": 0,
+      "sha256": "d67e0a3342270bdd3666704ead116da87bf915bc562d2f3fd565225555ec3c2a",
+      "Q_coverage": {
+        "train": 0.9993838992332968,
+        "validation": 0.7385844748858448
+      }
+    },
+    {
+      "station_id": "02232200",
+      "terminal_system_id": "HYBAS_7120043860",
+      "crossfit_fold": 0,
+      "sha256": "b3069cacd1a9f0be7279ef304b977f1082b7651c8ca9218a0cae35378bf9088c",
+      "Q_coverage": {
+        "train": 0.9987906170135086,
+        "validation": 0.9993150684931507
+      }
+    },
+    {
+      "station_id": "02232400",
+      "terminal_system_id": "HYBAS_7120043860",
+      "crossfit_fold": 0,
+      "sha256": "c78ec5517b765e2e214456c71c867eab0e235b17e090e8af4dae68c3364cb794",
+      "Q_coverage": {
+        "train": 0.9599534501642936,
+        "validation": 0.9505707762557077
+      }
+    },
+    {
+      "station_id": "02232500",
+      "terminal_system_id": "HYBAS_7120043860",
+      "crossfit_fold": 0,
+      "sha256": "ad54b8affcda03b8e5d188164cbce94baa16fe035974fd16c20de13f98abc5f5",
+      "Q_coverage": {
+        "train": 0.9875410733844469,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "02235200",
+      "terminal_system_id": "HYBAS_7120043860",
+      "crossfit_fold": 0,
+      "sha256": "568e1a3091bc1ea72de505cba777a86975f3e82527ca16738c6b2073199cacb0",
+      "Q_coverage": {
+        "train": 0.9768619934282585,
+        "validation": 0.9638127853881279
+      }
+    },
+    {
+      "station_id": "02236500",
+      "terminal_system_id": "HYBAS_7120043860",
+      "crossfit_fold": 0,
+      "sha256": "fbbc419bfba4b71e0e3a54b4b4f1c12905c29d0ce731f3a309a46344ea897fb5",
+      "Q_coverage": {
+        "train": 0.992218875502008,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "02244440",
+      "terminal_system_id": "HYBAS_7120043860",
+      "crossfit_fold": 0,
+      "sha256": "c3f2b040e7c7ad79c545d5a0705ba76c880fa697e76b2ee6b03164bf70232f76",
+      "Q_coverage": {
+        "train": 0.5502464403066812,
+        "validation": 0.5513698630136986
+      }
+    },
+    {
+      "station_id": "02245260",
+      "terminal_system_id": "HYBAS_7120043860",
+      "crossfit_fold": 0,
+      "sha256": "01b92509af0572b3d8bb3f819a6dfb677b9228a9b5f67d82f05f6b63987c36ca",
+      "Q_coverage": {
+        "train": 0.6028431909456006,
+        "validation": 0.6592465753424658
+      }
+    },
+    {
+      "station_id": "02245500",
+      "terminal_system_id": "HYBAS_7120043860",
+      "crossfit_fold": 0,
+      "sha256": "5e4ff5faabf9b144c7673ae2192e46e068777194ce18ed4a1f87e265a79e7b5a",
+      "Q_coverage": {
+        "train": 0.9732794815626141,
+        "validation": 0.9996575342465753
+      }
+    },
+    {
+      "station_id": "02246000",
+      "terminal_system_id": "HYBAS_7120043860",
+      "crossfit_fold": 0,
+      "sha256": "d2fed73a9c9565c920b094570ed564564ccb1fc610092bf2739b346081fe2d67",
+      "Q_coverage": {
+        "train": 0.9826579043446513,
+        "validation": 0.9628995433789954
+      }
+    },
+    {
+      "station_id": "02294161",
+      "terminal_system_id": "HYBAS_7120044860",
+      "crossfit_fold": 2,
+      "sha256": "d886774ebd54c5d1eb6354c9d5ee277c33ac59055f6961354b3c9f41b87c6ea6",
+      "Q_coverage": {
+        "train": 0.9688526834611172,
+        "validation": 0.9938356164383562
+      }
+    },
+    {
+      "station_id": "02294217",
+      "terminal_system_id": "HYBAS_7120044860",
+      "crossfit_fold": 2,
+      "sha256": "854f936c6baa3e7caa2b828571702cb3948a777c3984573965adc9a88e054646",
+      "Q_coverage": {
+        "train": 0.9717278203723987,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "02294290",
+      "terminal_system_id": "HYBAS_7120044860",
+      "crossfit_fold": 2,
+      "sha256": "a8c5a96d41d654b6e51279ef9887fbd4a9baa95103b5c10b3160db36ae65eba0",
+      "Q_coverage": {
+        "train": 0.9293081416575393,
+        "validation": 0.9954337899543378
+      }
+    },
+    {
+      "station_id": "02294330",
+      "terminal_system_id": "HYBAS_7120044860",
+      "crossfit_fold": 2,
+      "sha256": "decf71728792e95df5dc73884f248164130a87e6a324121807dc8fb50cfb6e74",
+      "Q_coverage": {
+        "train": 0.9934282584884995,
+        "validation": 0.9523972602739726
+      }
+    },
+    {
+      "station_id": "02295013",
+      "terminal_system_id": "HYBAS_7120044860",
+      "crossfit_fold": 2,
+      "sha256": "7d3471c72176ab5659145829cea69a474bfc8e0de028c6e415d9d997e447f091",
+      "Q_coverage": {
+        "train": 0.8888280394304491,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "02296260",
+      "terminal_system_id": "HYBAS_7120044860",
+      "crossfit_fold": 2,
+      "sha256": "1a0cb0e3181da974a598196e3ac4a9ef333a065cf32782f4bde01b3ad0a85505",
+      "Q_coverage": {
+        "train": 0.9928121577217963,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "02296500",
+      "terminal_system_id": "HYBAS_7120044860",
+      "crossfit_fold": 2,
+      "sha256": "eaa5d4407f839e46d2bebf5a7599a7c90722dcac0526c2c3acb7767e88bca4b8",
+      "Q_coverage": {
+        "train": 0.9364731653888281,
+        "validation": 0.9711187214611872
+      }
+    },
+    {
+      "station_id": "02296750",
+      "terminal_system_id": "HYBAS_7120044860",
+      "crossfit_fold": 2,
+      "sha256": "236b6bb4b2ee2a1b8a3e19b7fdc3a3cc175466d29a9ebd9809901250309f07aa",
+      "Q_coverage": {
+        "train": 0.9955960204454181,
+        "validation": 0.997716894977169
+      }
+    },
+    {
+      "station_id": "02297100",
+      "terminal_system_id": "HYBAS_7120044860",
+      "crossfit_fold": 2,
+      "sha256": "da46cdb917d567408651fb628df9ef0bfc0008338177efeadbff882cad0c2a05",
+      "Q_coverage": {
+        "train": 0.9983570646221248,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "02298110",
+      "terminal_system_id": "HYBAS_7120044860",
+      "crossfit_fold": 2,
+      "sha256": "fb3aa3dfe2e075d4a64d4fd0c03fd97cb6b80789047c3ed8fe7d284755427bce",
+      "Q_coverage": {
+        "train": 0.9153888280394304,
+        "validation": 0.9761415525114155
+      }
+    },
+    {
+      "station_id": "02298202",
+      "terminal_system_id": "HYBAS_7120044860",
+      "crossfit_fold": 2,
+      "sha256": "e9637829277a713520f7b4e22eca3aeb956296d84d9857ae76184e5c209c38cb",
+      "Q_coverage": {
+        "train": 0.9994523548740416,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "02365470",
+      "terminal_system_id": "HYBAS_7120046130",
+      "crossfit_fold": 2,
+      "sha256": "cd91fae0b2cbd3b178de31c1593c494df102baa4278a942f6f885082b91c7b2c",
+      "Q_coverage": {
+        "train": 0.9979006936838262,
+        "validation": 0.9978310502283105
+      }
+    },
+    {
+      "station_id": "02365769",
+      "terminal_system_id": "HYBAS_7120046130",
+      "crossfit_fold": 2,
+      "sha256": "24e76e5cd414b850cb956e7e94aa369a93dc1d6c501033df4d70c3f85fd72330",
+      "Q_coverage": {
+        "train": 0.980056589996349,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "02388975",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "77cc2097bd5746714b920ac171f821c06bb416012b2fb867aa512ae87595f110",
+      "Q_coverage": {
+        "train": 0.9856927710843374,
+        "validation": 0.9721461187214612
+      }
+    },
+    {
+      "station_id": "02390000",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "d17f4ad2e35f1fdf211ff481de5cd8a1a9efe3875adaff24db006fc06167c9d8",
+      "Q_coverage": {
+        "train": 0.992926250456371,
+        "validation": 0.986986301369863
+      }
+    },
+    {
+      "station_id": "02391540",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "fb62c46098747510f430aed1275c361c4489023ad44ca17cd25ec199de8cf70f",
+      "Q_coverage": {
+        "train": 0.9608890105878057,
+        "validation": 0.9118721461187215
+      }
+    },
+    {
+      "station_id": "02391840",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "0ca28e5c6251d157b24658ed5aa56716ddb6ca170e2c9b5dfe2ac9b3ebb9b9ed",
+      "Q_coverage": {
+        "train": 0.9875410733844469,
+        "validation": 0.9984018264840183
+      }
+    },
+    {
+      "station_id": "02392360",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "b5b78859feb2d756021e49c9c0a1273cf0d54b9cc30d83ef39ed3e0899360508",
+      "Q_coverage": {
+        "train": 0.99324571011318,
+        "validation": 0.9994292237442922
+      }
+    },
+    {
+      "station_id": "02392780",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "1a667600c105c47798a5ea1ed83da41bd5aabfcecb910e0bac9544de2845b6e9",
+      "Q_coverage": {
+        "train": 0.9840270171595473,
+        "validation": 0.9602739726027397
+      }
+    },
+    {
+      "station_id": "02392950",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "eb3938fc34aef0780e163fc09041be41b29ab4e45a7b5f3c3c79895b2d76691e",
+      "Q_coverage": {
+        "train": 0.9972617743702081,
+        "validation": 0.9993150684931507
+      }
+    },
+    {
+      "station_id": "02392975",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "e7acb3df01e7f626a92b6d14e58996051d267de39498f32424361ac7965dbca7",
+      "Q_coverage": {
+        "train": 0.9956188389923329,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "02393419",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "ef8e209f91fca2e616635baef605d39573f4e0da68aac9218f9856017d3daee1",
+      "Q_coverage": {
+        "train": 0.9759036144578314,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "02399200",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "25477b593ed7609ee2bf05290b6ec315935d66c74ecbaa265fadab2b0b041348",
+      "Q_coverage": {
+        "train": 0.9640379700620665,
+        "validation": 0.9997716894977169
+      }
+    },
+    {
+      "station_id": "02400100",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "97ff520fb65fc7983a0bf432a254adcf97ecfe8f03dd5a5bb31a4a5d73ba34ed",
+      "Q_coverage": {
+        "train": 0.9675292077400511,
+        "validation": 0.9997716894977169
+      }
+    },
+    {
+      "station_id": "02400680",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "b8b82765549eb87e3e4382894471ceae2802e0788fcf53c4f666fa4421a778cb",
+      "Q_coverage": {
+        "train": 0.9972389558232931,
+        "validation": 0.9985159817351598
+      }
+    },
+    {
+      "station_id": "02401000",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "75e40b99b8043a3febe6f4250dee878099f0cec1ef57371678c9459bcbeaee27",
+      "Q_coverage": {
+        "train": 0.9964403066812705,
+        "validation": 0.9998858447488584
+      }
+    },
+    {
+      "station_id": "02401390",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "8e2353a63a27780550512c27bdc48561d2746ede6089cb0b7774569d06fd5fa8",
+      "Q_coverage": {
+        "train": 0.9992698064987222,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "02404400",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "8fee3c76bede54bb993b4b4b2ca201924842b0ca3ee83dcd72a7698f9c42f5f0",
+      "Q_coverage": {
+        "train": 0.9424059875867105,
+        "validation": 0.9855022831050229
+      }
+    },
+    {
+      "station_id": "02405500",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "7e8b7735c4a90c506662e1da38e19aa351efa31ccee106b26203c674e4d8aecc",
+      "Q_coverage": {
+        "train": 0.9124452354874042,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "02407514",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "d55c258396e6186a4f837bbdd944d02c12e543f8efd5be9ee9d9f50fd98a594c",
+      "Q_coverage": {
+        "train": 0.9683506754289887,
+        "validation": 0.9996575342465753
+      }
+    },
+    {
+      "station_id": "02408540",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "ec7c1269cc3a491af2dc9bb4f3a58e9cbe68b517e396edf89da389aceea0006f",
+      "Q_coverage": {
+        "train": 0.9960295728368017,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "02411930",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "55560be0a9f2967ee4d8f9b0a5fb52e1fb0561c108f8b69b1912547c7e3162b4",
+      "Q_coverage": {
+        "train": 0.9994523548740416,
+        "validation": 0.9992009132420091
+      }
+    },
+    {
+      "station_id": "02412000",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "88e590b5ca688cc7bf2990f4cab25709e6369c35619076b51e2e66789d5a34f8",
+      "Q_coverage": {
+        "train": 0.9947517342095655,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "02413000",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "0b811605d95da13a4d101a4efb98d4e5d298b8e17eaf27a6743bd78b6817647f",
+      "Q_coverage": {
+        "train": 0.9863088718510405,
+        "validation": 0.9982876712328768
+      }
+    },
+    {
+      "station_id": "02413210",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "b31685f18f45ce8651bc678934eaf2a8e11c5c26443e0f6be301f5abc1ce1739",
+      "Q_coverage": {
+        "train": 0.9741009492515517,
+        "validation": 0.9987442922374429
+      }
+    },
+    {
+      "station_id": "02413300",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "ba96f39553b03eaa136ede3eb4c8a595abd19de55692c0292765f65ad4266128",
+      "Q_coverage": {
+        "train": 0.9857384081781673,
+        "validation": 0.9942922374429224
+      }
+    },
+    {
+      "station_id": "02414500",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "37a16ac7272052f24da5fe0761a9d4c2f87dfbbc33fe359a993739875924c51e",
+      "Q_coverage": {
+        "train": 0.9892752829499818,
+        "validation": 0.8958904109589041
+      }
+    },
+    {
+      "station_id": "02415000",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "e0b646f25fe98a98ec2b412fdf018887f2a9866674014a9b50393a18f80ec5a0",
+      "Q_coverage": {
+        "train": 0.9486810879883169,
+        "validation": 0.9940639269406393
+      }
+    },
+    {
+      "station_id": "02418230",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "8277c111bbd2b6c6404167ebfdad679143a5ebc51a31a50a234265957c2f71d1",
+      "Q_coverage": {
+        "train": 0.9983342460752099,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "02418760",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "20d6283105a698de05516d4c16de12d6f85479c486193acdfc1e63733136d219",
+      "Q_coverage": {
+        "train": 0.9948201898503103,
+        "validation": 0.9998858447488584
+      }
+    },
+    {
+      "station_id": "02419000",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "17f96b9992ba9e89e3df31b19411506b57dea155f9f18e09a5d52030efd723a7",
+      "Q_coverage": {
+        "train": 0.979714311792625,
+        "validation": 0.9940639269406393
+      }
+    },
+    {
+      "station_id": "02421000",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "b6da5451bbb51af0978ec4d70aa32fbed219b63730b9faf84a5e4127439cbe0a",
+      "Q_coverage": {
+        "train": 0.993268528660095,
+        "validation": 0.9581050228310503
+      }
+    },
+    {
+      "station_id": "02422500",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "49763ca527b224d6c2676e89a5c2870cbd1a4c3f48a39988c888fa2b9959d584",
+      "Q_coverage": {
+        "train": 0.9565306681270537,
+        "validation": 0.9876712328767123
+      }
+    },
+    {
+      "station_id": "02423130",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "73202a90bb08b8403400cf215fa8336cef739541e6dffe5f118d4b06a4f8f6cd",
+      "Q_coverage": {
+        "train": 0.9617561153705732,
+        "validation": 0.9932648401826484
+      }
+    },
+    {
+      "station_id": "02423380",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "740cbc8a79f08c23efa1bd4b75d14b6cef3577cb3980a9926f8485ebc7e2eee7",
+      "Q_coverage": {
+        "train": 0.9996120847024461,
+        "validation": 0.9996575342465753
+      }
+    },
+    {
+      "station_id": "02423397",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "7a6db49c840124e70ea2068b0a4bc03b24ba1807f7320ca647f3651a6828d94c",
+      "Q_coverage": {
+        "train": 0.9906443957648777,
+        "validation": 0.9998858447488584
+      }
+    },
+    {
+      "station_id": "02423400",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "5c72386826729fdb38ff3841bed39f78880888532715c24c34a23b91d8077d47",
+      "Q_coverage": {
+        "train": 0.9991328952172326,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "02423414",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "229cb43430b610e0d96c0dd766f7860a5b1fa485078413377167194bdaaed767",
+      "Q_coverage": {
+        "train": 0.99153431909456,
+        "validation": 0.9962328767123287
+      }
+    },
+    {
+      "station_id": "02423425",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "c187561c6fdc6b84e873add32a5be4ec55d2ba5c173e3d696e6923e73e501caa",
+      "Q_coverage": {
+        "train": 0.9880658999634904,
+        "validation": 0.9995433789954338
+      }
+    },
+    {
+      "station_id": "02423496",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "fd0e72d5fe9ecd04f586d49bb7ab3b936200221250d9b6094fec44eb396bf749",
+      "Q_coverage": {
+        "train": 0.9893893756845564,
+        "validation": 0.998972602739726
+      }
+    },
+    {
+      "station_id": "02423500",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "17e183cee8d5fc4cee25518d3ea245fb6e6a508e49d82a02fa201d12d5f3fa80",
+      "Q_coverage": {
+        "train": 0.9991557137641475,
+        "validation": 0.9993150684931507
+      }
+    },
+    {
+      "station_id": "0242354750",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "18d6634fd7cc66636e18049a6c37324e665de33fdd1871339a6becd588485d40",
+      "Q_coverage": {
+        "train": 0.9933598028477546,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "02423555",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "68b8a3e3a0b41f380f16aa2152ef06ad6c26ee66c2e30d09be6c432bd89ef130",
+      "Q_coverage": {
+        "train": 0.7909592917123037,
+        "validation": 0.9839041095890411
+      }
+    },
+    {
+      "station_id": "02423630",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "26da558b0c7d7d1fe314ba63bd76d43789b14033d4bd4181a828fd1f71c83b4b",
+      "Q_coverage": {
+        "train": 0.9971020445418036,
+        "validation": 0.9992009132420091
+      }
+    },
+    {
+      "station_id": "02424000",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "f68e9ccaa3f32787f1fe74657155090a71f76bd733d610b6e0bd1e4f2cb41a36",
+      "Q_coverage": {
+        "train": 0.950004563709383,
+        "validation": 0.9341324200913242
+      }
+    },
+    {
+      "station_id": "02425000",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "637a62b156dd48eed910513076482f722230159642d409aeac29c75a8a8002ab",
+      "Q_coverage": {
+        "train": 0.9890927345746623,
+        "validation": 0.9962328767123287
+      }
+    },
+    {
+      "station_id": "02427250",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "96b921e33a42d4af20d0e011b236b2d14f9a8a9c53330bd37b17bebf0bd1ebc0",
+      "Q_coverage": {
+        "train": 0.9529025191675794,
+        "validation": 0.9920091324200914
+      }
+    },
+    {
+      "station_id": "02438000",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "e2a9ddc61c5924de10b1865194a4d3b81c98705919f717a4e61f4d49402ac9e7",
+      "Q_coverage": {
+        "train": 0.9747855056589997,
+        "validation": 0.9858447488584475
+      }
+    },
+    {
+      "station_id": "02443500",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "f8a9b72305eae588dec4d6785c2c89aab0d84c7580656b73929b51c693de6410",
+      "Q_coverage": {
+        "train": 0.9890242789339175,
+        "validation": 0.9996575342465753
+      }
+    },
+    {
+      "station_id": "02446500",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "4a0a0c453d14fae1fb50814d2303bec0dc869befb3568a37c160c4922edc9e67",
+      "Q_coverage": {
+        "train": 0.9971933187294633,
+        "validation": 0.9971461187214612
+      }
+    },
+    {
+      "station_id": "02448900",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "46ad3d29ca1580c8347777c25cb09cc2cd4f88c644c5eac5a1008106fd0d994b",
+      "Q_coverage": {
+        "train": 0.9924242424242424,
+        "validation": 0.996689497716895
+      }
+    },
+    {
+      "station_id": "02449882",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "f5afe5b10d72e5b26d7382d1b6982f0539e8d1075a89b36afbb91dacb362a458",
+      "Q_coverage": {
+        "train": 0.9704956188389924,
+        "validation": 0.9997716894977169
+      }
+    },
+    {
+      "station_id": "02450180",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "d4f3ca1b9e3913170f008ce17192cebe1d7e4d2b808749285fdeaff50b315265",
+      "Q_coverage": {
+        "train": 0.9712029937933553,
+        "validation": 0.9885844748858448
+      }
+    },
+    {
+      "station_id": "02450250",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "d59c48424194f329bb9e363f8c6095a87171d89fc0a9a2b0e82a657b5865f0d1",
+      "Q_coverage": {
+        "train": 0.9865598758671048,
+        "validation": 0.9123287671232877
+      }
+    },
+    {
+      "station_id": "02450825",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "65dde394d76a08dcd753486275e86699389662e86cba88d5b4c7e29b511f590b",
+      "Q_coverage": {
+        "train": 0.9912376779846659,
+        "validation": 0.9990867579908675
+      }
+    },
+    {
+      "station_id": "02453000",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "71f96fb60c08e0926f8194ee527f7477bcd30341ac2be2329390e7d563b19c10",
+      "Q_coverage": {
+        "train": 0.9971476816356335,
+        "validation": 0.9974885844748859
+      }
+    },
+    {
+      "station_id": "02454055",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "594389217f35dae057da8ea7c04a02a0d25fcd67fc38a6b895e72e29392c2ae0",
+      "Q_coverage": {
+        "train": 0.9819277108433735,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "02455000",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "c827e7c0fcecd1124bd5e0292022f76b50e5bf06c44610f144b21aa1fe71b9e6",
+      "Q_coverage": {
+        "train": 0.939873128879153,
+        "validation": 0.996689497716895
+      }
+    },
+    {
+      "station_id": "02455185",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "33f2070127d89c84c0d07eec0351fe11cf18c0a3aaf3cc3aef0f1e03d30cdc27",
+      "Q_coverage": {
+        "train": 0.9929947060971157,
+        "validation": 0.9995433789954338
+      }
+    },
+    {
+      "station_id": "02455980",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "b7ca684f9ce46b897c9f8318e93a5c7d6108b831a98d9ad08c921a05ce99f907",
+      "Q_coverage": {
+        "train": 0.9957785688207375,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "02456500",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "4ebb6ea8a3cd55aebd1d72d0014ec491e01a68cfae229e3fa6561d4a783422bc",
+      "Q_coverage": {
+        "train": 0.9983570646221248,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "02457000",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "982707ab180cf21dcfd4abed57c7c5f00d2a7691bf81a2540afccfddfb29a9b1",
+      "Q_coverage": {
+        "train": 0.988499452354874,
+        "validation": 0.43424657534246575
+      }
+    },
+    {
+      "station_id": "02457595",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "12205d36aaad4b6e8fe00d0450a4faaa7f6811649462bfc4f6328c19d4fce557",
+      "Q_coverage": {
+        "train": 0.9813572471705002,
+        "validation": 0.9761415525114155
+      }
+    },
+    {
+      "station_id": "02458300",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "ff8a266f13f985dc3f3fcb2f6f971bf727b3ab8c73fbf15959d264e737635ddb",
+      "Q_coverage": {
+        "train": 0.9884081781672143,
+        "validation": 0.9875570776255708
+      }
+    },
+    {
+      "station_id": "02458450",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "12f842b93c509d913834a0c2d40f0f5a43f824d8d423eca0cab6564fbca722d1",
+      "Q_coverage": {
+        "train": 0.9998630887185104,
+        "validation": 0.9993150684931507
+      }
+    },
+    {
+      "station_id": "02458600",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "b35f9e7410a94ba5d986003ca306e088de55205610602ae61a59058b6dd74f13",
+      "Q_coverage": {
+        "train": 0.9903705732018985,
+        "validation": 0.9995433789954338
+      }
+    },
+    {
+      "station_id": "02461500",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "c768955d1945e514e3937ad4c1358d39114f75ea4fd6cf907a376fb13165d490",
+      "Q_coverage": {
+        "train": 0.983798831690398,
+        "validation": 0.998972602739726
+      }
+    },
+    {
+      "station_id": "02462000",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "e5da2dfefb34904e1b99043b9afeec1fbe584fb026c24ea505945cd9f203d93d",
+      "Q_coverage": {
+        "train": 0.9680083972252647,
+        "validation": 0.9888127853881279
+      }
+    },
+    {
+      "station_id": "02464000",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "9451f029b39a72b871530e9f5c859011b36b5d98d2c8ff94f86c2a003a0eb86d",
+      "Q_coverage": {
+        "train": 0.9947745527564804,
+        "validation": 0.971689497716895
+      }
+    },
+    {
+      "station_id": "02465292",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "4e8cbf58c6fc6fda5f819d7d29e6f5f4cb35629fb6c8f9824ba87d5e1bf9b7cc",
+      "Q_coverage": {
+        "train": 0.9955960204454181,
+        "validation": 0.9998858447488584
+      }
+    },
+    {
+      "station_id": "02465493",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "c97f6aeaa068e90f769774fbbd70d4dadb58216aa2b1a7e2d57d2e67e3a42182",
+      "Q_coverage": {
+        "train": 0.9978550565899964,
+        "validation": 0.9957762557077625
+      }
+    },
+    {
+      "station_id": "02467500",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "980df02cdadfd34f876054b88bae243c8448a4a9da8af02712927787d97664ec",
+      "Q_coverage": {
+        "train": 0.9983798831690398,
+        "validation": 0.9982876712328768
+      }
+    },
+    {
+      "station_id": "02469800",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "25ccee709038c2995bc75da5c728f70effc94b5b6e99b4c4bd56ff9e2437a1d5",
+      "Q_coverage": {
+        "train": 0.9907128514056225,
+        "validation": 0.9997716894977169
+      }
+    },
+    {
+      "station_id": "02470072",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "fa2ba15ebe5da0253a208508ec4e5a4a8eae3cdb604bc8563febd7a60695ea30",
+      "Q_coverage": {
+        "train": 0.968578860898138,
+        "validation": 0.9998858447488584
+      }
+    },
+    {
+      "station_id": "02471001",
+      "terminal_system_id": "HYBAS_7120046590",
+      "crossfit_fold": 0,
+      "sha256": "94fa70d29332a9eb5cfdcd96cfc1a3a53a63d6eaedf1025d96874dd41717ae0f",
+      "Q_coverage": {
+        "train": 0.9986080686381891,
+        "validation": 0.9965753424657534
+      }
+    },
+    {
+      "station_id": "07375000",
+      "terminal_system_id": "HYBAS_7120046900",
+      "crossfit_fold": 1,
+      "sha256": "f9977da45e6857dc56484513469e08e18b205dd855a64132632d34f975a64431",
+      "Q_coverage": {
+        "train": 0.9820646221248631,
+        "validation": 0.9985159817351598
+      }
+    },
+    {
+      "station_id": "07375280",
+      "terminal_system_id": "HYBAS_7120046900",
+      "crossfit_fold": 1,
+      "sha256": "890023cf5e363233d0ee7e4fde458c137bf4b72fdc6b4247dc6392be266163d2",
+      "Q_coverage": {
+        "train": 0.962486308871851,
+        "validation": 0.998972602739726
+      }
+    },
+    {
+      "station_id": "07375500",
+      "terminal_system_id": "HYBAS_7120046900",
+      "crossfit_fold": 1,
+      "sha256": "46d465372b88f61800515fb8a5d7ae1aabdc91713822b386b6eeea3b83c2054d",
+      "Q_coverage": {
+        "train": 0.9958242059145673,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "07375800",
+      "terminal_system_id": "HYBAS_7120046900",
+      "crossfit_fold": 1,
+      "sha256": "f28576114bf3d208d18fc72986b95eeaabea2f93fe30e82da161f7f30150201d",
+      "Q_coverage": {
+        "train": 0.987495436290617,
+        "validation": 0.9997716894977169
+      }
+    },
+    {
+      "station_id": "07375960",
+      "terminal_system_id": "HYBAS_7120046900",
+      "crossfit_fold": 1,
+      "sha256": "beb37843fab42cdaf8dcb353cc2a73de08e783da337035128c817b9d96571c33",
+      "Q_coverage": {
+        "train": 0.9777290982110259,
+        "validation": 0.9932648401826484
+      }
+    },
+    {
+      "station_id": "07376000",
+      "terminal_system_id": "HYBAS_7120046900",
+      "crossfit_fold": 1,
+      "sha256": "5ab533e2363e525ea678b1979b740f51162aeebb212c91dbf7729b7e65e26757",
+      "Q_coverage": {
+        "train": 0.9958242059145673,
+        "validation": 0.9817351598173516
+      }
+    },
+    {
+      "station_id": "07376500",
+      "terminal_system_id": "HYBAS_7120046900",
+      "crossfit_fold": 1,
+      "sha256": "acd0326685ec2776cdafbad1fc1dd54aa4dc521feff7211be123e6233d181bd3",
+      "Q_coverage": {
+        "train": 0.9948886454910552,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "07377000",
+      "terminal_system_id": "HYBAS_7120046900",
+      "crossfit_fold": 1,
+      "sha256": "337988d88c2dcd3dcccd2a05f28346dcf1540ff253839c58abc9914d52621c7f",
+      "Q_coverage": {
+        "train": 0.9984255202628697,
+        "validation": 0.9877853881278539
+      }
+    },
+    {
+      "station_id": "07378500",
+      "terminal_system_id": "HYBAS_7120046900",
+      "crossfit_fold": 1,
+      "sha256": "45cd513656d9ddb1ddbcd3eb63729fac1a11967450cdcee606f3fd9f03a82ff8",
+      "Q_coverage": {
+        "train": 1.0,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "07380120",
+      "terminal_system_id": "HYBAS_7120046900",
+      "crossfit_fold": 1,
+      "sha256": "1b0f266122044ca5363205b06da1cf5162eff0e28c26185c29bf0133f82b8837",
+      "Q_coverage": {
+        "train": 0.9652245345016429,
+        "validation": 0.9834474885844748
+      }
+    },
+    {
+      "station_id": "08013000",
+      "terminal_system_id": "HYBAS_7120047800",
+      "crossfit_fold": 0,
+      "sha256": "1df1beb2c710fda2f4f5cbffa409630478ad43246fce72b9da171d4492533f91",
+      "Q_coverage": {
+        "train": 0.9995892661555312,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "08013500",
+      "terminal_system_id": "HYBAS_7120047800",
+      "crossfit_fold": 0,
+      "sha256": "fc20f60723fca5f1af38406e59e2cbc7c912312c810e009ddfa6406fafa76f51",
+      "Q_coverage": {
+        "train": 0.9956188389923329,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "08014500",
+      "terminal_system_id": "HYBAS_7120047800",
+      "crossfit_fold": 0,
+      "sha256": "df6ea6b0a34ace2e54179540b20a3d8b29f3e5263deba9b7a34cc303d708d172",
+      "Q_coverage": {
+        "train": 0.9811290617013508,
+        "validation": 0.9992009132420091
+      }
+    },
+    {
+      "station_id": "08014800",
+      "terminal_system_id": "HYBAS_7120047800",
+      "crossfit_fold": 0,
+      "sha256": "88a85ac54cf9cd97e270446a3f854e27b35aad45b7459e0b3753b633d0828b94",
+      "Q_coverage": {
+        "train": 1.0,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "08082700",
+      "terminal_system_id": "HYBAS_7120048300",
+      "crossfit_fold": 2,
+      "sha256": "2613dd2a6e6261d6c21992fd14a3299cf44e115860761a968caedc5b3480abd7",
+      "Q_coverage": {
+        "train": 0.9916484118291348,
+        "validation": 0.9778538812785388
+      }
+    },
+    {
+      "station_id": "08083100",
+      "terminal_system_id": "HYBAS_7120048300",
+      "crossfit_fold": 2,
+      "sha256": "14da8df3ad1f85f40cbc4c9b245c056628df717134cb7056049ec5f52db67582",
+      "Q_coverage": {
+        "train": 0.9525830595107704,
+        "validation": 0.9932648401826484
+      }
+    },
+    {
+      "station_id": "08083230",
+      "terminal_system_id": "HYBAS_7120048300",
+      "crossfit_fold": 2,
+      "sha256": "5814beb6171b96a18f5ef659e22ba1f6147725a2d7d417593d32f7db0a7df913",
+      "Q_coverage": {
+        "train": 0.9922416940489229,
+        "validation": 0.9873287671232877
+      }
+    },
+    {
+      "station_id": "08083420",
+      "terminal_system_id": "HYBAS_7120048300",
+      "crossfit_fold": 2,
+      "sha256": "8bfb7fadfda696bde33b406db1515ab552e371a5b0e12c7eaeedcee9dea73c42",
+      "Q_coverage": {
+        "train": 0.99491146403797,
+        "validation": 0.9990867579908675
+      }
+    },
+    {
+      "station_id": "08084800",
+      "terminal_system_id": "HYBAS_7120048300",
+      "crossfit_fold": 2,
+      "sha256": "8d652013013348a49aa0cafa2488d347c04ca302e5083f1329ad7f1ac8f5ff1f",
+      "Q_coverage": {
+        "train": 0.999657721796276,
+        "validation": 0.9884703196347032
+      }
+    },
+    {
+      "station_id": "08086050",
+      "terminal_system_id": "HYBAS_7120048300",
+      "crossfit_fold": 2,
+      "sha256": "3c7a7c8ac38b150d1b255f1848de6c65fa9414fc2ab7b3ce266d35b2fab93614",
+      "Q_coverage": {
+        "train": 0.9937933552391384,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "08086212",
+      "terminal_system_id": "HYBAS_7120048300",
+      "crossfit_fold": 2,
+      "sha256": "d205c58cf57bef1bd2b68ce0d52ad9316736f15035f0869a0aed44a758842af0",
+      "Q_coverage": {
+        "train": 0.999338262139467,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "08086290",
+      "terminal_system_id": "HYBAS_7120048300",
+      "crossfit_fold": 2,
+      "sha256": "1024a60bf06bad5121443cac33d0c0feacb046b5b419ef643aa8a7e94501f846",
+      "Q_coverage": {
+        "train": 0.9657265425337714,
+        "validation": 0.9788812785388128
+      }
+    },
+    {
+      "station_id": "08086500",
+      "terminal_system_id": "HYBAS_7120048300",
+      "crossfit_fold": 2,
+      "sha256": "8449c2aa8451930c72762c7c67089326c933681547e0b823d7c8d6d045eb6d9e",
+      "Q_coverage": {
+        "train": 0.6035277473530486,
+        "validation": 0.9995433789954338
+      }
+    },
+    {
+      "station_id": "08091500",
+      "terminal_system_id": "HYBAS_7120048300",
+      "crossfit_fold": 2,
+      "sha256": "d799130b24de67c4dc8e02397371669e4c7d5705e986b6c9fafe1b0a324ef10a",
+      "Q_coverage": {
+        "train": 0.9951168309602044,
+        "validation": 0.9995433789954338
+      }
+    },
+    {
+      "station_id": "08092000",
+      "terminal_system_id": "HYBAS_7120048300",
+      "crossfit_fold": 2,
+      "sha256": "6b31ce02ba7ebf881c50742aa0f5c3d16eda9a35adb2669d51ae4c420472323b",
+      "Q_coverage": {
+        "train": 0.9752875136911281,
+        "validation": 0.990296803652968
+      }
+    },
+    {
+      "station_id": "08093360",
+      "terminal_system_id": "HYBAS_7120048300",
+      "crossfit_fold": 2,
+      "sha256": "a5e6e8d4804ab02d75beee9b544a5612f869cd34c05cc731ba2de9abd52df921",
+      "Q_coverage": {
+        "train": 0.9680540343190945,
+        "validation": 0.9969178082191781
+      }
+    },
+    {
+      "station_id": "08094800",
+      "terminal_system_id": "HYBAS_7120048300",
+      "crossfit_fold": 2,
+      "sha256": "4a7c703ebf4b9c296a53a068d41583500fa4ab096435e55174411de9fbf30da2",
+      "Q_coverage": {
+        "train": 0.891908543263965,
+        "validation": 0.9997716894977169
+      }
+    },
+    {
+      "station_id": "08095000",
+      "terminal_system_id": "HYBAS_7120048300",
+      "crossfit_fold": 2,
+      "sha256": "ddb9a751373e6ef72942cf0597d9301e748374c061568df7f3d2f7734f615d47",
+      "Q_coverage": {
+        "train": 0.9965315808689302,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "08095300",
+      "terminal_system_id": "HYBAS_7120048300",
+      "crossfit_fold": 2,
+      "sha256": "01dc549d5f10aad9b7c8b2535e7a886a4210f9c707ebf4771ae1491d4a01b258",
+      "Q_coverage": {
+        "train": 0.9826807228915663,
+        "validation": 0.9995433789954338
+      }
+    },
+    {
+      "station_id": "08098300",
+      "terminal_system_id": "HYBAS_7120048300",
+      "crossfit_fold": 2,
+      "sha256": "34d6add19110ea126732879223bae165386d4ca9f28e0cb009326c8e6d38ae8e",
+      "Q_coverage": {
+        "train": 0.9688755020080321,
+        "validation": 0.9987442922374429
+      }
+    },
+    {
+      "station_id": "08099100",
+      "terminal_system_id": "HYBAS_7120048300",
+      "crossfit_fold": 2,
+      "sha256": "631369855df94254068915e98432a51f30abfaf175132608316dc38b1f8ac0c7",
+      "Q_coverage": {
+        "train": 0.9299698795180723,
+        "validation": 0.9953196347031964
+      }
+    },
+    {
+      "station_id": "08099300",
+      "terminal_system_id": "HYBAS_7120048300",
+      "crossfit_fold": 2,
+      "sha256": "ff55d36a9690bb0b2f06519ae6671ede59afb62237c96a7544df33fe8e97999b",
+      "Q_coverage": {
+        "train": 0.9907813070463672,
+        "validation": 0.9980593607305936
+      }
+    },
+    {
+      "station_id": "08099500",
+      "terminal_system_id": "HYBAS_7120048300",
+      "crossfit_fold": 2,
+      "sha256": "20052c123d7fd6b887d0bfb0246ed60efe67a02362eea56ce6c5df91a42024e2",
+      "Q_coverage": {
+        "train": 0.9990872581234027,
+        "validation": 0.998972602739726
+      }
+    },
+    {
+      "station_id": "08100000",
+      "terminal_system_id": "HYBAS_7120048300",
+      "crossfit_fold": 2,
+      "sha256": "dd6631ca9a91139b48a98710a8cf65ad4045b51dd6d311ea5ea9606d457ae2db",
+      "Q_coverage": {
+        "train": 0.9575118656443957,
+        "validation": 0.9970319634703196
+      }
+    },
+    {
+      "station_id": "08101000",
+      "terminal_system_id": "HYBAS_7120048300",
+      "crossfit_fold": 2,
+      "sha256": "34c2a1f1921a5f7cccb986cc53c5db92615f5ee10985f011bef3b74fdfbec87a",
+      "Q_coverage": {
+        "train": 0.92565717415115,
+        "validation": 0.9992009132420091
+      }
+    },
+    {
+      "station_id": "08103800",
+      "terminal_system_id": "HYBAS_7120048300",
+      "crossfit_fold": 2,
+      "sha256": "5bee2f3589ac37edf7157b8bfad3248dbe3c406116ed63c33d5693e07ab051e4",
+      "Q_coverage": {
+        "train": 0.992218875502008,
+        "validation": 0.9997716894977169
+      }
+    },
+    {
+      "station_id": "08103900",
+      "terminal_system_id": "HYBAS_7120048300",
+      "crossfit_fold": 2,
+      "sha256": "520747f3a93d89811019f4d9d21ac2d2f9c870dfffa4b6603de3b910e34156f4",
+      "Q_coverage": {
+        "train": 0.9989275282949982,
+        "validation": 0.9997716894977169
+      }
+    },
+    {
+      "station_id": "08104100",
+      "terminal_system_id": "HYBAS_7120048300",
+      "crossfit_fold": 2,
+      "sha256": "57a4eeeedc9d2c9bbd7bac46a73d428346fae79490be91cfc90eb2000467fff3",
+      "Q_coverage": {
+        "train": 0.9952081051478642,
+        "validation": 0.9995433789954338
+      }
+    },
+    {
+      "station_id": "08104700",
+      "terminal_system_id": "HYBAS_7120048300",
+      "crossfit_fold": 2,
+      "sha256": "2fbf5975c1002beaa74d9778a4d6fc19400b5b346cdf318b3c0a4dd75b9ed41b",
+      "Q_coverage": {
+        "train": 0.9958013873676524,
+        "validation": 0.9996575342465753
+      }
+    },
+    {
+      "station_id": "08105095",
+      "terminal_system_id": "HYBAS_7120048300",
+      "crossfit_fold": 2,
+      "sha256": "5a239f7f09c29bef138b17f6824bd91b3595de62f4a587c14dc334acfc0a55c8",
+      "Q_coverage": {
+        "train": 0.9972389558232931,
+        "validation": 0.9998858447488584
+      }
+    },
+    {
+      "station_id": "08105700",
+      "terminal_system_id": "HYBAS_7120048300",
+      "crossfit_fold": 2,
+      "sha256": "23e80e93ad8b9615ece14a23a4f1b140a014e41aa65dd61db376bb6480515b8c",
+      "Q_coverage": {
+        "train": 0.9896403797006207,
+        "validation": 0.998972602739726
+      }
+    },
+    {
+      "station_id": "08110325",
+      "terminal_system_id": "HYBAS_7120048300",
+      "crossfit_fold": 2,
+      "sha256": "f955fa72a8e1ccee5166337f540365d3d19e1658f8f64a6fb459576788c4db34",
+      "Q_coverage": {
+        "train": 0.9940671778021175,
+        "validation": 0.998972602739726
+      }
+    },
+    {
+      "station_id": "08111700",
+      "terminal_system_id": "HYBAS_7120048300",
+      "crossfit_fold": 2,
+      "sha256": "279ee3705329d58658460fa95cf4ec94c46158346feb34e0edac0da6e92f3870",
+      "Q_coverage": {
+        "train": 0.9952081051478642,
+        "validation": 0.998972602739726
+      }
+    },
+    {
+      "station_id": "08115000",
+      "terminal_system_id": "HYBAS_7120048300",
+      "crossfit_fold": 2,
+      "sha256": "5e5c021eececd8c92d13fbeaa46879987296d57a61820a613a6d075c20ff539b",
+      "Q_coverage": {
+        "train": 1.0,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "08116400",
+      "terminal_system_id": "HYBAS_7120048300",
+      "crossfit_fold": 2,
+      "sha256": "f16eff16474dc170cf73f379f87f0894d7b030300dcd7a4fd1ca9bd2ca95bb42",
+      "Q_coverage": {
+        "train": 0.9916484118291348,
+        "validation": 0.9504566210045662
+      }
+    },
+    {
+      "station_id": "08164390",
+      "terminal_system_id": "HYBAS_7120048480",
+      "crossfit_fold": 0,
+      "sha256": "c0a94a18c4657f6ff794482b9f49e251036f53226ba31fb1afb5f89da576ac18",
+      "Q_coverage": {
+        "train": 0.9912833150784958,
+        "validation": 0.993607305936073
+      }
+    },
+    {
+      "station_id": "08164450",
+      "terminal_system_id": "HYBAS_7120048480",
+      "crossfit_fold": 0,
+      "sha256": "3b9c4dcc08167f50f4695785966dbd41aa0447d7ef0d89ee2001308c351a868a",
+      "Q_coverage": {
+        "train": 0.9956644760861628,
+        "validation": 0.9987442922374429
+      }
+    },
+    {
+      "station_id": "08164503",
+      "terminal_system_id": "HYBAS_7120048480",
+      "crossfit_fold": 0,
+      "sha256": "b318863aafd25d477f526026d72dfca8d91a4610431e82ac765bf9e4b7b33d8b",
+      "Q_coverage": {
+        "train": 0.9967141292442497,
+        "validation": 0.9993150684931507
+      }
+    },
+    {
+      "station_id": "08166140",
+      "terminal_system_id": "HYBAS_7120048620",
+      "crossfit_fold": 2,
+      "sha256": "d9de0d03332ff2e323aa9a16c957b749b0fb1f8fe72a023e46afc48257fd07e5",
+      "Q_coverage": {
+        "train": 0.965521175611537,
+        "validation": 0.9591324200913242
+      }
+    },
+    {
+      "station_id": "08166200",
+      "terminal_system_id": "HYBAS_7120048620",
+      "crossfit_fold": 2,
+      "sha256": "f491fd77f6df6e9e2a919a253ba032bb8093ee6f200fd5388af5cbe937c27e9c",
+      "Q_coverage": {
+        "train": 0.9987221613727638,
+        "validation": 0.9968036529680365
+      }
+    },
+    {
+      "station_id": "08166250",
+      "terminal_system_id": "HYBAS_7120048620",
+      "crossfit_fold": 2,
+      "sha256": "963fa7e52d2c086ca07cb6e45646988c582a9a034315f0e786ebe4f923bce3e6",
+      "Q_coverage": {
+        "train": 0.9668674698795181,
+        "validation": 0.9718036529680365
+      }
+    },
+    {
+      "station_id": "08167000",
+      "terminal_system_id": "HYBAS_7120048620",
+      "crossfit_fold": 2,
+      "sha256": "83bd267b7b0118fcd0bd0cc90d6e3319428296c6c0ad3e8e4616babc87edc0a3",
+      "Q_coverage": {
+        "train": 0.9490461847389559,
+        "validation": 0.9740867579908675
+      }
+    },
+    {
+      "station_id": "08167500",
+      "terminal_system_id": "HYBAS_7120048620",
+      "crossfit_fold": 2,
+      "sha256": "04ed8fae215a00682056d9db1016c521f90cd2ab042a2dd701d929e1168bad53",
+      "Q_coverage": {
+        "train": 0.9991557137641475,
+        "validation": 0.9940639269406393
+      }
+    },
+    {
+      "station_id": "08174600",
+      "terminal_system_id": "HYBAS_7120048620",
+      "crossfit_fold": 2,
+      "sha256": "8e1fdb641db5030f657b8208f341f0983c55caf7f7dec967782878b93dfa1b02",
+      "Q_coverage": {
+        "train": 0.9997033588901059,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "08177500",
+      "terminal_system_id": "HYBAS_7120048620",
+      "crossfit_fold": 2,
+      "sha256": "a304e0a66a65f809b461801f5e318a9bf5339512c11928ae9694f9b27d65bb9a",
+      "Q_coverage": {
+        "train": 0.9957101131799927,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "08180700",
+      "terminal_system_id": "HYBAS_7120048620",
+      "crossfit_fold": 2,
+      "sha256": "8914f594acbde99a79df375c888fd43d3ce62e97139c68038c32dcb8d67d1dfc",
+      "Q_coverage": {
+        "train": 0.9945463672873311,
+        "validation": 0.9995433789954338
+      }
+    },
+    {
+      "station_id": "08181400",
+      "terminal_system_id": "HYBAS_7120048620",
+      "crossfit_fold": 2,
+      "sha256": "75d4ecfc6271b856cf9b61be5a58be5b710539d7a5dc1395e15802c2453bbe19",
+      "Q_coverage": {
+        "train": 0.9982429718875502,
+        "validation": 0.9547945205479452
+      }
+    },
+    {
+      "station_id": "08181480",
+      "terminal_system_id": "HYBAS_7120048620",
+      "crossfit_fold": 2,
+      "sha256": "2121eaed0ce75445fa0b8afcaf19b01ae9103e5c8688ff0a8eba8404722ba702",
+      "Q_coverage": {
+        "train": 0.9951168309602044,
+        "validation": 0.9987442922374429
+      }
+    },
+    {
+      "station_id": "08181500",
+      "terminal_system_id": "HYBAS_7120048620",
+      "crossfit_fold": 2,
+      "sha256": "e9e1b3b79406c7c8121e331f1a63fcef7d6b9bc15900ea4383383d24b0df3e79",
+      "Q_coverage": {
+        "train": 0.9840954728002921,
+        "validation": 0.9982876712328768
+      }
+    },
+    {
+      "station_id": "08181800",
+      "terminal_system_id": "HYBAS_7120048620",
+      "crossfit_fold": 2,
+      "sha256": "d96018f95302e51c6a15d931b187c91c3223fe827b5fe6864f463da984cdb533",
+      "Q_coverage": {
+        "train": 0.9859665936473165,
+        "validation": 0.9955479452054794
+      }
+    },
+    {
+      "station_id": "08183900",
+      "terminal_system_id": "HYBAS_7120048620",
+      "crossfit_fold": 2,
+      "sha256": "b6259aea9826baba32b1471763d086c006923665282cd7a4877457d3eb29950c",
+      "Q_coverage": {
+        "train": 0.9997033588901059,
+        "validation": 0.9998858447488584
+      }
+    },
+    {
+      "station_id": "08185000",
+      "terminal_system_id": "HYBAS_7120048620",
+      "crossfit_fold": 2,
+      "sha256": "22347947d5ad94398e32f05d2ee493b1975f7da4d2585ee5f20dd67455fb509f",
+      "Q_coverage": {
+        "train": 0.9944094560058415,
+        "validation": 0.9942922374429224
+      }
+    },
+    {
+      "station_id": "08185065",
+      "terminal_system_id": "HYBAS_7120048620",
+      "crossfit_fold": 2,
+      "sha256": "65e01dba73f844ba51b4fe50e6240f2e5423ca4935a28d9f4733ca18463d9ea6",
+      "Q_coverage": {
+        "train": 0.9454180357794816,
+        "validation": 0.9872146118721461
+      }
+    },
+    {
+      "station_id": "08185100",
+      "terminal_system_id": "HYBAS_7120048620",
+      "crossfit_fold": 2,
+      "sha256": "cf894d8344643a6889b2401b136875b984a15e976a674c83097beeaaf4dca955",
+      "Q_coverage": {
+        "train": 0.9924014238773274,
+        "validation": 0.9981735159817352
+      }
+    },
+    {
+      "station_id": "08185500",
+      "terminal_system_id": "HYBAS_7120048620",
+      "crossfit_fold": 2,
+      "sha256": "a2a1239b24ff7129d45ca2c6bc26849e88e717fde58981b75aec909d7512348c",
+      "Q_coverage": {
+        "train": 0.999657721796276,
+        "validation": 0.9998858447488584
+      }
+    },
+    {
+      "station_id": "08186000",
+      "terminal_system_id": "HYBAS_7120048620",
+      "crossfit_fold": 2,
+      "sha256": "d6f1742f6949a064ba5bef276e053eb87f3d58ed5742f6d3d02460b30b4c524f",
+      "Q_coverage": {
+        "train": 0.9953450164293538,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "08211900",
+      "terminal_system_id": "HYBAS_7120048960",
+      "crossfit_fold": 1,
+      "sha256": "8ef39d8993fa14f7c61bc356bfbd0e22a24f1e3933ee115f5eaebfb86034c59e",
+      "Q_coverage": {
+        "train": 0.9887048192771084,
+        "validation": 0.9987442922374429
+      }
+    },
+    {
+      "station_id": "10105900",
+      "terminal_system_id": "HYBAS_7120073620",
+      "crossfit_fold": 0,
+      "sha256": "93281661ed29c48700bb71741145d18f820931085eb21a8a6594cb3f36e0802a",
+      "Q_coverage": {
+        "train": 0.9955960204454181,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "10129900",
+      "terminal_system_id": "HYBAS_7120073620",
+      "crossfit_fold": 0,
+      "sha256": "319753ad33bdb76fc2c02ee27d4bb00aa146bc2bdb71b0e34c5f0b6922dc4710",
+      "Q_coverage": {
+        "train": 0.9898229280759401,
+        "validation": 0.9996575342465753
+      }
+    },
+    {
+      "station_id": "10149000",
+      "terminal_system_id": "HYBAS_7120073620",
+      "crossfit_fold": 0,
+      "sha256": "41d8cad0cdfb4e7cf066109e1d50175eb2a149e326d146796b80f13c44ddc956",
+      "Q_coverage": {
+        "train": 0.9021997079225995,
+        "validation": 0.8623287671232877
+      }
+    },
+    {
+      "station_id": "10149400",
+      "terminal_system_id": "HYBAS_7120073620",
+      "crossfit_fold": 0,
+      "sha256": "45655d09be0b7fb1d85fc360f3d69ab2bbf6105f30864cdea36ad07f61f76c5a",
+      "Q_coverage": {
+        "train": 0.9435012778386273,
+        "validation": 0.95662100456621
+      }
+    },
+    {
+      "station_id": "10153100",
+      "terminal_system_id": "HYBAS_7120073620",
+      "crossfit_fold": 0,
+      "sha256": "53e2b0813514b341e598accab5fa7767bd06873b81df557dbb9c918096fb9bdf",
+      "Q_coverage": {
+        "train": 1.0,
+        "validation": 0.9990867579908675
+      }
+    },
+    {
+      "station_id": "10155500",
+      "terminal_system_id": "HYBAS_7120073620",
+      "crossfit_fold": 0,
+      "sha256": "2a5b5d109532e883f64c27e84f058eca8b245388d5b3279ad078fb0be21c00e9",
+      "Q_coverage": {
+        "train": 0.9913745892661555,
+        "validation": 0.8761415525114156
+      }
+    },
+    {
+      "station_id": "10157500",
+      "terminal_system_id": "HYBAS_7120073620",
+      "crossfit_fold": 0,
+      "sha256": "030010617b64b8c14bdcfe45b8744522fb2010e08c9ac7e2da3bf48ee4ca0140",
+      "Q_coverage": {
+        "train": 0.6394213216502374,
+        "validation": 0.5253424657534247
+      }
+    },
+    {
+      "station_id": "10172952",
+      "terminal_system_id": "HYBAS_7120073620",
+      "crossfit_fold": 0,
+      "sha256": "2bc9a1e59297a3ecb21f845902b79f5d6b1088e7f3f520a21b15a61afe51837a",
+      "Q_coverage": {
+        "train": 0.8782402336619204,
+        "validation": 0.9754566210045662
+      }
+    },
+    {
+      "station_id": "10174500",
+      "terminal_system_id": "HYBAS_7120073650",
+      "crossfit_fold": 2,
+      "sha256": "0982bc217633e8a7699fd29df0f71de73011c5b065856ee5c00beb8e2e68a81b",
+      "Q_coverage": {
+        "train": 0.9393254837531946,
+        "validation": 0.9724885844748858
+      }
+    },
+    {
+      "station_id": "10183500",
+      "terminal_system_id": "HYBAS_7120073650",
+      "crossfit_fold": 2,
+      "sha256": "756aa95999e42a23d3cb92f54b35f1b6da2895aa4a929b91e27a09dc2e51f4fa",
+      "Q_coverage": {
+        "train": 0.9988590726542533,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "10189000",
+      "terminal_system_id": "HYBAS_7120073650",
+      "crossfit_fold": 2,
+      "sha256": "3ced0fdd87819d052332c4d94b63d0be336bd0a75cf91946fd744ebf685b2612",
+      "Q_coverage": {
+        "train": 0.9165982110259219,
+        "validation": 0.7886986301369863
+      }
+    },
+    {
+      "station_id": "10194200",
+      "terminal_system_id": "HYBAS_7120073650",
+      "crossfit_fold": 2,
+      "sha256": "123128c66d2d7cb651a2a161c45b7041d007c4ee09e3b5e83e23ff84d98a7fc9",
+      "Q_coverage": {
+        "train": 0.9678714859437751,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "10205030",
+      "terminal_system_id": "HYBAS_7120073650",
+      "crossfit_fold": 2,
+      "sha256": "5d31b589ff59e6af5e5e82f672ad94eb1b46f4e13d675c31c11ba8bef00f6c13",
+      "Q_coverage": {
+        "train": 0.8114731653888281,
+        "validation": 0.925
+      }
+    },
+    {
+      "station_id": "10215900",
+      "terminal_system_id": "HYBAS_7120073650",
+      "crossfit_fold": 2,
+      "sha256": "8956c4c0ba2c5008df2c7aa6471486ff38bc9fab68b33f0f60ad25c048eb4821",
+      "Q_coverage": {
+        "train": 0.9130385177071924,
+        "validation": 0.8148401826484019
+      }
+    },
+    {
+      "station_id": "10234500",
+      "terminal_system_id": "HYBAS_7120073650",
+      "crossfit_fold": 2,
+      "sha256": "6011f030531b45e9e1649fe1e20870a81d2816ce6ae18a3c31f8e8fe114abe2d",
+      "Q_coverage": {
+        "train": 0.8749315443592552,
+        "validation": 0.840296803652968
+      }
+    },
+    {
+      "station_id": "10242000",
+      "terminal_system_id": "HYBAS_7120073650",
+      "crossfit_fold": 2,
+      "sha256": "ec3078230cee189b1eaf6829f45da22f70d8b946f842ab08df222649f84d1065",
+      "Q_coverage": {
+        "train": 0.8726953267615918,
+        "validation": 0.9404109589041096
+      }
+    },
+    {
+      "station_id": "10243260",
+      "terminal_system_id": "HYBAS_7120073620",
+      "crossfit_fold": 0,
+      "sha256": "e0149e0032b33758cd5f3835a0cb29b80aa3c5f94b78f813cbd7be93165acc13",
+      "Q_coverage": {
+        "train": 0.7944961664841182,
+        "validation": 0.7992009132420091
+      }
+    },
+    {
+      "station_id": "10249280",
+      "terminal_system_id": "HYBAS_7120074340",
+      "crossfit_fold": 1,
+      "sha256": "8fddda2959a4fcd85a56f99598e505092da9cdb59c4420e3b1dc719d2cd266d9",
+      "Q_coverage": {
+        "train": 0.9928349762687112,
+        "validation": 0.9957762557077625
+      }
+    },
+    {
+      "station_id": "11027000",
+      "terminal_system_id": "HYBAS_7120012380",
+      "crossfit_fold": 2,
+      "sha256": "0032a2b36c20131b03e6fd888e922204b92929636a31e9cb8b868c5c1459e907",
+      "Q_coverage": {
+        "train": 0.9937248995983936,
+        "validation": 1.0
+      }
+    },
+    {
+      "station_id": "11046300",
+      "terminal_system_id": "HYBAS_7120012510",
+      "crossfit_fold": 1,
+      "sha256": "7168b0a535c28192fdbe34f7679de1797f021d93af545aab1dd2ad660e162252",
+      "Q_coverage": {
+        "train": 0.9681224899598394,
+        "validation": 0.9997716894977169
+      }
+    },
+    {
+      "station_id": "11046530",
+      "terminal_system_id": "HYBAS_7120012530",
+      "crossfit_fold": 2,
+      "sha256": "ef538c320c6ac3f9e8da3954c66d6ce0ff75e8df12d0674e87e3f4d46f8f0533",
+      "Q_coverage": {
+        "train": 0.9850082146768894,
+        "validation": 0.7242009132420091
+      }
+    },
+    {
+      "station_id": "11047300",
+      "terminal_system_id": "HYBAS_7120012530",
+      "crossfit_fold": 2,
+      "sha256": "b307014dee717ed4e921ede9518fb0bc8550643bbb9072cc1a9ab3c766240860",
+      "Q_coverage": {
+        "train": 0.9933141657539248,
+        "validation": 0.9448630136986301
+      }
+    },
+    {
+      "station_id": "11153650",
+      "terminal_system_id": "HYBAS_7120013250",
+      "crossfit_fold": 1,
+      "sha256": "8d3e5bf62ae995a08a400abac60b97c48b69f79eb6147cfdb604454e5d204065",
+      "Q_coverage": {
+        "train": 0.9824753559693319,
+        "validation": 0.9998858447488584
+      }
+    },
+    {
+      "station_id": "11473900",
+      "terminal_system_id": "HYBAS_7120014040",
+      "crossfit_fold": 0,
+      "sha256": "a146ae49c1c30ca00a1a37e09d370bec248a9054ac25ab5ac107384314359892",
+      "Q_coverage": {
+        "train": 0.9966684921504199,
+        "validation": 0.9931506849315068
+      }
+    },
+    {
+      "station_id": "11481000",
+      "terminal_system_id": "HYBAS_7120014110",
+      "crossfit_fold": 1,
+      "sha256": "9f33356df071637c1ed3bacfc9c451ae7457dc64d087c429683aec5ab0057e4a",
+      "Q_coverage": {
+        "train": 0.9976725082146769,
+        "validation": 0.9937214611872146
+      }
+    },
+    {
+      "station_id": "12058790",
+      "terminal_system_id": "HYBAS_7120015600",
+      "crossfit_fold": 2,
+      "sha256": "47aaf0471cbc86f4ac081bdfa302b86b08c07352f02113d2bbe3a2c2f12d93c9",
+      "Q_coverage": {
+        "train": 0.9985167944505294,
+        "validation": 0.9996575342465753
+      }
+    },
+    {
+      "station_id": "12080010",
+      "terminal_system_id": "HYBAS_7120015770",
+      "crossfit_fold": 1,
+      "sha256": "6102335e85e946eb93258dbb536331f84fe63a72210225903cbcf6e189970038",
+      "Q_coverage": {
+        "train": 0.9887504563709383,
+        "validation": 0.916095890410959
+      }
+    },
+    {
+      "station_id": "12097500",
+      "terminal_system_id": "HYBAS_7120015900",
+      "crossfit_fold": 1,
+      "sha256": "9393d46158e13743882854ab1cb7ee423e50635608a6aa7c96d43f15b456e9fa",
+      "Q_coverage": {
+        "train": 0.969263417305586,
+        "validation": 0.9998858447488584
+      }
+    },
+    {
+      "station_id": "12175500",
+      "terminal_system_id": "HYBAS_7120016090",
+      "crossfit_fold": 0,
+      "sha256": "fb370002191d8aa481d620a98b1fb3a1de079dc9337df354ab7077de57ef2c08",
+      "Q_coverage": {
+        "train": 0.9815626140927346,
+        "validation": 0.997716894977169
+      }
+    },
+    {
+      "station_id": "14299800",
+      "terminal_system_id": "HYBAS_7120014800",
+      "crossfit_fold": 0,
+      "sha256": "8e65c832cbae4c7cbc8a947fee390a49909d59c2102a7b09406ced9376e4f591",
+      "Q_coverage": {
+        "train": 0.9981516976998904,
+        "validation": 0.9997716894977169
+      }
+    },
+    {
+      "station_id": "14320934",
+      "terminal_system_id": "HYBAS_7120014520",
+      "crossfit_fold": 0,
+      "sha256": "eae63b91f8cbbf465bd4e0a4baa57df281d98985638f4e1bae251a1e77c68fb2",
+      "Q_coverage": {
+        "train": 0.9917396860167944,
+        "validation": 0.9997716894977169
+      }
+    },
+    {
+      "station_id": "14354200",
+      "terminal_system_id": "HYBAS_7120014340",
+      "crossfit_fold": 2,
+      "sha256": "f7f8496c013d9874731e021b222847ff6750929508bfff5174bd6694598bc4ce",
+      "Q_coverage": {
+        "train": 0.9985396129974443,
+        "validation": 0.9813926940639269
+      }
+    }
+  ],
+  "H_stations": [
+    {
+      "station_id": "01017000",
+      "terminal_system_id": "HYBAS_7120038320",
+      "split": "development_test",
+      "crossfit_fold": -1,
+      "sha256": "6efdb2ad44dd3cb3e1b45c02c3d62b16b3880a7700f3c8c0544af1dd76d76ab1"
+    },
+    {
+      "station_id": "01081500",
+      "terminal_system_id": "HYBAS_7120039160",
+      "split": "train",
+      "crossfit_fold": 1,
+      "sha256": "f9d429eccab978afc382bf9eaf5c7ad7f3d1323e2d0daef97322696887cc03cd"
+    },
+    {
+      "station_id": "01085000",
+      "terminal_system_id": "HYBAS_7120039160",
+      "split": "train",
+      "crossfit_fold": 1,
+      "sha256": "c7483bbd21f32d0aecf213838b1d8c368e967f193512711d7ba6203244f28825"
+    },
+    {
+      "station_id": "01086000",
+      "terminal_system_id": "HYBAS_7120039160",
+      "split": "train",
+      "crossfit_fold": 1,
+      "sha256": "0f3f4850c8dc8de63061c21927ebadaa4a7951c8d9d66d2195188f04e5461dff"
+    },
+    {
+      "station_id": "01091500",
+      "terminal_system_id": "HYBAS_7120039160",
+      "split": "train",
+      "crossfit_fold": 1,
+      "sha256": "07a9f4b941ec6d18245b66f1902ea43737d7628b1f880e05ab83e11355027ca3"
+    },
+    {
+      "station_id": "01098530",
+      "terminal_system_id": "HYBAS_7120039160",
+      "split": "train",
+      "crossfit_fold": 1,
+      "sha256": "ac32074d91cba2983a8e05a87d07c08f59b3d260cdf67f552b4b6b3cc36c6cb9"
+    },
+    {
+      "station_id": "01122500",
+      "terminal_system_id": "HYBAS_7120039590",
+      "split": "development_test",
+      "crossfit_fold": -1,
+      "sha256": "6681486098ae2fac4b1ba531be4e75ee6492abe5b766d15fcaa5f9c4dc8d3706"
+    },
+    {
+      "station_id": "01208990",
+      "terminal_system_id": "HYBAS_7120039750",
+      "split": "train",
+      "crossfit_fold": 1,
+      "sha256": "9ef932a4ec2368c48ee469f5e05c5ff51c27201112d5c5d806d9aa522fc23479"
+    },
+    {
+      "station_id": "02235200",
+      "terminal_system_id": "HYBAS_7120043860",
+      "split": "train",
+      "crossfit_fold": 0,
+      "sha256": "cada0817bfd767a699a7270ccfb4db7a9a44ec7cb3159421a6258d9a1f92e83a"
+    },
+    {
+      "station_id": "02245500",
+      "terminal_system_id": "HYBAS_7120043860",
+      "split": "train",
+      "crossfit_fold": 0,
+      "sha256": "592f23ae8ebbf1373404890a82ee73fd24f5eb9bbdf8170268a6e51047a75f2e"
+    },
+    {
+      "station_id": "02365470",
+      "terminal_system_id": "HYBAS_7120046130",
+      "split": "train",
+      "crossfit_fold": 2,
+      "sha256": "0f7949ee085d08b1f1bc8fe3cfd9049e5b5383b873d229b3a1be2631657639cf"
+    },
+    {
+      "station_id": "02371500",
+      "terminal_system_id": "HYBAS_7120046390",
+      "split": "development_test",
+      "crossfit_fold": -1,
+      "sha256": "a8300a8db135b898bf7868ff19ff793712d04cd4dbcc1c63f3d863dc4f18e811"
+    },
+    {
+      "station_id": "02401000",
+      "terminal_system_id": "HYBAS_7120046590",
+      "split": "train",
+      "crossfit_fold": 0,
+      "sha256": "92127e1c357541ef990680cd1312462d24a77d3e67cd03c6d8a7359a95711ec7"
+    },
+    {
+      "station_id": "02415000",
+      "terminal_system_id": "HYBAS_7120046590",
+      "split": "train",
+      "crossfit_fold": 0,
+      "sha256": "4c2078476a9eeb9fc2f257eeec603976032ab98b197b0a5b78f2a16db4ce67e1"
+    },
+    {
+      "station_id": "02422500",
+      "terminal_system_id": "HYBAS_7120046590",
+      "split": "train",
+      "crossfit_fold": 0,
+      "sha256": "378b7ac4bcb8bdc6a29bbb6b59f80dc7bf20a36b671f9b1069fb64a728c247f9"
+    },
+    {
+      "station_id": "02423130",
+      "terminal_system_id": "HYBAS_7120046590",
+      "split": "train",
+      "crossfit_fold": 0,
+      "sha256": "a7932ef07188570b57067f51cdbb7f755224e4ec47a2d37a3e78fb0cf7aad5a4"
+    },
+    {
+      "station_id": "02423500",
+      "terminal_system_id": "HYBAS_7120046590",
+      "split": "train",
+      "crossfit_fold": 0,
+      "sha256": "fbd969635da74c79e33e9e96a1492c662f961d0b302dfe8a3fce31910f6b69f8"
+    },
+    {
+      "station_id": "02424000",
+      "terminal_system_id": "HYBAS_7120046590",
+      "split": "train",
+      "crossfit_fold": 0,
+      "sha256": "9caf39334e34b2ab9557c83896e47d94d3d5a72f4be88866784a6e4b21274214"
+    },
+    {
+      "station_id": "02450250",
+      "terminal_system_id": "HYBAS_7120046590",
+      "split": "train",
+      "crossfit_fold": 0,
+      "sha256": "608f21dd099cf491305517527a1fe3e6e98539f24024b0981bcda93bf1f53c65"
+    },
+    {
+      "station_id": "02450825",
+      "terminal_system_id": "HYBAS_7120046590",
+      "split": "train",
+      "crossfit_fold": 0,
+      "sha256": "633c399c03db5fdf6748b51c31d6f057d99f1122c4674bef84d649abc6cd37c8"
+    },
+    {
+      "station_id": "02455000",
+      "terminal_system_id": "HYBAS_7120046590",
+      "split": "train",
+      "crossfit_fold": 0,
+      "sha256": "2640f1e0111a0c00c94c03faa4405251e9c21b5714f148ec35d09358e93ee38e"
+    },
+    {
+      "station_id": "02461500",
+      "terminal_system_id": "HYBAS_7120046590",
+      "split": "train",
+      "crossfit_fold": 0,
+      "sha256": "566b3f4ba79ffc6a840bd094a9259b473669a42969eac4169d1e88448efd5b29"
+    },
+    {
+      "station_id": "02462000",
+      "terminal_system_id": "HYBAS_7120046590",
+      "split": "train",
+      "crossfit_fold": 0,
+      "sha256": "bff133b611cba3fd771d62e783eace2644db47d78e4b4ae64c8d6405be57f6c8"
+    },
+    {
+      "station_id": "02464000",
+      "terminal_system_id": "HYBAS_7120046590",
+      "split": "train",
+      "crossfit_fold": 0,
+      "sha256": "f2421647b6365f59cff437e99d55f1883e58d806ab44b88c5f59e76f90bf7766"
+    },
+    {
+      "station_id": "02467500",
+      "terminal_system_id": "HYBAS_7120046590",
+      "split": "train",
+      "crossfit_fold": 0,
+      "sha256": "1cb3d21e942879ef08cbbb50aa557aa3a0a33109b30f2c4417f213e1628cd47f"
+    },
+    {
+      "station_id": "07375800",
+      "terminal_system_id": "HYBAS_7120046900",
+      "split": "train",
+      "crossfit_fold": 1,
+      "sha256": "9c3e55337acb9f08e7638bb5329f51041c334f5ab0c9d27c8a971cde5cc12cd2"
+    },
+    {
+      "station_id": "07375960",
+      "terminal_system_id": "HYBAS_7120046900",
+      "split": "train",
+      "crossfit_fold": 1,
+      "sha256": "895f755af72e541d447dd43de6ecd5f9eb023904dcbd5128907696817807fea1"
+    },
+    {
+      "station_id": "07376000",
+      "terminal_system_id": "HYBAS_7120046900",
+      "split": "train",
+      "crossfit_fold": 1,
+      "sha256": "e9a6cfd44f898b6096e67ad973d57764a90922b0634656941d9e8235e9bd2968"
+    },
+    {
+      "station_id": "07376500",
+      "terminal_system_id": "HYBAS_7120046900",
+      "split": "train",
+      "crossfit_fold": 1,
+      "sha256": "907a51378f0a55a457ff743dbb3e75866e37c87e96f74fcd457921f40823ca0b"
+    },
+    {
+      "station_id": "08013000",
+      "terminal_system_id": "HYBAS_7120047800",
+      "split": "train",
+      "crossfit_fold": 0,
+      "sha256": "6d65b7b2291cc90357fca94fe2bc543cf8974d01a1730f3884229080c2cd7ff2"
+    },
+    {
+      "station_id": "08014500",
+      "terminal_system_id": "HYBAS_7120047800",
+      "split": "train",
+      "crossfit_fold": 0,
+      "sha256": "5abd2ae0a9b0d6a0b28f0b9eeae2f76b87f73ecf5433e41e6c77a99ec75833e9"
+    },
+    {
+      "station_id": "08084800",
+      "terminal_system_id": "HYBAS_7120048300",
+      "split": "train",
+      "crossfit_fold": 2,
+      "sha256": "97c1e5aa9b429f8652c570514b752d10120ec82ac4b39dbcb087860fdfc09a17"
+    },
+    {
+      "station_id": "08093360",
+      "terminal_system_id": "HYBAS_7120048300",
+      "split": "train",
+      "crossfit_fold": 2,
+      "sha256": "2cd230e91cd8919542915ed9fa0916e4c6da81aca2dc976195c4a0e436287f29"
+    },
+    {
+      "station_id": "08094800",
+      "terminal_system_id": "HYBAS_7120048300",
+      "split": "train",
+      "crossfit_fold": 2,
+      "sha256": "a29c62c535cc1c5ec362c68102af0f8ea8163d60dcc11dd14eb78516c54fa708"
+    },
+    {
+      "station_id": "08095000",
+      "terminal_system_id": "HYBAS_7120048300",
+      "split": "train",
+      "crossfit_fold": 2,
+      "sha256": "96c976bb98fd1c9906f399b905173732d932cc6e61ad1716dcbb7c5c2e3de452"
+    },
+    {
+      "station_id": "08099100",
+      "terminal_system_id": "HYBAS_7120048300",
+      "split": "train",
+      "crossfit_fold": 2,
+      "sha256": "04ac12e0ffff1e63905dbfcc6c423ba30e0d5e46da6b65e5de912fe27eb083a9"
+    },
+    {
+      "station_id": "08100000",
+      "terminal_system_id": "HYBAS_7120048300",
+      "split": "train",
+      "crossfit_fold": 2,
+      "sha256": "80f716349f0f18f7201a0cd2fd26149c9c7bdf589865def4914256563c1a83d2"
+    },
+    {
+      "station_id": "08105095",
+      "terminal_system_id": "HYBAS_7120048300",
+      "split": "train",
+      "crossfit_fold": 2,
+      "sha256": "b2405a4d84851893cd244fadad6f90f7a15c77d11f43c1089571134a8bc485ff"
+    },
+    {
+      "station_id": "08167500",
+      "terminal_system_id": "HYBAS_7120048620",
+      "split": "train",
+      "crossfit_fold": 2,
+      "sha256": "e25ce50ab28cb9976c77355e0c28acc1377860785f6ec8af4c72ab5b55faa817"
+    },
+    {
+      "station_id": "08180500",
+      "terminal_system_id": "HYBAS_7120048620",
+      "split": "train",
+      "crossfit_fold": 2,
+      "sha256": "e2f1c832b0c9a91839076f4f685c1aeda066cc819166bd5edf76ead16202d0cc"
+    },
+    {
+      "station_id": "10243260",
+      "terminal_system_id": "HYBAS_7120073620",
+      "split": "train",
+      "crossfit_fold": 0,
+      "sha256": "82b17c4ab6f08f45bd8be389979ee4eaefb830a11e5a94ef60d3e7f7b1992d57"
+    },
+    {
+      "station_id": "11465200",
+      "terminal_system_id": "HYBAS_7120013800",
+      "split": "validation",
+      "crossfit_fold": -1,
+      "sha256": "354622235ddda0df4de356cfed3d74b2d39916640207c90416020812f767e3b1"
+    }
+  ],
+  "source_Q_stations": 248,
+  "source_Q_systems": 39,
+  "Q_excluded_candidates": 41,
+  "formal_blind_scored": false
+}

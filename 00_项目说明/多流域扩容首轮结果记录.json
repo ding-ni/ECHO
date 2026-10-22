@@ -1,0 +1,328 @@
+{
+  "created_utc": "2026-10-22T10:13:04.730969+00:00",
+  "scope": "expanded_source_development",
+  "source_Q_index_sha256": "8770d8f8a23e48739f9c358f905395c1a32dc7b3cdbccb919e57a0826d4a9b77",
+  "H_index_sha256": "8796d2e072284be5e08af2af5835b9982e90bdb74bc7f0820288314157509de9",
+  "LSTM_training": {
+    "created_utc": "2026-10-22T10:02:20.189954+00:00",
+    "commit": "5f8ad6b0c3dc1d64b9037f1bbf3575c9dd2296de",
+    "working_tree_dirty": false,
+    "python": "3.11.17",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "config": {
+      "model": "direct_lstm",
+      "seed": 20261019,
+      "hidden": 64,
+      "epochs": 30,
+      "episodes_per_station": 8,
+      "support_days": [
+        7,
+        30,
+        90,
+        366
+      ],
+      "query_hours": 168,
+      "learning_rate": 0.0002,
+      "cpu_threads": 2,
+      "device": "cuda",
+      "validation_support_hours": 720,
+      "validation_origins": [
+        "2018-10-01",
+        "2018-11-01",
+        "2018-12-01",
+        "2019-01-01",
+        "2019-02-01",
+        "2019-03-01",
+        "2019-04-01",
+        "2019-05-01",
+        "2019-06-01",
+        "2019-07-01",
+        "2019-08-01",
+        "2019-09-01"
+      ],
+      "evidence_scope": "expanded_source_H_joint_training"
+    },
+    "inputs": {
+      "本地数据\\模型视图\\扩展水位训练_v2\\index.json": "8796d2e072284be5e08af2af5835b9982e90bdb74bc7f0820288314157509de9"
+    },
+    "scope": "real_development",
+    "actual_seconds": 316.6560000000027,
+    "actual_effective_hours": 25534104,
+    "rss_bytes_at_end": 1274404864,
+    "peak_cuda_bytes": 98421248,
+    "torch": "2.8.0+cu126",
+    "device": "cuda",
+    "parameters": 54593,
+    "truncated_history_gradient_hours": null
+  },
+  "actual_train_episodes": 8146,
+  "best_epoch_1based": 30,
+  "checkpoint_sha256": "8a09bcbe5339e0c83f5fe562a0df97cd5a24a7f0aa3105e3a0d9c3dc9ded85ee",
+  "metrics": {
+    "persistence": {
+      "validation": {
+        "summary": {
+          "scope": "real_development",
+          "mode": "conditional_simulation_no_H_updates",
+          "model": "persistence",
+          "budget_days": "complete_water_year",
+          "sites": 1,
+          "failures": [],
+          "primary": {
+            "mean": 0.12058147188295158,
+            "ci95": [
+              0.12058147188295158,
+              0.12058147188295158
+            ],
+            "sites": 1,
+            "systems": 1,
+            "resampling_unit": "terminal_river_system"
+          },
+          "all_period": {
+            "MAE_m": 0.05278126952312956,
+            "RMSE_m": 0.06804464203077767,
+            "CRPS_m": 0.05278126952312956
+          },
+          "tolerance_pass_fraction": {
+            "0.1": 1.0,
+            "0.2": 1.0,
+            "0.5": 1.0
+          }
+        },
+        "stations": [
+          {
+            "station_id": "11465200",
+            "terminal_system_id": "HYBAS_7120013800",
+            "MAE_m": 0.0527812695231295,
+            "RMSE_m": 0.0680446420307776,
+            "valid_hours": 8592,
+            "query_hours": 8760,
+            "event_RMSE_m": 0.1205814718829515,
+            "peak_error_m": 0.3474719822406769,
+            "peak_time_error_h": 168.66666666666666,
+            "events": 3,
+            "research_threshold_m": 0.4663439989089966,
+            "CRPS_m": 0.0527812695231295
+          }
+        ]
+      },
+      "development_test": {
+        "summary": {
+          "scope": "real_development",
+          "mode": "conditional_simulation_no_H_updates",
+          "model": "persistence",
+          "budget_days": "complete_water_year",
+          "sites": 3,
+          "failures": [],
+          "primary": {
+            "mean": 1.959998858949202,
+            "ci95": [
+              1.22943392125478,
+              2.5414881749070686
+            ],
+            "sites": 3,
+            "systems": 3,
+            "resampling_unit": "terminal_river_system"
+          },
+          "all_period": {
+            "MAE_m": 0.6941395310313238,
+            "RMSE_m": 0.8812641739853633,
+            "CRPS_m": 0.6941395310313238
+          },
+          "tolerance_pass_fraction": {
+            "0.1": 0.0,
+            "0.2": 0.0,
+            "0.5": 0.0
+          }
+        },
+        "stations": [
+          {
+            "station_id": "01017000",
+            "terminal_system_id": "HYBAS_7120038320",
+            "MAE_m": 0.936249574158518,
+            "RMSE_m": 1.1150255151872897,
+            "valid_hours": 8736,
+            "query_hours": 8760,
+            "event_RMSE_m": 2.109074480685757,
+            "peak_error_m": 2.888487959901492,
+            "peak_time_error_h": 41.0,
+            "events": 3,
+            "research_threshold_m": 2.368295907974243,
+            "CRPS_m": 0.936249574158518
+          },
+          {
+            "station_id": "01122500",
+            "terminal_system_id": "HYBAS_7120039590",
+            "MAE_m": 0.6004935581263021,
+            "RMSE_m": 0.7556276435893734,
+            "valid_hours": 8759,
+            "query_hours": 8760,
+            "event_RMSE_m": 1.22943392125478,
+            "peak_error_m": 1.8887439833747013,
+            "peak_time_error_h": 58.22222222222222,
+            "events": 9,
+            "research_threshold_m": 1.7144999504089355,
+            "CRPS_m": 0.6004935581263021
+          },
+          {
+            "station_id": "02371500",
+            "terminal_system_id": "HYBAS_7120046390",
+            "MAE_m": 0.5456754608091511,
+            "RMSE_m": 0.7731393631794269,
+            "valid_hours": 8582,
+            "query_hours": 8760,
+            "event_RMSE_m": 2.541488174907069,
+            "peak_error_m": 3.083052158355713,
+            "peak_time_error_h": 36.5,
+            "events": 2,
+            "research_threshold_m": 3.944112062454224,
+            "CRPS_m": 0.5456754608091511
+          }
+        ]
+      }
+    },
+    "direct_lstm": {
+      "validation": {
+        "summary": {
+          "scope": "real_development",
+          "mode": "conditional_simulation_no_H_updates",
+          "model": "direct_lstm",
+          "budget_days": "complete_water_year",
+          "sites": 1,
+          "failures": [],
+          "primary": {
+            "mean": 0.09512883018156153,
+            "ci95": [
+              0.09512883018156153,
+              0.09512883018156153
+            ],
+            "sites": 1,
+            "systems": 1,
+            "resampling_unit": "terminal_river_system"
+          },
+          "all_period": {
+            "MAE_m": 0.07725203141667213,
+            "RMSE_m": 0.09404493306478576,
+            "CRPS_m": 0.07725203141667213
+          },
+          "tolerance_pass_fraction": {
+            "0.1": 1.0,
+            "0.2": 1.0,
+            "0.5": 1.0
+          }
+        },
+        "stations": [
+          {
+            "station_id": "11465200",
+            "terminal_system_id": "HYBAS_7120013800",
+            "MAE_m": 0.0772520314166721,
+            "RMSE_m": 0.0940449330647857,
+            "valid_hours": 8592,
+            "query_hours": 8760,
+            "event_RMSE_m": 0.0951288301815615,
+            "peak_error_m": 0.2422273556391398,
+            "peak_time_error_h": 91.33333333333331,
+            "events": 3,
+            "research_threshold_m": 0.4663439989089966,
+            "CRPS_m": 0.0772520314166721
+          }
+        ]
+      },
+      "development_test": {
+        "summary": {
+          "scope": "real_development",
+          "mode": "conditional_simulation_no_H_updates",
+          "model": "direct_lstm",
+          "budget_days": "complete_water_year",
+          "sites": 3,
+          "failures": [],
+          "primary": {
+            "mean": 1.1102657810554397,
+            "ci95": [
+              0.5436326896571175,
+              1.846154279748997
+            ],
+            "sites": 3,
+            "systems": 3,
+            "resampling_unit": "terminal_river_system"
+          },
+          "all_period": {
+            "MAE_m": 0.5858289476014433,
+            "RMSE_m": 0.7084642825330988,
+            "CRPS_m": 0.5858289476014433
+          },
+          "tolerance_pass_fraction": {
+            "0.1": 0.0,
+            "0.2": 0.0,
+            "0.5": 0.0
+          }
+        },
+        "stations": [
+          {
+            "station_id": "01017000",
+            "terminal_system_id": "HYBAS_7120038320",
+            "MAE_m": 0.476111270429314,
+            "RMSE_m": 0.6194427695428667,
+            "valid_hours": 8736,
+            "query_hours": 8760,
+            "event_RMSE_m": 0.9410103737602044,
+            "peak_error_m": 1.321548581123352,
+            "peak_time_error_h": 59.0,
+            "events": 3,
+            "research_threshold_m": 2.368295907974243,
+            "CRPS_m": 0.476111270429314
+          },
+          {
+            "station_id": "01122500",
+            "terminal_system_id": "HYBAS_7120039590",
+            "MAE_m": 0.4346137281857283,
+            "RMSE_m": 0.5352995149794499,
+            "valid_hours": 8759,
+            "query_hours": 8760,
+            "event_RMSE_m": 0.5436326896571175,
+            "peak_error_m": 0.6355623536639743,
+            "peak_time_error_h": 11.333333333333334,
+            "events": 9,
+            "research_threshold_m": 1.7144999504089355,
+            "CRPS_m": 0.4346137281857283
+          },
+          {
+            "station_id": "02371500",
+            "terminal_system_id": "HYBAS_7120046390",
+            "MAE_m": 0.8467618441892876,
+            "RMSE_m": 0.9706505630769796,
+            "valid_hours": 8582,
+            "query_hours": 8760,
+            "event_RMSE_m": 1.8461542797489967,
+            "peak_error_m": 1.5661940574645996,
+            "peak_time_error_h": 49.5,
+            "events": 2,
+            "research_threshold_m": 3.944112062454224,
+            "CRPS_m": 0.8467618441892876
+          }
+        ]
+      }
+    }
+  },
+  "common_old_development_sites": {
+    "sites": 2,
+    "old_RMSE_m": 0.8408907307931002,
+    "new_RMSE_m": 0.7950466663099232,
+    "old_event_RMSE_m": 2.162653295387485,
+    "new_event_RMSE_m": 1.3935823267546006
+  },
+  "hydro_training_snapshot": {
+    "updated_utc": "2026-10-22T10:08:26.236442+00:00",
+    "epoch": 14,
+    "epochs": 30,
+    "sites": 248,
+    "systems": 39,
+    "best_source_validation": 0.6441855239998348,
+    "elapsed_seconds": 1831.8429999999935,
+    "total_valid_Q_points": 4310903,
+    "rss_bytes": 522747904,
+    "complete": false
+  },
+  "hydro_training_running": true,
+  "phase1_acceptance_complete": false
+}
