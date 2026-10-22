@@ -46,18 +46,25 @@ def predict(
 ):
     if split == "blind_holdout":
         raise ValueError("第一阶段不解封正式盲测")
+    if (model_run is None) == (baseline is None):
+        raise ValueError("模型与基线必须且只能指定一个")
     torch.manual_seed(seed)
     torch.set_num_threads(2)
     device = torch.device(device)
     index = read_json(index_path)
-    root, output = Path(hydro_run), Path(output)
+    output = Path(output)
     output.mkdir(parents=True, exist_ok=True)
-    hc = torch.load(root / "hydro_full.pt", map_location=device, weights_only=False)
-    if hc.get("index_hash") != digest(index_path):
-        raise ValueError("水文前端与当前预测数据清单不一致")
-    hydro = RegionalHBV(hc["geo_dim"]).to(device)
-    hydro.load_state_dict(hc["state"])
-    hydro.eval().requires_grad_(False)
+    hc, hydro = None, None
+    if model_run is not None or baseline != "persistence":
+        if hydro_run is None:
+            raise ValueError("该模型需要已训练的水文前端")
+        root = Path(hydro_run)
+        hc = torch.load(root / "hydro_full.pt", map_location=device, weights_only=False)
+        if hc.get("index_hash") != digest(index_path):
+            raise ValueError("水文前端与当前预测数据清单不一致")
+        hydro = RegionalHBV(hc["geo_dim"]).to(device)
+        hydro.load_state_dict(hc["state"])
+        hydro.eval().requires_grad_(False)
     model, config = None, {}
     if model_run:
         checkpoint = torch.load(Path(model_run) / "model.pt", map_location=device, weights_only=False)
@@ -84,7 +91,8 @@ def predict(
         if row["split"] != split:
             continue
         try:
-            assert_source_permissions(hc["trained_systems"], {row["terminal_system_id"]})
+            if hc is not None:
+                assert_source_permissions(hc["trained_systems"], {row["terminal_system_id"]})
             if model_run:
                 assert_source_permissions(checkpoint["trained_systems"], {row["terminal_system_id"]})
             d = load_station(row)
@@ -92,11 +100,12 @@ def predict(
                 d["geo"] = np.zeros_like(d["geo"])
             inp = target_input(d, budget_days)
             with torch.no_grad():
-                qref, _ = simulate_q(hydro, d, device)
-                q = qref[0].cpu().numpy()
                 if baseline == "persistence":
                     pred = np.full((1, inp.query_end - inp.query_start), inp.support_h[inp.support_mask][-1])
-                elif baseline == "local_spline":
+                else:
+                    qref, _ = simulate_q(hydro, d, device)
+                    q = qref[0].cpu().numpy()
+                if baseline == "local_spline":
                     pred = local_spline(
                         q[inp.query_start :],
                         q[inp.support_start : inp.support_end],
@@ -108,7 +117,7 @@ def predict(
                         model, inp, q, device, members if model.probabilistic else 1, hydro
                     )
                     pred = pred.cpu().numpy()
-                else:
+                elif model is not None:
                     pred, _, _ = stage_forward(model, inp, q, device, config, hydro)
                     pred = pred.cpu().numpy()
             path = output / (row["station_id"] + ".npz")

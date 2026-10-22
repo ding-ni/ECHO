@@ -207,7 +207,7 @@ def dispatch(command, argv):
         from echo.training.predict import predict
 
         p.add_argument("--index", type=Path, required=True)
-        p.add_argument("--hydro-run", type=Path, required=True)
+        p.add_argument("--hydro-run", type=Path)
         p.add_argument("--model-run", type=Path)
         p.add_argument("--baseline", choices=["persistence", "local_spline"])
         p.add_argument("--split", choices=["validation", "development_test"], default="development_test")

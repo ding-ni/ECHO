@@ -9,7 +9,8 @@ from echo.data.prepare import prepare
 from echo.data.splits import build_splits, freeze_system_roles
 from echo.data.usgs_q_evidence import _assert_response_station, _hourly_q, audit_source_q
 from echo.hydro.hbv import RegionalHBV, _hbv_sequence, inference_sequence
-from echo.utils import write_json
+from echo.training.predict import predict
+from echo.utils import digest, write_json
 
 
 def _manifest():
@@ -124,3 +125,28 @@ def test_scripted_warmup_matches_equations_and_chunked_state():
     torch.testing.assert_close(torch.cat([first[0], last[0]], 1), actual[0])
     torch.testing.assert_close(last[1], actual[1])
     assert np.isfinite(actual[0].numpy()).all()
+
+
+def test_persistence_needs_only_target_support_not_hydro_weights(tmp_path, monkeypatch):
+    import echo.training.predict as module
+
+    path = tmp_path / "target.npz"
+    np.savez_compressed(path, station_id=np.array("00000001"), system=np.array("R1"),
+                        weather=np.zeros((10, 3)), geo=np.zeros(2), area=np.float32(100),
+                        time_ns=np.arange(10, dtype=np.int64), support_h=np.array([1., 2., np.nan]),
+                        support_start=np.int64(2), support_end=np.int64(5))
+    index = tmp_path / "index.json"
+    write_json(index, {"scope": "synthetic_demo", "stations": [
+        {"station_id": "00000001", "terminal_system_id": "R1", "split": "development_test",
+         "path": str(path), "sha256": digest(path), "crossfit_fold": -1}
+    ]})
+
+    def forbidden(*args, **kwargs):
+        raise AssertionError("持续性预测不应加载任何水文或神经权重")
+
+    monkeypatch.setattr(module.torch, "load", forbidden)
+    monkeypatch.setattr(module, "simulate_q", forbidden)
+    result = predict(index, None, tmp_path / "predictions", baseline="persistence")
+    assert result == {"predicted": 1, "failures": []}
+    with np.load(tmp_path / "predictions/00000001.npz") as data:
+        np.testing.assert_array_equal(data["members"], np.full((1, 5), 2.))
