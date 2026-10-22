@@ -22,6 +22,7 @@ def main():
             "split",
             "system-roles",
             "pilot-manifest",
+            "reference-audit",
             "prepare",
             "train",
             "predict",

@@ -138,6 +138,14 @@ def dispatch(command, argv):
         p.add_argument("--limit", type=int)
         a = p.parse_args(argv)
         result = audit_source_q(a.manifest, a.roles, a.output, a.snapshots, a.limit)
+    elif command == "reference-audit":
+        from echo.hydro.reference import audit_references
+
+        p.add_argument("--index", required=True, type=Path)
+        p.add_argument("--hydro-run", required=True, type=Path)
+        p.add_argument("--replay", action="store_true")
+        a = p.parse_args(argv)
+        result = audit_references(a.index, a.hydro_run, a.replay)
     elif command == "pilot-manifest":
         from echo.data.pilot import build_pilot
 

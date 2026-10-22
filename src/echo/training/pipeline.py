@@ -16,6 +16,7 @@ from echo.data.episodes import hours_since, source_episode, tokens
 from echo.data.permissions import assert_source_permissions, support_scaling
 from echo.evaluation.metrics import ensemble_crps
 from echo.hydro.hbv import RegionalHBV
+from echo.hydro.reference import seal_references, verify_references
 from echo.models.echo import DirectStage, EchoStage
 from echo.utils import digest, read_json, run_metadata, write_json
 
@@ -190,6 +191,7 @@ def reference_models(index, config, device, root, index_hash=None):
         data = load_station(row, config.get("no_geo", False))
         q, _ = simulate_q(model, data, device)
         np.save(cache / (row["station_id"] + ".npy"), q[0].cpu().numpy())
+    seal_references(index, index_hash, root)
     return full
 
 
@@ -329,6 +331,7 @@ def fit_stage(index_path, config, root):
         return
     if not (hydro_root / "hydro_full.pt").exists():
         raise ValueError("先训练水文前端并生成交叉拟合参考Q")
+    verify_references(index, digest(index_path), hydro_root)
     hydro_ckpt = torch.load(hydro_root / "hydro_full.pt", map_location=device, weights_only=False)
     if hydro_ckpt.get("index_hash") != digest(index_path):
         raise ValueError("水文前端与当前数据清单不一致")
@@ -508,7 +511,7 @@ def fit_stage(index_path, config, root):
     write_json(
         root / "metadata.json",
         {
-            **run_metadata(config, [index_path]),
+            **run_metadata(config, [index_path, hydro_root / "reference_index.json"]),
             "scope": scope,
             "actual_seconds": time.monotonic() - begin,
             "actual_effective_hours": actual_hours,
