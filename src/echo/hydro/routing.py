@@ -3,7 +3,7 @@
 import torch
 
 
-def reservoir_step(storage, inflow, tau, dt=1.0):
+def reservoir_step(storage, inflow, tau, dt: float = 1.0):
     if torch.any(tau <= 0):
         raise ValueError("时间尺度必须为正")
     decay = torch.exp(-dt / tau)

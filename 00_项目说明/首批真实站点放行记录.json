@@ -1,0 +1,88 @@
+{
+  "scope": "pilot_readiness_not_final_phase1_acceptance",
+  "created_utc": "2026-10-22T06:10:35.364608+00:00",
+  "fixed_system_roles": {
+    "train": 40,
+    "validation": 13,
+    "development_test": 13,
+    "blind_holdout": 16
+  },
+  "historical_manuscripts_reviewed": 20,
+  "source_QH_reviewed": 9,
+  "source_Q_time_passed": 7,
+  "source_H_time_passed": 9,
+  "source_Q_comparison_paired_hours": 887,
+  "source_H_comparison_paired_hours": 1071,
+  "pilot": [
+    {
+      "station_id": "01017000",
+      "terminal_system_id": "HYBAS_7120038320",
+      "split": "development_test",
+      "crossfit_fold": -1
+    },
+    {
+      "station_id": "01208990",
+      "terminal_system_id": "HYBAS_7120039750",
+      "split": "train",
+      "crossfit_fold": 1
+    },
+    {
+      "station_id": "02371500",
+      "terminal_system_id": "HYBAS_7120046390",
+      "split": "development_test",
+      "crossfit_fold": -1
+    },
+    {
+      "station_id": "02450250",
+      "terminal_system_id": "HYBAS_7120046590",
+      "split": "train",
+      "crossfit_fold": 0
+    },
+    {
+      "station_id": "07375960",
+      "terminal_system_id": "HYBAS_7120046900",
+      "split": "train",
+      "crossfit_fold": 1
+    },
+    {
+      "station_id": "08093360",
+      "terminal_system_id": "HYBAS_7120048300",
+      "split": "train",
+      "crossfit_fold": 2
+    },
+    {
+      "station_id": "08167500",
+      "terminal_system_id": "HYBAS_7120048620",
+      "split": "train",
+      "crossfit_fold": 2
+    },
+    {
+      "station_id": "11465200",
+      "terminal_system_id": "HYBAS_7120013800",
+      "split": "validation",
+      "crossfit_fold": -1
+    }
+  ],
+  "input_sha256": {
+    "01_数据准备/固定水系角色_v1.json": "5d723c86a0bdca9642d1e9d83da625836719acd65b2cdd7516bbfd29d084eb78",
+    "01_数据准备/历史水尺基准登记_v1.json": "e83040162ab4eb4ef2e612ff36c46440e75ce7a02260d7bd8569fae2fe63732d",
+    "本地数据/审计/USGS来源QH核验.json": "d6ff15aca4b0a2a292137284c7c920a43f4c23602a04b343bf297fa0277399d0",
+    "本地数据/审计/首批试运行_v2.csv": "afb8851a9d7208a5866fe0f827f2c1b0498cf6ebdee50dc8ec8332b687dc95bd"
+  },
+  "blind_prediction_or_scoring": false,
+  "source_windows": [
+    [
+      "2018-10-01",
+      "2018-10-03"
+    ],
+    [
+      "2019-03-07",
+      "2019-03-10"
+    ]
+  ],
+  "limitations": [
+    "两个短窗口只核验发布序列时间支持，不证明每小时没有观测修订或基准问题。",
+    "13站具有历史时期文本记录，不代表13站均满足全部放行条件。",
+    "八站是第一轮流程试运行，不能代替100站、三个种子或消融。"
+  ]
+}

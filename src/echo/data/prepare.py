@@ -6,7 +6,10 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+from echo.data.datum import validate_registry_station
 from echo.data.netcdf import open_netcdf
+from echo.data.usgs_evidence import validate_support_evidence
+from echo.data.usgs_q_evidence import validate_source_evidence
 from echo.geo.features import FeatureScaler, validate_features
 from echo.utils import digest, read_json, write_json
 
@@ -118,10 +121,17 @@ def date_mask(times, start, end):
     return (times >= pd.Timestamp(start, tz="UTC")) & (times < pd.Timestamp(end, tz="UTC"))
 
 
-def prepare(manifest_path, mapping_path, output, features=None):
+def prepare(manifest_path, mapping_path, output, features=None, datum_registry=None,
+            system_roles=None, source_evidence=None, height_evidence=None, height_snapshots=None):
     mapping = read_json(mapping_path)
     if not mapping.get("verified") or not mapping.get("evidence"):
         raise ValueError("字段映射必须具有真实核验依据")
+    if datum_registry is None:
+        raise ValueError("真实数据准备必须指定历史水尺基准登记，不接受仅布尔放行")
+    if system_roles is None or source_evidence is None:
+        raise ValueError("真实数据准备必须指定冻结水系角色和来源Q/H核验记录")
+    if height_evidence is None or height_snapshots is None:
+        raise ValueError("真实数据准备必须指定支持期H核验记录与快照目录")
     if mapping.get("timezone") != "UTC" or mapping.get("time_support") not in {
         "step_start",
         "step_end",
@@ -144,6 +154,14 @@ def prepare(manifest_path, mapping_path, output, features=None):
     active = df[df.split.isin(["train", "validation", "development_test"])].copy()
     if active.empty or not (active.split == "train").any():
         raise ValueError("没有许可来源站")
+    roles = {r["terminal_system_id"]: r for r in read_json(system_roles)["systems"]}
+    for _, row in active.iterrows():
+        role = roles.get(row.terminal_system_id, {})
+        if role.get("system_split") != row.split or role.get("crossfit_fold") != row.crossfit_fold:
+            raise ValueError("活动清单与冻结水系角色或交叉拟合折号不一致")
+    allowed_stations = mapping.get("allowed_station_ids")
+    if allowed_stations is None or not set(active.station_id).issubset(set(allowed_stations)):
+        raise ValueError("字段映射尚未核验这些站点")
     scaler = FeatureScaler().fit(active.loc[active.split == "train", features].to_numpy(float))
     output = Path(output)
     output.mkdir(parents=True, exist_ok=True)
@@ -162,6 +180,19 @@ def prepare(manifest_path, mapping_path, output, features=None):
                 or not str(row.get("datum_evidence", "")).strip()
             ):
                 raise ValueError("缺少基准标识及独立依据")
+            datum_start, datum_end = (
+                ("2013-10-01", "2019-10-01") if row.split == "train"
+                else ("2019-10-01", "2021-10-01")
+            )
+            actual_datum = validate_registry_station(datum_registry, sid, datum_start, datum_end)
+            if actual_datum != row.datum_id:
+                raise ValueError("清单基准标识与实际任务时期不一致")
+            if row.split == "train":
+                if row.get("source_time_support_verified") not in (True,):
+                    raise ValueError("来源训练期Q/H时间支持未逐站核验")
+                validate_source_evidence(source_evidence, row, system_roles)
+            else:
+                validate_support_evidence(height_evidence, height_snapshots, row)
             require_verified_origin(row.qh_path)
             require_verified_origin(row.weather_path)
             times = pd.date_range("2011-10-01", "2021-10-01", freq="h", inclusive="left", tz="UTC")
@@ -239,10 +270,15 @@ def prepare(manifest_path, mapping_path, output, features=None):
         {
             "scope": "real_development",
             "stations": index,
+            "forbidden_systems": sorted(s for s, r in roles.items() if r["system_split"] != "train"),
             "failures": failures,
             "features": features,
             "manifest_sha256": digest(manifest_path),
             "mapping_sha256": digest(mapping_path),
+            "datum_registry_sha256": digest(datum_registry),
+            "system_roles_sha256": digest(system_roles),
+            "source_evidence_sha256": digest(source_evidence),
+            "height_evidence_sha256": digest(height_evidence),
             "geo_center": scaler.center.tolist(),
             "geo_scale": scaler.scale.tolist(),
         },

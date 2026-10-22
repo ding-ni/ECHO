@@ -12,7 +12,7 @@ import pandas as pd
 from echo.data.download import request
 from echo.data.netcdf import open_netcdf
 from echo.data.splits import group_key
-from echo.utils import digest, utc_now, write_json
+from echo.utils import digest, read_json, utc_now, write_json
 
 SUPPORT_WINDOWS = [("2019-10-01", "2019-10-03"), ("2020-03-07", "2020-03-10")]
 
@@ -128,6 +128,23 @@ def reconcile_station(row, snapshots):
     except Exception as exc:
         result["error"] = f"{type(exc).__name__}: {exc}"
     return result
+
+
+def validate_support_evidence(report_path, snapshots, row):
+    """准备时只使用既有支持期快照复算，不联网、不读取Q或未来H。"""
+    report = read_json(report_path)
+    matches = [record for record in report["stations"] if record["station_id"] == str(row.station_id)]
+    if len(matches) != 1:
+        raise ValueError("支持期H核验站号缺失或重复")
+    snapshots = Path(snapshots)
+    paths = [snapshots / f"{row.station_id}_site.json"]
+    paths += [snapshots / f"{row.station_id}_H_{start}.json" for start, _ in SUPPORT_WINDOWS]
+    if not all(path.is_file() and path.with_suffix(".provenance.json").is_file() for path in paths):
+        raise ValueError("支持期H快照不完整，准备流程不得临时联网补证")
+    actual = reconcile_station(row, snapshots)
+    if not actual["time_support_verified"] or actual != matches[0]:
+        raise ValueError("支持期H快照复算与登记不一致")
+    return True
 
 
 def audit_station_evidence(manifest, output, snapshots, limit=20, seed=20261019):

@@ -18,7 +18,8 @@ def write_json(path, obj):
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     temp = path.with_suffix(path.suffix + ".tmp")
-    temp.write_text(json.dumps(obj, ensure_ascii=False, indent=2, default=str), encoding="utf-8")
+    # 固定LF，使证据/配置哈希在Windows写入和Git/Linux检出后保持相同。
+    temp.write_text(json.dumps(obj, ensure_ascii=False, indent=2, default=str), encoding="utf-8", newline="\n")
     temp.replace(path)
 
 

@@ -53,6 +53,8 @@ def predict(
     root, output = Path(hydro_run), Path(output)
     output.mkdir(parents=True, exist_ok=True)
     hc = torch.load(root / "hydro_full.pt", map_location=device, weights_only=False)
+    if hc.get("index_hash") != digest(index_path):
+        raise ValueError("水文前端与当前预测数据清单不一致")
     hydro = RegionalHBV(hc["geo_dim"]).to(device)
     hydro.load_state_dict(hc["state"])
     hydro.eval().requires_grad_(False)

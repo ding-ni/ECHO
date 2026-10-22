@@ -128,6 +128,32 @@ def dispatch(command, argv):
         if a.limit < 1:
             p.error("limit必须为正")
         result = audit_station_evidence(a.manifest, a.output, a.snapshots, a.limit)
+    elif command == "source-q-evidence":
+        from echo.data.usgs_q_evidence import audit_source_q
+
+        p.add_argument("--manifest", required=True, type=Path)
+        p.add_argument("--roles", required=True, type=Path)
+        p.add_argument("--output", required=True, type=Path)
+        p.add_argument("--snapshots", required=True, type=Path)
+        p.add_argument("--limit", type=int)
+        a = p.parse_args(argv)
+        result = audit_source_q(a.manifest, a.roles, a.output, a.snapshots, a.limit)
+    elif command == "pilot-manifest":
+        from echo.data.pilot import build_pilot
+
+        for name in ["manifest", "roles", "datum-registry", "height-report", "source-report", "output"]:
+            p.add_argument("--" + name, required=True, type=Path)
+        p.add_argument("--max-sites", type=int, default=10)
+        a = p.parse_args(argv)
+        result = build_pilot(a.manifest, a.roles, a.datum_registry, a.height_report,
+                             a.source_report, a.output, a.max_sites)
+    elif command == "system-roles":
+        from echo.data.splits import freeze_system_roles
+
+        p.add_argument("--manifest", required=True, type=Path)
+        p.add_argument("--output", required=True, type=Path)
+        a = p.parse_args(argv)
+        result = freeze_system_roles(a.manifest, a.output)
     elif command == "split":
         import pandas as pd
 
@@ -136,10 +162,12 @@ def dispatch(command, argv):
         p.add_argument("--manifest", required=True, type=Path)
         p.add_argument("--output", required=True, type=Path)
         p.add_argument("--max-sites", type=int, default=100)
+        p.add_argument("--system-roles", type=Path)
         a = p.parse_args(argv)
         frame = build_splits(
             pd.read_csv(a.manifest, dtype={"station_id": str, "terminal_system_id": str}),
             max_sites=a.max_sites,
+            system_roles=json.loads(a.system_roles.read_text(encoding="utf-8")) if a.system_roles else None,
         )
         a.output.parent.mkdir(parents=True, exist_ok=True)
         frame.to_csv(a.output, index=False, encoding="utf-8-sig")
@@ -153,9 +181,16 @@ def dispatch(command, argv):
 
         p.add_argument("--manifest", required=True, type=Path)
         p.add_argument("--mapping", required=True, type=Path)
+        p.add_argument("--datum-registry", required=True, type=Path)
+        p.add_argument("--system-roles", required=True, type=Path)
+        p.add_argument("--source-evidence", required=True, type=Path)
+        p.add_argument("--height-evidence", required=True, type=Path)
+        p.add_argument("--height-snapshots", required=True, type=Path)
         p.add_argument("--output", type=Path, default=ROOT / "本地数据/模型视图")
         a = p.parse_args(argv)
-        result = prepare(a.manifest, a.mapping, a.output)
+        result = prepare(a.manifest, a.mapping, a.output, datum_registry=a.datum_registry,
+                         system_roles=a.system_roles, source_evidence=a.source_evidence,
+                         height_evidence=a.height_evidence, height_snapshots=a.height_snapshots)
     elif command == "train":
         import yaml
 

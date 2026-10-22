@@ -1,6 +1,42 @@
 """仅依据独立基准元数据分段，不通过拟合误差或洪峰形状自动改正。"""
 
+import xml.etree.ElementTree as ET
+from pathlib import Path
+
 import pandas as pd
+
+from echo.utils import digest, read_json
+
+
+def validate_registry_station(registry_path, station_id, start, end):
+    """核对快照、站号、官方原文与实际任务窗口；布尔许可不能代替证据。"""
+    registry_path = Path(registry_path)
+    registry = read_json(registry_path)
+    records = [r for r in registry["stations"] if r["station_id"] == str(station_id)]
+    if len(records) != 1:
+        raise ValueError("水尺基准登记站号缺失或重复")
+    record = records[0]
+    if record.get("review_status") != "historical_epoch_reviewed":
+        raise ValueError("历史水尺基准尚未核验")
+    snapshot = (registry_path.parent / record["snapshot"]).resolve()
+    if not snapshot.is_file():
+        raise ValueError("基准证据快照不存在")
+    if digest(snapshot) != record["snapshot_sha256"]:
+        raise ValueError("基准证据快照哈希不一致")
+    tree = ET.parse(snapshot)
+    if tree.findtext(".//site_no") != str(station_id):
+        raise ValueError("基准证据快照站号不一致")
+    receipt = read_json(snapshot.with_suffix(".provenance.json"))
+    expected_url = (
+        "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/"
+        f"sims_USGS_{station_id}.xml"
+    )
+    if receipt.get("url") != expected_url or receipt.get("sha256") != record["snapshot_sha256"]:
+        raise ValueError("基准证据来源收据不一致")
+    gage = [e.findtext("info") for e in tree.findall(".//Element") if e.findtext("name") == "GAGE"]
+    if len(gage) != 1 or gage[0] != record["gage_quote"]:
+        raise ValueError("水尺基准登记原文与快照不一致")
+    return assert_comparable_datum(start, end, record["epochs"])
 
 
 def datum_epoch_at(time, epochs):

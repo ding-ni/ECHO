@@ -1,0 +1,419 @@
+{
+  "version": 1,
+  "seed": 20261019,
+  "created_utc": "2026-10-22T03:23:50.005518+00:00",
+  "manifest_sha256": "355bf1fe6342b73acba526d313ad7160150d845cc4a601d09c48adf9af618a47",
+  "systems": [
+    {
+      "terminal_system_id": "HYBAS_7120039200",
+      "system_split": "train",
+      "crossfit_fold": 0
+    },
+    {
+      "terminal_system_id": "HYBAS_7120041260",
+      "system_split": "train",
+      "crossfit_fold": 1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120073650",
+      "system_split": "train",
+      "crossfit_fold": 2
+    },
+    {
+      "terminal_system_id": "HYBAS_7120039090",
+      "system_split": "train",
+      "crossfit_fold": 0
+    },
+    {
+      "terminal_system_id": "HYBAS_7120039540",
+      "system_split": "train",
+      "crossfit_fold": 1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120038840",
+      "system_split": "train",
+      "crossfit_fold": 2
+    },
+    {
+      "terminal_system_id": "HYBAS_7120014800",
+      "system_split": "train",
+      "crossfit_fold": 0
+    },
+    {
+      "terminal_system_id": "HYBAS_7120015900",
+      "system_split": "train",
+      "crossfit_fold": 1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120041920",
+      "system_split": "train",
+      "crossfit_fold": 2
+    },
+    {
+      "terminal_system_id": "HYBAS_7120038810",
+      "system_split": "train",
+      "crossfit_fold": 0
+    },
+    {
+      "terminal_system_id": "HYBAS_7120039160",
+      "system_split": "train",
+      "crossfit_fold": 1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120039130",
+      "system_split": "train",
+      "crossfit_fold": 2
+    },
+    {
+      "terminal_system_id": "HYBAS_7120046590",
+      "system_split": "train",
+      "crossfit_fold": 0
+    },
+    {
+      "terminal_system_id": "HYBAS_7120012510",
+      "system_split": "train",
+      "crossfit_fold": 1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120048300",
+      "system_split": "train",
+      "crossfit_fold": 2
+    },
+    {
+      "terminal_system_id": "HYBAS_7120043860",
+      "system_split": "train",
+      "crossfit_fold": 0
+    },
+    {
+      "terminal_system_id": "HYBAS_7120048960",
+      "system_split": "train",
+      "crossfit_fold": 1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120048620",
+      "system_split": "train",
+      "crossfit_fold": 2
+    },
+    {
+      "terminal_system_id": "HYBAS_7120014040",
+      "system_split": "train",
+      "crossfit_fold": 0
+    },
+    {
+      "terminal_system_id": "HYBAS_7120039750",
+      "system_split": "train",
+      "crossfit_fold": 1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120012380",
+      "system_split": "train",
+      "crossfit_fold": 2
+    },
+    {
+      "terminal_system_id": "HYBAS_7120014520",
+      "system_split": "train",
+      "crossfit_fold": 0
+    },
+    {
+      "terminal_system_id": "HYBAS_7120015770",
+      "system_split": "train",
+      "crossfit_fold": 1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120046130",
+      "system_split": "train",
+      "crossfit_fold": 2
+    },
+    {
+      "terminal_system_id": "HYBAS_7120016090",
+      "system_split": "train",
+      "crossfit_fold": 0
+    },
+    {
+      "terminal_system_id": "HYBAS_7120074340",
+      "system_split": "train",
+      "crossfit_fold": 1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120012530",
+      "system_split": "train",
+      "crossfit_fold": 2
+    },
+    {
+      "terminal_system_id": "HYBAS_7120048480",
+      "system_split": "train",
+      "crossfit_fold": 0
+    },
+    {
+      "terminal_system_id": "HYBAS_7120046900",
+      "system_split": "train",
+      "crossfit_fold": 1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120014340",
+      "system_split": "train",
+      "crossfit_fold": 2
+    },
+    {
+      "terminal_system_id": "HYBAS_7120073620",
+      "system_split": "train",
+      "crossfit_fold": 0
+    },
+    {
+      "terminal_system_id": "HYBAS_7120013250",
+      "system_split": "train",
+      "crossfit_fold": 1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120015600",
+      "system_split": "train",
+      "crossfit_fold": 2
+    },
+    {
+      "terminal_system_id": "HYBAS_7120038980",
+      "system_split": "train",
+      "crossfit_fold": 0
+    },
+    {
+      "terminal_system_id": "HYBAS_7120014110",
+      "system_split": "train",
+      "crossfit_fold": 1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120041710",
+      "system_split": "train",
+      "crossfit_fold": 2
+    },
+    {
+      "terminal_system_id": "HYBAS_7120047800",
+      "system_split": "train",
+      "crossfit_fold": 0
+    },
+    {
+      "terminal_system_id": "HYBAS_7120039060",
+      "system_split": "train",
+      "crossfit_fold": 1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120044860",
+      "system_split": "train",
+      "crossfit_fold": 2
+    },
+    {
+      "terminal_system_id": "HYBAS_7120039010",
+      "system_split": "train",
+      "crossfit_fold": 0
+    },
+    {
+      "terminal_system_id": "HYBAS_7120012800",
+      "system_split": "validation",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120013800",
+      "system_split": "validation",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120039670",
+      "system_split": "validation",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120073870",
+      "system_split": "validation",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120043160",
+      "system_split": "validation",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120039700",
+      "system_split": "validation",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120046690",
+      "system_split": "validation",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120016190",
+      "system_split": "validation",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120048860",
+      "system_split": "validation",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120016030",
+      "system_split": "validation",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120042140",
+      "system_split": "validation",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120012480",
+      "system_split": "validation",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120014770",
+      "system_split": "validation",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120041650",
+      "system_split": "development_test",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120046200",
+      "system_split": "development_test",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120039470",
+      "system_split": "development_test",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120039030",
+      "system_split": "development_test",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120041400",
+      "system_split": "development_test",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120038480",
+      "system_split": "development_test",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120014200",
+      "system_split": "development_test",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120038320",
+      "system_split": "development_test",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120039590",
+      "system_split": "development_test",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120041680",
+      "system_split": "development_test",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120043500",
+      "system_split": "development_test",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120039570",
+      "system_split": "development_test",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120046390",
+      "system_split": "development_test",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120048410",
+      "system_split": "blind_holdout",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120013550",
+      "system_split": "blind_holdout",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120049270",
+      "system_split": "blind_holdout",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120043090",
+      "system_split": "blind_holdout",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120039120",
+      "system_split": "blind_holdout",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120047970",
+      "system_split": "blind_holdout",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120042240",
+      "system_split": "blind_holdout",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120039110",
+      "system_split": "blind_holdout",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120022240",
+      "system_split": "blind_holdout",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120047850",
+      "system_split": "blind_holdout",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120008710",
+      "system_split": "blind_holdout",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120013430",
+      "system_split": "blind_holdout",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120015740",
+      "system_split": "blind_holdout",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120012660",
+      "system_split": "blind_holdout",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120044770",
+      "system_split": "blind_holdout",
+      "crossfit_fold": -1
+    },
+    {
+      "terminal_system_id": "HYBAS_7120074440",
+      "system_split": "blind_holdout",
+      "crossfit_fold": -1
+    }
+  ],
+  "selection_basis": "topology_weather_area_H_coverage_before_Q_or_model_performance"
+}

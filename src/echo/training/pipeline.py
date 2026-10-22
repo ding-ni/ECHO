@@ -69,7 +69,7 @@ def simulate_q(model, data, device, code=None, stop=None, gradients=False, block
     return torch.cat(result, 1), state
 
 
-def fit_hydrology(rows, forbidden, config, device, output):
+def fit_hydrology(rows, forbidden, config, device, output, index_hash=None):
     assert_source_permissions([r["terminal_system_id"] for r in rows], forbidden)
     if not rows:
         raise ValueError("来源水系为空")
@@ -121,7 +121,8 @@ def fit_hydrology(rows, forbidden, config, device, output):
         for row in rows:
             d = load_station(row, config.get("no_geo", False))
             times = pd.to_datetime(d["time_ns"], utc=True)
-            mask = (times >= periods["train_end"]) & (times < periods["validation_end"]) & np.isfinite(d["q"])
+            mask = ((times >= periods["train_end"]) & (times < periods["validation_end"])
+                    & np.isfinite(d["q"]) & (d["q"] >= 0))
             q, _ = simulate_q(
                 model,
                 d,
@@ -143,6 +144,7 @@ def fit_hydrology(rows, forbidden, config, device, output):
             }
         )
         write_json(output.with_suffix(".history.json"), history)
+        print(f"{output.stem} epoch={epoch + 1}/{epochs} source_validation={score:.6f}", flush=True)
         if score < best_loss:
             best_loss, best = score, copy.deepcopy(model.state_dict())
     if best is None:
@@ -155,24 +157,29 @@ def fit_hydrology(rows, forbidden, config, device, output):
             "trained_systems": sorted({r["terminal_system_id"] for r in rows}),
             "forbidden_systems": sorted(forbidden),
             "config": config,
+            "index_hash": index_hash,
         },
         output,
     )
     return model.eval()
 
 
-def reference_models(index, config, device, root):
+def reference_models(index, config, device, root, index_hash=None):
     sources = [r for r in index["stations"] if r["split"] == "train"]
-    forbidden = {r["terminal_system_id"] for r in index["stations"] if r["split"] != "train"}
+    forbidden = set(index.get("forbidden_systems", [])) | {
+        r["terminal_system_id"] for r in index["stations"] if r["split"] != "train"
+    }
     if len({r["terminal_system_id"] for r in sources}) < 3:
         raise ValueError("三折交叉拟合至少需要3个来源水系")
     root.mkdir(parents=True, exist_ok=True)
-    full = fit_hydrology(list(sources), forbidden, config, device, root / "hydro_full.pt")
+    if {r["crossfit_fold"] for r in sources} != {0, 1, 2}:
+        raise ValueError("来源站未覆盖三折，不能生成交叉拟合前端")
+    full = fit_hydrology(list(sources), forbidden, config, device, root / "hydro_full.pt", index_hash)
     folds = {}
     for fold in range(3):
         kept = [r for r in sources if r["crossfit_fold"] != fold]
         excluded = forbidden | {r["terminal_system_id"] for r in sources if r["crossfit_fold"] == fold}
-        folds[fold] = fit_hydrology(kept, excluded, config, device, root / f"hydro_fold{fold}.pt")
+        folds[fold] = fit_hydrology(kept, excluded, config, device, root / f"hydro_fold{fold}.pt", index_hash)
     cache = root / "参考流量"
     cache.mkdir(exist_ok=True)
     for row in index["stations"]:
@@ -296,6 +303,8 @@ def fit_stage(index_path, config, root):
     if device.type == "cuda":
         torch.cuda.reset_peak_memory_stats()
     index = read_json(index_path)
+    if index.get("failures"):
+        raise ValueError("模型视图含准备失败站点；请解决后另建版本再训练")
     scope = index.get("scope")
     if scope not in {"real_development", "synthetic_demo"}:
         raise ValueError("数据范围未明确")
@@ -308,7 +317,7 @@ def fit_stage(index_path, config, root):
         raise ValueError("未实现的模型配置，不能自动替换骨干")
     begin = time.monotonic()
     if model_kind == "hydrology":
-        reference_models(index, config, device, root)
+        reference_models(index, config, device, root, digest(index_path))
         write_json(
             root / "metadata.json",
             {
@@ -321,6 +330,8 @@ def fit_stage(index_path, config, root):
     if not (hydro_root / "hydro_full.pt").exists():
         raise ValueError("先训练水文前端并生成交叉拟合参考Q")
     hydro_ckpt = torch.load(hydro_root / "hydro_full.pt", map_location=device, weights_only=False)
+    if hydro_ckpt.get("index_hash") != digest(index_path):
+        raise ValueError("水文前端与当前数据清单不一致")
     if bool(config.get("no_geo")) != bool(hydro_ckpt["config"].get("no_geo")):
         raise ValueError("无地理消融必须同时重训水文前端，不能沿用带地理参考Q")
     hydro = RegionalHBV(hydro_ckpt["geo_dim"]).to(device)
@@ -338,6 +349,8 @@ def fit_stage(index_path, config, root):
             config.get("hidden", 64),
         ).to(device)
     previous = config.get("initialize_from")
+    if config.get("initialize_from_run"):
+        previous = root.parent / config["initialize_from_run"] / "model.pt"
     if previous:
         checkpoint = torch.load(previous, map_location=device, weights_only=False)
         if checkpoint["index_hash"] != digest(index_path):
@@ -475,6 +488,7 @@ def fit_stage(index_path, config, root):
             }
         )
         write_json(root / "history.json", history)
+        print(f"{model_kind} epoch={epoch + 1} source_validation={score:.6f}", flush=True)
         if score < best_score:
             best_score, best = score, copy.deepcopy(model.state_dict())
     if best is None:

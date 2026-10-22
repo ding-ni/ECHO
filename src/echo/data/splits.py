@@ -4,12 +4,53 @@ import hashlib
 
 import pandas as pd
 
+from echo.utils import digest, read_json, utc_now, write_json
+
+
+def freeze_system_roles(manifest_path, output, seed=20261019):
+    """在基准审批/来源Q读取前，按全部候选水系冻结角色；后续不因增站重排。"""
+    from pathlib import Path
+
+    frame = pd.read_csv(manifest_path, dtype={"station_id": str, "terminal_system_id": str})
+    good = frame[
+        frame.topology_verified.eq(True) & frame.weather_available.eq(True)
+        & frame.area_km2.between(20, 5000) & frame.support_coverage.ge(0.8)
+        & frame.query_coverage.ge(0.9) & frame.terminal_system_id.notna()
+    ]
+    systems = sorted(good.terminal_system_id.unique(), key=lambda x: group_key(x, seed))
+    if len(systems) < 8:
+        raise ValueError("固定角色至少需要8个独立水系")
+    blind_n = max(1, round(len(systems) * 0.2))
+    blind = systems[:blind_n]
+    dev = sorted(systems[blind_n:], key=lambda x: group_key(x, seed + 1))
+    nt = min(max(3, round(len(dev) * 0.6)), len(dev) - 2)
+    nv = min(max(1, round(len(dev) * 0.2)), len(dev) - nt - 1)
+    labels = dict.fromkeys(blind, "blind_holdout")
+    labels.update({s: "train" if i < nt else "validation" if i < nt + nv else "development_test"
+                   for i, s in enumerate(dev)})
+    roles = [{"terminal_system_id": s, "system_split": labels[s],
+              "crossfit_fold": i % 3 if i < nt else -1} for i, s in enumerate(dev)]
+    roles += [{"terminal_system_id": s, "system_split": "blind_holdout", "crossfit_fold": -1}
+              for s in blind]
+    result = {"version": 1, "seed": seed, "created_utc": utc_now(),
+              "manifest_sha256": digest(manifest_path), "systems": roles,
+              "selection_basis": "topology_weather_area_H_coverage_before_Q_or_model_performance"}
+    if Path(output).exists():
+        previous = read_json(output)
+        if previous["manifest_sha256"] != result["manifest_sha256"] or previous["systems"] != roles:
+            raise ValueError("水系角色已冻结；禁止原位更换候选池或随机种子")
+        return previous
+    write_json(output, result)
+    return result
+
 
 def group_key(value, seed):
     return hashlib.sha256(f"{seed}:{value}".encode()).hexdigest()
 
 
-def build_splits(manifest, seed=20261019, max_sites=100):
+def build_splits(manifest, seed=20261019, max_sites=100, system_roles=None):
+    if max_sites < 5:
+        raise ValueError("开发站点预算至少为5，以保留三来源水系及验证/评估")
     df = manifest.copy()
     required = [
         "station_id",
@@ -43,6 +84,38 @@ def build_splits(manifest, seed=20261019, max_sites=100):
         df.loc[mask, "exclusion_reason"] += reason + ";"
     df["split"] = "excluded"
     good = df[df.exclusion_reason == ""]
+    if system_roles is not None:
+        roles = pd.DataFrame(system_roles["systems"])
+        if roles.terminal_system_id.duplicated().any():
+            raise ValueError("固定水系角色重复")
+        allowed_roles = {"train", "validation", "development_test", "blind_holdout"}
+        if not roles.system_split.isin(allowed_roles).all():
+            raise ValueError("未知水系角色")
+        if not roles.loc[roles.system_split == "train", "crossfit_fold"].isin([0, 1, 2]).all():
+            raise ValueError("来源交叉拟合折号无效")
+        if not roles.loc[roles.system_split != "train", "crossfit_fold"].eq(-1).all():
+            raise ValueError("目标水系不得分配来源折号")
+        roles = roles.set_index("terminal_system_id")
+        df["system_split"] = df.terminal_system_id.map(roles.system_split).fillna("excluded")
+        df["crossfit_fold"] = df.terminal_system_id.map(roles.crossfit_fold).fillna(-1).astype(int)
+        df["target_Q_forbidden"] = df.system_split != "train"
+        train_cap = max(3, int(max_sites * 0.6))
+        validation_cap = max(1, int(max_sites * 0.2))
+        caps = {"train": train_cap, "validation": validation_cap,
+                "development_test": max_sites - train_cap - validation_cap}
+        for role in ["train", "validation", "development_test", "blind_holdout"]:
+            pool = good[good.terminal_system_id.map(roles.system_split) == role]
+            selected = sorted(pool.index, key=lambda i: group_key(df.loc[i, "station_id"], seed))
+            # 固定水系角色不受站点预算或基准审批数量影响；预算按角色分配。
+            if role == "blind_holdout":
+                selected = list(pool.index)
+            else:
+                selected = selected[:caps[role]]
+            df.loc[selected, "split"] = role
+        df.loc[(df.split == "excluded") & (df.exclusion_reason == ""), "exclusion_reason"] = (
+            "unregistered_system_or_development_budget;"
+        )
+        return df
     systems = sorted(good.terminal_system_id.unique(), key=lambda x: group_key(x, seed))
     if len(systems) < 8:
         raise ValueError("至少需8个独立终端水系，才能预留盲测并划分开发池；不以随机站点替代")

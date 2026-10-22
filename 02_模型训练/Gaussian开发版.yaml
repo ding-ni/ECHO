@@ -1,7 +1,7 @@
 model: echo_gaussian
 seed: 20261019
 hydrology_run: 区域水文
-initialize_from: 本地运行/动态ECHO/model.pt
+initialize_from_run: 动态ECHO
 hidden: 64
 dynamic: true
 probabilistic: true

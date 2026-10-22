@@ -1,7 +1,7 @@
 model: echo_dynamic
 seed: 20261019
 hydrology_run: 区域水文
-initialize_from: 本地运行/静态ECHO/model.pt
+initialize_from_run: 静态ECHO
 freeze_static: true
 hidden: 64
 dynamic: true

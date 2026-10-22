@@ -1,5 +1,7 @@
 """单节点可微HBV开发前端，储量单位mm，步长小时，逐步水量闭合。"""
 
+from functools import lru_cache
+
 import torch
 from torch import nn
 
@@ -49,6 +51,23 @@ def hbv_step(weather, state, params):
     return runoff, nxt, balance
 
 
+def _hbv_sequence(weather, state, params, area_km2):
+    runoff: list[torch.Tensor] = []
+    errors: list[torch.Tensor] = []
+    for x in weather.unbind(1):
+        r, state, error = hbv_step(x, state, params)
+        runoff.append(r)
+        errors.append(error)
+    q = torch.stack(runoff, 1) * area_km2[:, None] / 3.6
+    return q, state, torch.stack(errors, 1)
+
+
+@lru_cache(maxsize=1)
+def inference_sequence():
+    # 相同方程与小时顺序，仅消除无梯度长预热的Python逐步调度开销。
+    return torch.jit.script(_hbv_sequence)
+
+
 class RegionalHBV(nn.Module):
     def __init__(self, geo_dim, hidden=32):
         super().__init__()
@@ -68,10 +87,6 @@ class RegionalHBV(nn.Module):
         params = self.parameters_for(geo, code)
         if state is None:
             state = weather.new_zeros((weather.shape[0], 5))
-        runoff, errors = [], []
-        for x in weather.unbind(1):
-            r, state, error = hbv_step(x, state, params)
-            runoff.append(r)
-            errors.append(error)
-        q = torch.stack(runoff, 1) * area_km2[:, None] / 3.6
-        return q, state, torch.stack(errors, 1)
+        if not torch.is_grad_enabled():
+            return inference_sequence()(weather, state, params, area_km2)
+        return _hbv_sequence(weather, state, params, area_km2)
