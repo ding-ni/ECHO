@@ -1,0 +1,19 @@
+# 从同一数据索引的静态版接续，冻结静态模块，只训练动态增量。
+model: echo_dynamic
+seed: 20261019
+hydrology_run: 区域水文
+initialize_from_run: 静态ECHO
+freeze_static: true
+hidden: 64
+dynamic: true
+probabilistic: false
+epochs: 10
+episodes_per_station: 4
+support_days: [7, 30, 90, 366]
+query_hours: 168
+learning_rate: 0.0002
+train_members: 1
+cpu_threads: 2
+device: cuda
+validation_support_hours: 720
+evidence_scope: real_eight_site_pilot_single_seed_not_phase1_acceptance
