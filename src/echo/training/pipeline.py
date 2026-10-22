@@ -32,13 +32,13 @@ def tensor(x, device):
     return torch.as_tensor(np.asarray(x), dtype=torch.float32, device=device)
 
 
-def load_station(row, no_geo=False):
+def load_station(row, no_geo=False, exclude_q=False):
     if digest(row["path"]) != row["sha256"]:
         raise ValueError(f"数据文件哈希变更: {row['station_id']}")
     with np.load(row["path"], allow_pickle=False) as z:
-        data = {k: z[k] for k in z.files}
-    if row["split"] != "train" and "q" in data:
-        raise ValueError("目标预测文件含Q")
+        if row["split"] != "train" and ({"q", "h", "future_h"} & set(z.files)):
+            raise ValueError("目标预测文件含Q或未来H")
+        data = {k: z[k] for k in z.files if not (exclude_q and k == "q")}
     if no_geo:
         data["geo"] = np.zeros_like(data["geo"])
     return data
@@ -329,19 +329,25 @@ def fit_stage(index_path, config, root):
             },
         )
         return
-    if not (hydro_root / "hydro_full.pt").exists():
-        raise ValueError("先训练水文前端并生成交叉拟合参考Q")
-    verify_references(index, digest(index_path), hydro_root)
-    hydro_ckpt = torch.load(hydro_root / "hydro_full.pt", map_location=device, weights_only=False)
-    if hydro_ckpt.get("index_hash") != digest(index_path):
-        raise ValueError("水文前端与当前数据清单不一致")
-    if bool(config.get("no_geo")) != bool(hydro_ckpt["config"].get("no_geo")):
-        raise ValueError("无地理消融必须同时重训水文前端，不能沿用带地理参考Q")
-    hydro = RegionalHBV(hydro_ckpt["geo_dim"]).to(device)
-    hydro.load_state_dict(hydro_ckpt["state"])
-    hydro.requires_grad_(False)
+    needs_hydro = model_kind != "direct_lstm"
+    hydro = None
+    if needs_hydro:
+        if not (hydro_root / "hydro_full.pt").exists():
+            raise ValueError("先训练水文前端并生成交叉拟合参考Q")
+        verify_references(index, digest(index_path), hydro_root)
+        hydro_ckpt = torch.load(hydro_root / "hydro_full.pt", map_location=device, weights_only=False)
+        if hydro_ckpt.get("index_hash") != digest(index_path):
+            raise ValueError("水文前端与当前数据清单不一致")
+        if bool(config.get("no_geo")) != bool(hydro_ckpt["config"].get("no_geo")):
+            raise ValueError("无地理消融必须同时重训水文前端，不能沿用带地理参考Q")
+        hydro = RegionalHBV(hydro_ckpt["geo_dim"]).to(device)
+        hydro.load_state_dict(hydro_ckpt["state"])
+        hydro.requires_grad_(False)
     rows = [r for r in index["stations"] if r["split"] == "train"]
-    dimension = len(load_station(rows[0])["geo"])
+    forbidden = set(index.get("forbidden_systems", [])) | {
+        r["terminal_system_id"] for r in index["stations"] if r["split"] != "train"}
+    assert_source_permissions({r["terminal_system_id"] for r in rows}, forbidden)
+    dimension = len(load_station(rows[0], exclude_q=not needs_hydro)["geo"])
     if model_kind == "direct_lstm":
         model = DirectStage(dimension, config.get("hidden", 64)).to(device)
     else:
@@ -377,15 +383,25 @@ def fit_stage(index_path, config, root):
         weight_decay=0.01,
     )
     rng = np.random.default_rng(seed)
+    validation_origins = config.get("validation_origins", [periods["stage_validation_origin"]])
+    if not validation_origins:
+        raise ValueError("来源验证日期不能为空")
+    if scope == "real_development":
+        for origin in validation_origins:
+            date = pd.Timestamp(origin, tz="UTC")
+            if (date < pd.Timestamp(periods["train_end"], tz="UTC")
+                or date + pd.Timedelta(hours=config.get("query_hours", 168))
+                > pd.Timestamp(periods["validation_end"], tz="UTC")):
+                raise ValueError("来源验证查询必须在冻结的来源验证水文年内")
     history, best_score, best, actual_hours = [], float("inf"), None, 0
     for epoch in range(config.get("epochs", 10)):
         model.train()
         train_losses = []
         for row in rows:
-            d = load_station(row)
+            d = load_station(row, exclude_q=not needs_hydro)
             if config.get("no_geo"):
                 d["geo"] = np.zeros_like(d["geo"])
-            qref = np.load(hydro_root / "参考流量" / (row["station_id"] + ".npy"))
+            qref = np.load(hydro_root / "参考流量" / (row["station_id"] + ".npy")) if needs_hydro else None
             t = pd.to_datetime(d["time_ns"], utc=True)
             first = int(np.searchsorted(t.asi8, pd.Timestamp(periods["train_start"], tz="UTC").value))
             stop = int(np.searchsorted(t.asi8, pd.Timestamp(periods["train_end"], tz="UTC").value))
@@ -456,38 +472,45 @@ def fit_stage(index_path, config, root):
             raise ValueError("该轮没有合格的支持/查询训练样本")
         model.eval()
         validation = []
+        validation_episodes = 0
         with torch.no_grad():
             for row in rows:
-                d = load_station(row)
+                d = load_station(row, exclude_q=not needs_hydro)
                 if config.get("no_geo"):
                     d["geo"] = np.zeros_like(d["geo"])
-                qref = np.load(hydro_root / "参考流量" / (row["station_id"] + ".npy"))
+                qref = np.load(hydro_root / "参考流量" / (row["station_id"] + ".npy")) if needs_hydro else None
                 t = pd.to_datetime(d["time_ns"], utc=True)
-                origin = int(
-                    np.searchsorted(t.asi8, pd.Timestamp(periods["stage_validation_origin"], tz="UTC").value)
-                )
-                try:
-                    val_support = config.get("validation_support_hours", 720)
-                    inp, label = source_episode(
-                        d, origin - val_support, val_support, config.get("query_hours", 168)
-                    )
-                    valid = np.isfinite(label)
-                    if valid.mean() < 0.9:
+                site_scores = []
+                for date in validation_origins:
+                    origin = int(np.searchsorted(t.asi8, pd.Timestamp(date, tz="UTC").value))
+                    try:
+                        val_support = config.get("validation_support_hours", 720)
+                        inp, label = source_episode(
+                            d, origin - val_support, val_support, config.get("query_hours", 168)
+                        )
+                        valid = np.isfinite(label)
+                        if valid.mean() < 0.9:
+                            continue
+                        pred, _, scale = stage_forward(
+                            model, inp, qref, device, config, fold_hydros.get(row["crossfit_fold"], hydro)
+                        )
+                        site_scores.append(
+                            float(ensemble_crps(pred[:, valid] / scale, tensor(label[valid], device) / scale))
+                        )
+                        validation_episodes += 1
+                    except ValueError:
                         continue
-                    pred, _, scale = stage_forward(
-                        model, inp, qref, device, config, fold_hydros.get(row["crossfit_fold"], hydro)
-                    )
-                    validation.append(
-                        float(ensemble_crps(pred[:, valid] / scale, tensor(label[valid], device) / scale))
-                    )
-                except ValueError:
-                    continue
+                if site_scores:
+                    validation.append(float(np.mean(site_scores)))
         score = float(np.mean(validation)) if validation else float("inf")
         history.append(
             {
                 "epoch": epoch,
                 "train_loss": float(np.mean(train_losses)) if train_losses else None,
                 "source_temporal_validation": score,
+                "train_episodes": len(train_losses),
+                "validation_sites": len(validation),
+                "validation_episodes": validation_episodes,
             }
         )
         write_json(root / "history.json", history)
@@ -520,7 +543,7 @@ def fit_stage(index_path, config, root):
             "torch": torch.__version__,
             "device": str(device),
             "parameters": sum(p.numel() for p in model.parameters()),
-            "truncated_history_gradient_hours": 720,
+            "truncated_history_gradient_hours": 720 if isinstance(model, EchoStage) else None,
         },
     )
 

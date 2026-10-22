@@ -54,8 +54,15 @@ def predict(
     index = read_json(index_path)
     output = Path(output)
     output.mkdir(parents=True, exist_ok=True)
+    model, config, checkpoint = None, {}, None
+    if model_run:
+        checkpoint = torch.load(Path(model_run) / "model.pt", map_location=device, weights_only=False)
+        if checkpoint["index_hash"] != digest(index_path):
+            raise ValueError("预测数据清单与模型训练清单不一致")
+        config = checkpoint["config"]
     hc, hydro = None, None
-    if model_run is not None or baseline != "persistence":
+    needs_hydro = (model_run is not None and config["model"] != "direct_lstm") or baseline == "local_spline"
+    if needs_hydro:
         if hydro_run is None:
             raise ValueError("该模型需要已训练的水文前端")
         root = Path(hydro_run)
@@ -65,13 +72,8 @@ def predict(
         hydro = RegionalHBV(hc["geo_dim"]).to(device)
         hydro.load_state_dict(hc["state"])
         hydro.eval().requires_grad_(False)
-    model, config = None, {}
     if model_run:
-        checkpoint = torch.load(Path(model_run) / "model.pt", map_location=device, weights_only=False)
-        if checkpoint["index_hash"] != digest(index_path):
-            raise ValueError("预测数据清单与模型训练清单不一致")
-        config = checkpoint["config"]
-        if bool(config.get("no_geo")) != bool(hc["config"].get("no_geo")):
+        if hc is not None and bool(config.get("no_geo")) != bool(hc["config"].get("no_geo")):
             raise ValueError("后端与水文前端的地理消融设置不一致")
         if config["model"] == "direct_lstm":
             model = DirectStage(checkpoint["geo_dim"], config.get("hidden", 64))
@@ -102,9 +104,11 @@ def predict(
             with torch.no_grad():
                 if baseline == "persistence":
                     pred = np.full((1, inp.query_end - inp.query_start), inp.support_h[inp.support_mask][-1])
-                else:
+                elif needs_hydro:
                     qref, _ = simulate_q(hydro, d, device)
                     q = qref[0].cpu().numpy()
+                else:
+                    q = None
                 if baseline == "local_spline":
                     pred = local_spline(
                         q[inp.query_start :],

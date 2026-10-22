@@ -1,0 +1,25 @@
+model: direct_lstm
+seed: 20261019
+hidden: 64
+epochs: 30
+episodes_per_station: 8
+support_days: [7, 30, 90, 366]
+query_hours: 168
+learning_rate: 0.0002
+cpu_threads: 2
+device: cuda
+validation_support_hours: 720
+validation_origins:
+  - '2018-10-01'
+  - '2018-11-01'
+  - '2018-12-01'
+  - '2019-01-01'
+  - '2019-02-01'
+  - '2019-03-01'
+  - '2019-04-01'
+  - '2019-05-01'
+  - '2019-06-01'
+  - '2019-07-01'
+  - '2019-08-01'
+  - '2019-09-01'
+evidence_scope: expanded_source_H_joint_training

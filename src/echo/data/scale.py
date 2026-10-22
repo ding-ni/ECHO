@@ -1,6 +1,7 @@
 """固定训练水系的多流域Q预训练数据，不要求或读取地方H基准。"""
 
 import argparse
+import shutil
 import time
 import xml.etree.ElementTree as ET
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -168,14 +169,74 @@ def fetch_manuscripts(manifest, roles_path, output):
     return {"fetched": sum("error" not in r for r in records), "total": len(records)}
 
 
+def align_geography(index_path, source_scaler_index, output):
+    """把H视图地理统一到大样本来源统计，供HBV与所有水位基线共同使用。"""
+    index, source = read_json(index_path), read_json(source_scaler_index)
+    output = Path(output)
+    if (output / "index.json").exists():
+        raise ValueError("目标视图已存在，请使用新版本")
+    if index.get("scope") != "real_development" or source.get("scope") != "real_source_Q_pretraining":
+        raise ValueError("地理对齐需要真实H视图和来源Q预训练统计")
+    if index.get("failures") or index["features"] != source["features"]:
+        raise ValueError("H视图含失败或地理字段不一致")
+    if index["system_roles_sha256"] not in source["inputs"].values():
+        raise ValueError("地理统计与H视图水系角色不同")
+    forbidden = set(index["forbidden_systems"])
+    if any(r["split"] != "train" or r["terminal_system_id"] in forbidden for r in source["stations"]):
+        raise ValueError("地理标准化只能使用许可来源水系")
+    old_center, old_scale = np.array(index["geo_center"]), np.array(index["geo_scale"])
+    scaler = FeatureScaler()
+    scaler.center, scaler.scale = np.array(source["geo_center"]), np.array(source["geo_scale"])
+    if not np.isfinite(scaler.center).all() or not np.isfinite(scaler.scale).all() or (scaler.scale <= 0).any():
+        raise ValueError("来源地理统计无效")
+    dimension = len(index["features"])
+    records = []
+    for row in index["stations"]:
+        if digest(row["path"]) != row["sha256"] or not row["station_id"].isdigit():
+            raise ValueError("数据哈希或站号无效")
+        with np.load(row["path"], allow_pickle=False) as z:
+            if row["split"] != "train" and ({"q", "h", "future_h"} & set(z.files)):
+                raise ValueError("目标视图含Q或未来H")
+            data = {k: z[k] for k in z.files}
+        geo = data["geo"]
+        if len(geo) != 2 * dimension:
+            raise ValueError("地理数值和缺测标记维度不一致")
+        raw = geo[:dimension].astype(float) * old_scale + old_center
+        raw[geo[dimension:].astype(bool)] = np.nan
+        data["geo"] = scaler.transform(raw[None])[0]
+        folder = "来源训练" if row["split"] == "train" else "目标上下文"
+        path = output / folder / (row["station_id"] + ".npz")
+        path.parent.mkdir(parents=True, exist_ok=True)
+        np.savez_compressed(path, **data)
+        records.append({**row, "path": str(path.resolve()), "sha256": digest(path)})
+        if row["split"] != "train":
+            labels = output / "评分标签" / (row["station_id"] + ".parquet")
+            labels.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(Path(index_path).parent / "评分标签" / labels.name, labels)
+    write_json(output / "index.json", {**index, "stations": records,
+               "geo_center": scaler.center.tolist(), "geo_scale": scaler.scale.tolist(),
+               "parent_index_sha256": digest(index_path),
+               "geography_source_Q_index_sha256": digest(source_scaler_index)})
+    return {"stations": len(records), "geography_source_Q_index_sha256": digest(source_scaler_index)}
+
+
 def main():
     parser = argparse.ArgumentParser(description="扩展固定来源训练水系的数据与站点资料")
-    parser.add_argument("action", choices=["prepare", "manuscripts"])
-    parser.add_argument("--manifest", type=Path, required=True)
-    parser.add_argument("--roles", type=Path, required=True)
+    parser.add_argument("action", choices=["prepare", "manuscripts", "align"])
+    parser.add_argument("--manifest", type=Path)
+    parser.add_argument("--roles", type=Path)
+    parser.add_argument("--index", type=Path)
+    parser.add_argument("--source-scaler", type=Path)
     parser.add_argument("--mapping", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
+    if args.action == "align":
+        if args.index is None or args.source_scaler is None:
+            parser.error("align需要--index和--source-scaler")
+        print(align_geography(args.index, args.source_scaler, args.output))
+        return
+    if args.manifest is None or args.roles is None:
+        parser.error("prepare/manuscripts需要--manifest和--roles")
     if args.action == "prepare":
         if args.mapping is None:
             parser.error("prepare需要--mapping")

@@ -20,10 +20,18 @@ def verified_extraction_root(directory):
     record = read_json(marker)
     archive = Path(record["archive"])
     audit = read_json(archive.with_name(archive.name + ".audit.json"))
-    if record.get("preview") or digest(archive) != record["archive_sha256"]:
+    if record.get("preview"):
         raise ValueError("提取目录与完整校验归档不一致")
     if audit.get("status") not in {"downloaded_verified", "verified_existing"}:
         raise ValueError("原始归档未完成校验")
+    stat = archive.stat()
+    # 提取完成之后未变化的归档复用当时的校验收据，避免每个准备进程重读21GB。
+    # 大小/修改时间或收据变化时仍重算内容哈希。
+    unchanged = (audit.get("sha256") == record["archive_sha256"]
+                 and audit.get("bytes") == stat.st_size
+                 and stat.st_mtime_ns <= marker.stat().st_mtime_ns)
+    if not unchanged and digest(archive) != record["archive_sha256"]:
+        raise ValueError("提取目录与完整校验归档不一致")
     return True
 
 

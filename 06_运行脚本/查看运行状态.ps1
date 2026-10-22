@@ -7,3 +7,17 @@ Get-ChildItem -LiteralPath (Join-Path $projectRoot '本地数据\原始') -Recur
 }
 Get-Content -LiteralPath (Join-Path $projectRoot '本地运行\环境与测试\执行状态.json') -Encoding utf8
 Get-Content -LiteralPath (Join-Path $projectRoot '本地运行\后台任务.json') -Encoding utf8
+foreach ($run in @('多流域Q预训练_v1', '扩展水位训练_v2')) {
+    $runRoot = Join-Path $projectRoot "本地运行/$run"
+    Write-Output "当前扩容训练：$run"
+    foreach ($file in @('队列状态.json', '训练标准输出.log', '训练错误输出.log')) {
+        $path = Join-Path $runRoot $file
+        if (Test-Path -LiteralPath $path) { Get-Content -LiteralPath $path -Encoding utf8 -Tail 10 }
+    }
+    $hydro = Join-Path $runRoot '区域水文'
+    if (Test-Path -LiteralPath $hydro) {
+        Get-ChildItem -LiteralPath $hydro -Filter '*.status.json' -File | ForEach-Object {
+            Get-Content -LiteralPath $_.FullName -Encoding utf8
+        }
+    }
+}

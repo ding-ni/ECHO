@@ -102,3 +102,22 @@ def test_real_training_interfaces_on_short_synthetic_calendar(tmp_path):
         result = evaluate(forecasts, labels, tmp_path / (kind + "_scores"))
         assert result["sites"] == 1
         assert result["scope"] == "synthetic_demo"
+
+    # 直接水位基线不依赖HBV或来源Q，可以与大样本水文预训练并行。
+    direct_rows = []
+    for row in rows:
+        copied = dict(row)
+        if row["split"] == "train":
+            path = tmp_path / ("H_only_" + row["station_id"] + ".npz")
+            with np.load(row["path"], allow_pickle=False) as z:
+                payload = {key: z[key] for key in z.files if key != "q"}
+            np.savez_compressed(path, **payload)
+            copied.update(path=str(path), sha256=digest(path))
+        direct_rows.append(copied)
+    direct_index = tmp_path / "H_only_index.json"
+    write_json(direct_index, {"scope": "synthetic_demo", "stations": direct_rows})
+    direct_run = tmp_path / "independent_direct"
+    fit_stage(direct_index, {**common, "model": "direct_lstm", "hydrology_run": "absent",
+                            "validation_origins": ["2013-10-08", "2013-10-09"]}, direct_run)
+    result = predict(direct_index, None, tmp_path / "independent_predictions", model_run=direct_run)
+    assert result == {"predicted": 1, "failures": []}

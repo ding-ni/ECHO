@@ -3,7 +3,8 @@ import pandas as pd
 import pytest
 import torch
 
-from echo.data.scale import source_pool
+from echo.data.prepare import verified_extraction_root
+from echo.data.scale import align_geography, source_pool
 from echo.training.multibasin import load_sources, station_logq_loss
 from echo.utils import digest, write_json
 
@@ -89,3 +90,66 @@ def test_interrupted_training_resumes_optimizer_and_next_epoch(tmp_path, monkeyp
     assert a["next_epoch"] == b["next_epoch"] == 2
     assert a["history"] == b["history"]
     torch.testing.assert_close(a["state"]["weight"], b["state"]["weight"], rtol=0, atol=0)
+
+
+def test_archive_receipt_reuse_and_changed_content_recheck(tmp_path, monkeypatch):
+    import os
+
+    import echo.data.prepare as module
+
+    archive = tmp_path / "source.zip"
+    archive.write_bytes(b"original")
+    expected = digest(archive)
+    write_json(tmp_path / "source.zip.audit.json", {"status": "downloaded_verified",
+               "sha256": expected, "bytes": 8})
+    output = tmp_path / "extracted"
+    output.mkdir()
+    marker = output / "extraction.json"
+    write_json(marker, {"archive": str(archive), "archive_sha256": expected, "preview": False})
+    real_digest = module.digest
+    calls = []
+
+    def checked(path):
+        calls.append(str(path))
+        return real_digest(path)
+
+    monkeypatch.setattr(module, "digest", checked)
+    verified_extraction_root.cache_clear()
+    assert verified_extraction_root(str(output))
+    assert not calls
+    archive.write_bytes(b"modified")
+    stamp = marker.stat().st_mtime_ns + 10_000_000
+    os.utime(archive, ns=(stamp, stamp))
+    verified_extraction_root.cache_clear()
+    with pytest.raises(ValueError, match="归档不一致"):
+        verified_extraction_root(str(output))
+    assert calls == [str(archive)]
+
+
+def test_geography_alignment_preserves_inputs_masks_and_labels(tmp_path):
+    first = tmp_path / "first"
+    first.mkdir()
+    (first / "评分标签").mkdir()
+    source_path, target_path = first / "source.npz", first / "target.npz"
+    np.savez(source_path, geo=np.array([1., 0., 0., 1.]), q=np.array([1., 2.]), h=np.array([3., 4.]))
+    np.savez(target_path, geo=np.array([2., -1., 0., 0.]), support_h=np.array([3., 4.]))
+    (first / "评分标签/002.parquet").write_bytes(b"labels copied without reading")
+    index, qindex = first / "index.json", tmp_path / "qindex.json"
+    write_json(index, {"scope": "real_development", "features": ["area_km2", "latitude"],
+        "geo_center": [10., 20.], "geo_scale": [2., 4.], "system_roles_sha256": "frozen",
+        "forbidden_systems": ["T"], "failures": [], "stations": [
+            {"station_id": "001", "terminal_system_id": "S", "split": "train", "path": str(source_path), "sha256": digest(source_path)},
+            {"station_id": "002", "terminal_system_id": "T", "split": "validation", "path": str(target_path), "sha256": digest(target_path)}]})
+    write_json(qindex, {"scope": "real_source_Q_pretraining", "features": ["area_km2", "latitude"],
+        "geo_center": [0., 0.], "geo_scale": [2., 5.], "inputs": {"roles": "frozen"},
+        "stations": [{"split": "train", "terminal_system_id": "S"}]})
+    output = tmp_path / "aligned"
+    assert align_geography(index, qindex, output)["stations"] == 2
+    with np.load(output / "来源训练/001.npz") as z:
+        np.testing.assert_allclose(z["geo"], [6., 0., 0., 1.])
+        np.testing.assert_array_equal(z["q"], [1., 2.])
+        np.testing.assert_array_equal(z["h"], [3., 4.])
+    with np.load(output / "目标上下文/002.npz") as z:
+        np.testing.assert_allclose(z["geo"], [7., 3.2, 0., 0.])
+        assert "q" not in z.files and "h" not in z.files
+    assert digest(first / "评分标签/002.parquet") == digest(output / "评分标签/002.parquet")
