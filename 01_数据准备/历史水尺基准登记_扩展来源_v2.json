@@ -1,0 +1,1332 @@
+{
+  "version": 2,
+  "review_type": "source_grounded_development_metadata_review_not_geodetic_certification",
+  "source_release": "USGS Water Year Summaries 1.0.0 DOI10.5066/P14CPWPZ commit10357415449a9f4135a081d3c04343eeebd82b82 src/get_manuscript.R",
+  "coverage_note": "2013-10-01下界为本项目审查起点，不为历史安装日期；变更日无时刻证据时保守留空当天；不将垂直参考标高差自动转成H偏移。",
+  "stations": [
+    {
+      "station_id": "01017000",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/第三轮基准/manuscripts/01017000.xml",
+      "snapshot_sha256": "8c2a15acd944107d746bfdb6b3ed2ccff45747dc928157689be91e6bd4d8c452",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_01017000.xml",
+      "gage_quote": "Water-stage recorder and crest-stage gage.&nbsp;Datum of gage is 435.68 ft above North American Vertical Datum of 1988, prior to Jun. 14, 2024, datum of gage is 436.40 ft. above National Geodetic Vertical Datum of 1929. Prior to Oct. 1, 1948, at datum 2.0 ft higher.",
+      "review_rationale": "历史稿列出1948以前高2ft及2024后的参考变更；研究期位于中间历史时期。",
+      "epochs": [
+        {
+          "start": "1948-10-02",
+          "end": "2024-06-14",
+          "datum_id": "USGS-01017000:436.40ft_NGVD1929",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_01017000.xml#sha256=8c2a15acd944107d746bfdb6b3ed2ccff45747dc928157689be91e6bd4d8c452"
+        }
+      ]
+    },
+    {
+      "station_id": "01027200",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/第三轮基准/manuscripts/01027200.xml",
+      "snapshot_sha256": "d0fcfa859e885854d119db855ba8924a5d49b2ca77d4ce8e7f954523d69f5a15",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_01027200.xml",
+      "gage_quote": "Water-stage recorder and crest-stage gage.&nbsp;Datum of gage is 1085.96 ft above North American Vertical Datum of 1988, prior to Jun. 14, 2024, datum of gage was 1,086.20 ft above National Geodetic Vertical Datum of 1929.",
+      "review_rationale": "历史稿明确2024-06-14以前1086.20ft；Q率定修订不自动解释为H水尺变更。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2024-06-14",
+          "datum_id": "USGS-01027200:1086.20ft_NGVD1929",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_01027200.xml#sha256=d0fcfa859e885854d119db855ba8924a5d49b2ca77d4ce8e7f954523d69f5a15"
+        }
+      ]
+    },
+    {
+      "station_id": "01029200",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/01029200.xml",
+      "snapshot_sha256": "07d69e38c8a2eb52919b1c1c81add5a95d731a7c70685a5783538a3c1d7b4da9",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_01029200.xml",
+      "gage_quote": "Water-stage recorder and crest-stage gage. Datum of gage is 511.83 ft above North American Vertical Datum of 1988, prior to Jun. 14, 2024, datum of gage was 512.00 ft above National Geodetic Vertical Datum of 1929. Prior to November 13, 2018, water-stage recorder 50 feet downstream at same datum.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-01029200:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_01029200.xml#sha256=07d69e38c8a2eb52919b1c1c81add5a95d731a7c70685a5783538a3c1d7b4da9"
+        }
+      ]
+    },
+    {
+      "station_id": "01031500",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/01031500.xml",
+      "snapshot_sha256": "b354cd7ab248982b51ce207255ea3ba62ca31dced9be0b0fe44a93d0936b5336",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_01031500.xml",
+      "gage_quote": "Water-stage recorder and crest-stage gage. Datum of gage is 358.47 ft above National Geodetic Vertical Datum of 1929. Prior to July 20, 1930, nonrecording gage at same site and datum.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-01031500:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_01031500.xml#sha256=b354cd7ab248982b51ce207255ea3ba62ca31dced9be0b0fe44a93d0936b5336"
+        }
+      ]
+    },
+    {
+      "station_id": "01044550",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/01044550.xml",
+      "snapshot_sha256": "200fab4f8e64cb5c3a3b49d0098f776bd43e688d48c3e56e71c0ea260d1fd662",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_01044550.xml",
+      "gage_quote": "Water-stage recorder and crest-stage gage. Datum of gage is 1012.57 ft above North American Vertical Datum of 1988, prior to Jun. 14, 2024, elevation of gage was 1020 ft above National Geodetic Vertical Datum of 1929 (from topographic map). Prior to Oct. 1, 2007, at site 1.4 miles downstream at datum 20 ft lower.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-01044550:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_01044550.xml#sha256=200fab4f8e64cb5c3a3b49d0098f776bd43e688d48c3e56e71c0ea260d1fd662"
+        }
+      ]
+    },
+    {
+      "station_id": "01052500",
+      "review_status": "current_datum_only_history_unknown",
+      "snapshot": "../本地参考资料/sources/第三轮基准/manuscripts/01052500.xml",
+      "snapshot_sha256": "33fd144520cf64c9ce9516fdd5634cbce10395687521c0fa5398ac30e0558252",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_01052500.xml",
+      "gage_quote": "Water-stage recorder and crest-stage gage. Datum of gage is 1,259.48 ft above National Geodetic Vertical Datum of 1929.",
+      "review_rationale": "只有现行标高或历史需要另行索取，未建立研究期水尺时期；不自动放行。",
+      "epochs": []
+    },
+    {
+      "station_id": "01060000",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/01060000.xml",
+      "snapshot_sha256": "1b21ad48b636c02cd3bdfc9543f79108b95c2b5fa22db8207a987b49cc6a1d42",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_01060000.xml",
+      "gage_quote": "Water-stage recorder. Datum of gage is 9.18 ft above North American Vertical Datum of 1988, prior to Jun. 14, 2024, datum of gage was 9.51 ft above National Geodetic Vertical Datum of 1929.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-01060000:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_01060000.xml#sha256=1b21ad48b636c02cd3bdfc9543f79108b95c2b5fa22db8207a987b49cc6a1d42"
+        }
+      ]
+    },
+    {
+      "station_id": "01073000",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/01073000.xml",
+      "snapshot_sha256": "8815d04669ac70e4fe2a607b8c8afa03cdb608dfc189e7d7bf88c5719e92ea76",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_01073000.xml",
+      "gage_quote": "Water-stage recorder, crest-stage gage, and V-notch sharp-crested weir. Datum of gage is 64.58 ft above North American Vertical Datum of 1988. Concrete control prior to August 18, 2005, at site 150 ft upstream at datum 1.90 ft higher.  Prior to October 1, 1964, at datum 2.90 ft higher.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-01073000:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_01073000.xml#sha256=8815d04669ac70e4fe2a607b8c8afa03cdb608dfc189e7d7bf88c5719e92ea76"
+        }
+      ]
+    },
+    {
+      "station_id": "01081500",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/01081500.xml",
+      "snapshot_sha256": "7f336da8d4a0db9f84c750e45e0a9289e84498a1d93df57ba51125408090a4ee",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_01081500.xml",
+      "gage_quote": "Water-stage recorder. Datum of gage is 250.58 ft above North American Vertical Datum of 1988. Prior to September 13, 1923, nonrecording gage at bridge 350 ft downstream at same datum.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-01081500:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_01081500.xml#sha256=7f336da8d4a0db9f84c750e45e0a9289e84498a1d93df57ba51125408090a4ee"
+        }
+      ]
+    },
+    {
+      "station_id": "01084000",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/01084000.xml",
+      "snapshot_sha256": "109bde9d2b91330b22f134df61bfea68881109af653ffc8911a28517d1c1da46",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_01084000.xml",
+      "gage_quote": "Water-stage recorder and crest-stage gage from September 2009 to July 2011. Nonrecording gage from July 2020 to June 2023. Datum of gage is 880.81 ft above North American Vertical Datum of 1988 (levels by Corp of Engineers).  Prior to October 1, 1967, datum 1.00 ft higher. Prior to January 7, 1941, nonrecording gage at same site.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-01084000:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_01084000.xml#sha256=109bde9d2b91330b22f134df61bfea68881109af653ffc8911a28517d1c1da46"
+        }
+      ]
+    },
+    {
+      "station_id": "01085000",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/01085000.xml",
+      "snapshot_sha256": "985e1e0b2ee39c8e1f47a7a1c7452a29ec1692cb74fae4e6233fbbf88f99d293",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_01085000.xml",
+      "gage_quote": "Water-stage recorder and crest-stage gage. The datum of gage is 469.70 ft above North American Vertical Datum of 1988. Prior to Dec. 18, 1939, nonrecording gage at same site and datum.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-01085000:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_01085000.xml#sha256=985e1e0b2ee39c8e1f47a7a1c7452a29ec1692cb74fae4e6233fbbf88f99d293"
+        }
+      ]
+    },
+    {
+      "station_id": "01086000",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/01086000.xml",
+      "snapshot_sha256": "c5a946ba83e67fce7eee401f17b1c919c4f2bc180f5bc4d8138919bf9a328b1c",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_01086000.xml",
+      "gage_quote": "Water-stage recorder. Datum of gage is 379.37 ft above North American Vertical Datum of 1988. Prior to December 22, 1939, chain gage at bridge 60 ft upstream at same datum.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-01086000:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_01086000.xml#sha256=c5a946ba83e67fce7eee401f17b1c919c4f2bc180f5bc4d8138919bf9a328b1c"
+        }
+      ]
+    },
+    {
+      "station_id": "01091500",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/01091500.xml",
+      "snapshot_sha256": "e4897df2b1583e6e83d16721d00ef525f6c912fddf63bae4bbcc27de09e8b11f",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_01091500.xml",
+      "gage_quote": "Water-stage recorder. The datum of the gage is 173.98 ft above North American Vertical Datum of 1988. Prior to Dec 22, 1939, staff gage at same site and datum.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-01091500:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_01091500.xml#sha256=e4897df2b1583e6e83d16721d00ef525f6c912fddf63bae4bbcc27de09e8b11f"
+        }
+      ]
+    },
+    {
+      "station_id": "010965852",
+      "review_status": "current_datum_only_history_unknown",
+      "snapshot": "../本地参考资料/sources/第三轮基准/manuscripts/010965852.xml",
+      "snapshot_sha256": "a1e04dace9805ed28768d5930ed673a5466c630e37a1eb541861f14456f268b5",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_010965852.xml",
+      "gage_quote": "Water-stage recorder and crest-stage gage. Datum of gage is 148.55 ft above North American Vertical Datum of 1988.",
+      "review_rationale": "只有现行标高或历史需要另行索取，未建立研究期水尺时期；不自动放行。",
+      "epochs": []
+    },
+    {
+      "station_id": "01098530",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/01098530.xml",
+      "snapshot_sha256": "d201dcdd1b1b4128f8016c598292f1a8faa8e0f11afe695402fbcf900d8db3e5",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_01098530.xml",
+      "gage_quote": "Data Collection Platform with satellite telemeter. Datum of gage is 109.78 ft above NAVD 1988, from Massachusetts Department of Public Works benchmark (Disk 1306). Prior to May 13, 2020, datum reported as 110.55 ft above NGVD 1929, from Massachusetts Department of Public Works benchmark (Disk 1306).",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-01098530:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_01098530.xml#sha256=d201dcdd1b1b4128f8016c598292f1a8faa8e0f11afe695402fbcf900d8db3e5"
+        }
+      ]
+    },
+    {
+      "station_id": "01122500",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/第三轮基准/manuscripts/01122500.xml",
+      "snapshot_sha256": "18c1c0fc05afe16c0875dcc338fc421068a3bf86b2bc30f46d95a7e3249c0f41",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_01122500.xml",
+      "gage_quote": "Water-stage recorder (since Dec. 5, 1933) and crest-stage gage. Datum of gage is 130.52 ft above North American Vertical Datum of 1988. Prior to 3/14/2019 datum of gage was reported as 131.40 ft above National Geodetic Vertical Datum of 1929 (levels by Corps of Engineers). Apr. 4, 1904 to Dec. 31, 1905, nonrecording gage at present site and about the same datum. October 1919 to Sept. 30, 1921, and Sept. 1, 1928 to Sept. 30, 1933, water-stage recorder at site 1.5 mi downstream at different datum. Telephone telemetry at station. Satellite telemetry at station.",
+      "review_rationale": "2019-03-14变更reported垂直参考，物理零点是否变化未证实，保守分段；只允许2019-10以后的目标任务，不允许跨期来源H训练。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-03-14",
+          "datum_id": "USGS-01122500:131.40ft_NGVD1929_reported",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_01122500.xml#sha256=18c1c0fc05afe16c0875dcc338fc421068a3bf86b2bc30f46d95a7e3249c0f41"
+        },
+        {
+          "start": "2019-03-15",
+          "end": "2021-10-01",
+          "datum_id": "USGS-01122500:130.52ft_NAVD1988_reported",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_01122500.xml#sha256=18c1c0fc05afe16c0875dcc338fc421068a3bf86b2bc30f46d95a7e3249c0f41"
+        }
+      ]
+    },
+    {
+      "station_id": "01208990",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/第三轮基准/manuscripts/01208990.xml",
+      "snapshot_sha256": "aa41a7d957d7f8241592e6214a6a5e9988a389f52a58a5b74b8633ebe1c518f1",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_01208990.xml",
+      "gage_quote": "<p>Water-stage recorder and crest-stage gage.&nbsp;Datum of gage is 284.48 ft above North American Vertical Datum of 1988. Prior to 5/24/2023 datum of gage was 285.42 ft above National Geodetic Vertical Datum of 1929. Nov. 7, 1961 to Oct. 4, 1964, crest-stage gage only for annual maximum. Satellite telemetry at station.</p>",
+      "review_rationale": "历史稿明确2023-05-24以前285.42ft；研究期位于该历史时期。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2023-05-24",
+          "datum_id": "USGS-01208990:285.42ft_NGVD1929",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_01208990.xml#sha256=aa41a7d957d7f8241592e6214a6a5e9988a389f52a58a5b74b8633ebe1c518f1"
+        }
+      ]
+    },
+    {
+      "station_id": "01617800",
+      "review_status": "current_datum_only_history_unknown",
+      "snapshot": "../本地参考资料/sources/第三轮基准/manuscripts/01617800.xml",
+      "snapshot_sha256": "ffb9969755ffd57e2387d124173c9050ffca863c8036148587d91cd8e09ce521",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_01617800.xml",
+      "gage_quote": "Water-stage recorder and crest-stage gage. Datum of gage is 354.08 ft above North American Vertical Datum of 1988.",
+      "review_rationale": "只有现行标高或历史需要另行索取，未建立研究期水尺时期；不自动放行。",
+      "epochs": []
+    },
+    {
+      "station_id": "01669520",
+      "review_status": "current_datum_only_history_unknown",
+      "snapshot": "../本地参考资料/sources/第三轮基准/manuscripts/01669520.xml",
+      "snapshot_sha256": "5f4d348700c3cb7e7ec0b72ac965486231fadbbaecea912d68cd202fb356df4f",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_01669520.xml",
+      "gage_quote": "Water-stage recorder. Datum of gage is 20.29 &plusmn; 0.1 ft above NAVD 88.",
+      "review_rationale": "只有现行标高或历史需要另行索取，未建立研究期水尺时期；不自动放行。",
+      "epochs": []
+    },
+    {
+      "station_id": "02046000",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/第三轮基准/manuscripts/02046000.xml",
+      "snapshot_sha256": "551a7d323ff9888ec2c95331b12625060aee9425127516fca3ea8ceb4b7ad06e",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02046000.xml",
+      "gage_quote": "Water-stage recorder. Gage datum is 128.86 &plusmn; 0.1 ft above NAVD88. Prior to June 12, 1957, nonrecording gage and crest-stage gage at present site and datum.",
+      "review_rationale": "历史稿明确1957年前的水尺位于present site and datum；研究期采用所述同基准时期。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2021-10-01",
+          "datum_id": "USGS-02046000:128.86ft_NAVD1988_same_datum_history",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02046000.xml#sha256=551a7d323ff9888ec2c95331b12625060aee9425127516fca3ea8ceb4b7ad06e"
+        }
+      ]
+    },
+    {
+      "station_id": "02232000",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/02232000.xml",
+      "snapshot_sha256": "c8361da8d3c25eb7e1fb51492c45a1f439e7e089751dea1877c9607182457f48",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02232000.xml",
+      "gage_quote": "Water-stage recorder, acoustic velocity meter, and data-collection platform. Datum of gage is 11.22 ft above NGVD of 1929 and 9.85 ft above NAVD of 1988. Prior to July 26, 1940, nonrecording gage, and July 26, 1940 to Jan. 11, 1973, water-stage recorder at site 200 ft upstream at same datum. Oct. 1, 1969 to Oct. 5, 1972, and Oct. 1, 1982 to Sept. 30, 1983, water-stage recorder for Lake Washington near Eau Gallie (station 02232100) used as auxiliary gage for this station.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-02232000:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02232000.xml#sha256=c8361da8d3c25eb7e1fb51492c45a1f439e7e089751dea1877c9607182457f48"
+        }
+      ]
+    },
+    {
+      "station_id": "02232200",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/02232200.xml",
+      "snapshot_sha256": "01b1d30ddc6c670025d249a19043dace8ee71b5f86e09790d039b4141ac69af1",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02232200.xml",
+      "gage_quote": "Water-stage recorder and data-collection platform.  Datum of gage is 19.35 ft above NGVD of 1929 and 18.05 ft above NAVD of 1988.  Prior to July 13, 1967, at site 0.8 mi downstream at same datum.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-02232200:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02232200.xml#sha256=01b1d30ddc6c670025d249a19043dace8ee71b5f86e09790d039b4141ac69af1"
+        }
+      ]
+    },
+    {
+      "station_id": "02232500",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/02232500.xml",
+      "snapshot_sha256": "0ac98ac8d4fc5b91234d677d033870755de40126e98aa388530e40890c017260",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02232500.xml",
+      "gage_quote": "Water-stage recorder, acoustic velocity meter, and data-collection platform. Datum of gage is 1.62 ft above NGVD of 1929 and 0.39 ft above NAVD of 1988. Prior to July 23, 1934, nonrecording gage at same site and datum.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-02232500:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02232500.xml#sha256=0ac98ac8d4fc5b91234d677d033870755de40126e98aa388530e40890c017260"
+        }
+      ]
+    },
+    {
+      "station_id": "02235200",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/02235200.xml",
+      "snapshot_sha256": "0a79c092db6d178af91e3c7be5cbd572a98ad6775317dd620e50e555454b0e6c",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02235200.xml",
+      "gage_quote": "Water-stage recorder and data-collection platform. Datum of gage is 18.55 ft above NGVD of 1929 (Florida Department of Transportation bench mark) and 17.60 ft above NAVD of 1988. Sept. 20, 1962 to Aug. 7, 1967, and Oct. 1, 1969 to Mar. 23, 1981, crest-stage gage; Aug. 7, 1967 to Sept. 30, 1969 and Mar. 23, 1981 to June 10, 1983, water-stage recorder; June 10, 1983 to June 10, 1985, nonrecording gage at site 1,000 ft upstream at same datum.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-02235200:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02235200.xml#sha256=0a79c092db6d178af91e3c7be5cbd572a98ad6775317dd620e50e555454b0e6c"
+        }
+      ]
+    },
+    {
+      "station_id": "02245500",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/02245500.xml",
+      "snapshot_sha256": "ec48c5ded49643d7577c76089d53b25963b1694c4ad882cbc460b8a0742309c4",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02245500.xml",
+      "gage_quote": "Water-stage recorder and data-collection platform. Datum of gage is 9.82 ft above NGVD of 1929 (levels by U.S. Army Corps of Engineers) and 8.73 ft below NAVD of 1988. Prior to July 18, 1940, nonrecording gage at same site and datum.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-02245500:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02245500.xml#sha256=ec48c5ded49643d7577c76089d53b25963b1694c4ad882cbc460b8a0742309c4"
+        }
+      ]
+    },
+    {
+      "station_id": "02296750",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/02296750.xml",
+      "snapshot_sha256": "e2b4050673a1dc1bf9c84b61e61eafd060ce201448fa2241a1229adcddd95b81",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02296750.xml",
+      "gage_quote": "Water-stage recorder. Datum of gage is 6.00 ft above National Geodetic Vertical Datum of 1929. Prior to July 19, 1931, nonrecording gage and July 19, 1931, to Sept. 30, 1963, water-stage recorder at site 500 ft upstream at datum 2.25 ft higher; Oct. 1, 1963, to May 16, 2003, at site 500 ft upstream at same datum.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-02296750:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02296750.xml#sha256=e2b4050673a1dc1bf9c84b61e61eafd060ce201448fa2241a1229adcddd95b81"
+        }
+      ]
+    },
+    {
+      "station_id": "02297105",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/02297105.xml",
+      "snapshot_sha256": "180e29c1188f3e9132e96437722756c7e21d2a481e37195bf104aa130ae68bcf",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02297105.xml",
+      "gage_quote": "Water-stage recorder.  Datum of gage is 0.15 ft. below National Geodetic Vertical Datum of 1929.  From August 22, 2001 through December 30, 2003, water-stage recorder 200 ft. upstream at same datum.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-02297105:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02297105.xml#sha256=180e29c1188f3e9132e96437722756c7e21d2a481e37195bf104aa130ae68bcf"
+        }
+      ]
+    },
+    {
+      "station_id": "02365470",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/02365470.xml",
+      "snapshot_sha256": "76c45dcdc8822bc95aa25e4138d1a70e0f3ef539816e1e74635a6024483f6093",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02365470.xml",
+      "gage_quote": "Water-stage recorder and data-collection platform. Datum of gage is 50.94 ft above National Geodetic Vertical Datum of 1929 (revised). Mar. 23, 1983 to Sept. 30, 1987, nonrecording gage and crest-stage gage at same site and datum.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-02365470:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02365470.xml#sha256=76c45dcdc8822bc95aa25e4138d1a70e0f3ef539816e1e74635a6024483f6093"
+        }
+      ]
+    },
+    {
+      "station_id": "02371500",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/第三轮基准/manuscripts/02371500.xml",
+      "snapshot_sha256": "6f2a3802c56a1eef69e6bfb680cd9c0a1cd669e017ae4da4403ad36abc895998",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02371500.xml",
+      "gage_quote": "<p>Water-stage recorder. Datum of gage is 226.13 ft above NAVD of 1988.&nbsp; (Reference Frame NAD_83 (2011) (EPOCH:2010.0000) GEOID18).&nbsp; </p>\n<p>Prior to April 07, 2023 the datum of gage was 226.2 ft above NGVD of 1929 (levels by the U.S. Army Corps of Engineers). Prior to Nov. 1, 1938, nonrecording gage at same site and datum.</p>",
+      "review_rationale": "历史稿明确2023-04-07以前基准为226.2ft，且1938年仪器变化保持同站同基准。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2023-04-07",
+          "datum_id": "USGS-02371500:226.2ft_NGVD1929",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02371500.xml#sha256=6f2a3802c56a1eef69e6bfb680cd9c0a1cd669e017ae4da4403ad36abc895998"
+        }
+      ]
+    },
+    {
+      "station_id": "02388900",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/02388900.xml",
+      "snapshot_sha256": "9039fdc254f5eec59c429c54163f0127966f3b4a30e6e12cfa2096907874fd18",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02388900.xml",
+      "gage_quote": "Satellite telemetry with a water-stage recorder. Datum of gage is 1,270.8 feet above National Geodetic Vertical Datum (NGVD) of 1929. Crest-stage gage was installed from January 14, 1949 to August 05, 1988, at same datum.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-02388900:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02388900.xml#sha256=9039fdc254f5eec59c429c54163f0127966f3b4a30e6e12cfa2096907874fd18"
+        }
+      ]
+    },
+    {
+      "station_id": "02401000",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/02401000.xml",
+      "snapshot_sha256": "0486fa6eb0139eb2d45f83742419d3f03036d24a0ace95b3a38e3660626ea35f",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02401000.xml",
+      "gage_quote": "Water-stage recorder. Elevation of gage is 570 ft, by barometer. Prior to July 10, 1957, nonrecording gage at site 100 ft downstream at same datum.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-02401000:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02401000.xml#sha256=0486fa6eb0139eb2d45f83742419d3f03036d24a0ace95b3a38e3660626ea35f"
+        }
+      ]
+    },
+    {
+      "station_id": "02414500",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/02414500.xml",
+      "snapshot_sha256": "0b55c1f69b561c96effff1982371db8ba2a0532f2ab598c805a44dc832b919bf",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02414500.xml",
+      "gage_quote": "Water-stage recorder. Datum of gage is 599.87 ft above NGVD of 1929. June 17, 1959, to Sept. 30, 1970, nonrecording gage at same site and datum. Prior to June 17, 1959, at site 0.2 mi upstream at datum 1.46 ft higher.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-02414500:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02414500.xml#sha256=0b55c1f69b561c96effff1982371db8ba2a0532f2ab598c805a44dc832b919bf"
+        }
+      ]
+    },
+    {
+      "station_id": "02415000",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/02415000.xml",
+      "snapshot_sha256": "a3927531aa073c68ece7a7197b48694c926a78f419ee175dee4fabaab46b2852",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02415000.xml",
+      "gage_quote": "Water-stage recorder. Datum of gage is 557.92 ft above NGVD of 1929. Prior to March 17, 1999, a water-stage recorder located about 800 feet upstream at county road bridge, at same datum.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-02415000:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02415000.xml#sha256=a3927531aa073c68ece7a7197b48694c926a78f419ee175dee4fabaab46b2852"
+        }
+      ]
+    },
+    {
+      "station_id": "02418230",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/02418230.xml",
+      "snapshot_sha256": "39bacbc417bf0f6a71d850c3dfafa28c87f1539523f8b844b13e3173d41b3995",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02418230.xml",
+      "gage_quote": "<p>Water-stage recorder. Datum of gage is 522.99 ft above NAVD of 1988, (Reference Frame NAD_83 (2011) (EPOCH:2010.0000) GEOID18).&nbsp; </p>\n<p>Prior to April 06, 2023 the datum of gage was 522 ft above NAVD of 1988 derived from a digital elevation model.&nbsp; Prior to July 2020 the elevation of gage is 520 ft above NGVD of 1929 (from topographic map).</p>",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-02418230:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02418230.xml#sha256=39bacbc417bf0f6a71d850c3dfafa28c87f1539523f8b844b13e3173d41b3995"
+        }
+      ]
+    },
+    {
+      "station_id": "02422500",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/02422500.xml",
+      "snapshot_sha256": "43a670001349777b738d57d87272b6962f0cd67562ef4482ef6cd8377ee7576e",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02422500.xml",
+      "gage_quote": "Water-stage recorder. Datum of gage is 165.23 ft above NGVD of 1929. Prior to June 2, 1939, nonrecording gage at site 50 ft upstream at same datum.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-02422500:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02422500.xml#sha256=43a670001349777b738d57d87272b6962f0cd67562ef4482ef6cd8377ee7576e"
+        }
+      ]
+    },
+    {
+      "station_id": "02423130",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/02423130.xml",
+      "snapshot_sha256": "193671f8ff83f0f2ba1d706aafa810e15be077050c9a007da7e704cb1088684c",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02423130.xml",
+      "gage_quote": "Water-stage recorder. <span style=\"background-color: #ffffff;\">The datum of gage is 673.47 feet above NAVD88.&nbsp; Prior to September 19, 2022, the d</span>atum of gage was 673.30 ft above NGVD of 1929.  Prior to June 30, 2011, recording gage 300 ft downstream at same datum.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-02423130:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02423130.xml#sha256=193671f8ff83f0f2ba1d706aafa810e15be077050c9a007da7e704cb1088684c"
+        }
+      ]
+    },
+    {
+      "station_id": "02423500",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/02423500.xml",
+      "snapshot_sha256": "8a95e27e13827bc0ba4cf5f47dbcc3429b021760a2a70caf6db8d3dbf7fec6b3",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02423500.xml",
+      "gage_quote": "Water-stage recorder. Datum of gage is 375.00 ft above NGVD of 1929. Prior to Feb. 25, 1939, wire-weight gage at same site and datum.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-02423500:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02423500.xml#sha256=8a95e27e13827bc0ba4cf5f47dbcc3429b021760a2a70caf6db8d3dbf7fec6b3"
+        }
+      ]
+    },
+    {
+      "station_id": "02424000",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/02424000.xml",
+      "snapshot_sha256": "3c6f72eccde474a09fa9d70c19f30356901ee8e8632914f9a8a675da2dd39beb",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02424000.xml",
+      "gage_quote": "Water-stage recorder. Datum of gage is 180.74 ft above NGVD of 1929. Prior to Jan. 31, 1939, nonrecording gage at same site. Prior to May 1929, at datum 1.15 ft lower.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-02424000:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02424000.xml#sha256=3c6f72eccde474a09fa9d70c19f30356901ee8e8632914f9a8a675da2dd39beb"
+        }
+      ]
+    },
+    {
+      "station_id": "02425000",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/02425000.xml",
+      "snapshot_sha256": "4b7b6e5c82911ba11781412f1999adbbcc6bfc3588477f9db7118862c7e87187",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02425000.xml",
+      "gage_quote": "Water-stage recorder.&nbsp;&nbsp;<span style=\"font-family: 'Segoe UI', sans-serif;\">Datum of gage is 86.91 ft above NAVD of 1988, (Reference Frame NAD_83 (2011) (EPOCH:2010.0000) GEOID18).&nbsp; </span>\n<p><span style=\"font-family: 'Segoe UI', sans-serif;\">Prior to March 14, 2024 the datum of gage was 86.72 ft NGVD of 1929&nbsp;</span>(levels by the U.S. Army Corps of Engineers). October 1940 to September 1954, nonrecording gage 12 mi downstream from base gage at same datum.</p>",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-02425000:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02425000.xml#sha256=4b7b6e5c82911ba11781412f1999adbbcc6bfc3588477f9db7118862c7e87187"
+        }
+      ]
+    },
+    {
+      "station_id": "02438000",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/02438000.xml",
+      "snapshot_sha256": "a46f7ccc3d9efc91d6cf7f787989977d66d73752238f7fbb6b9e7801c83d79bf",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02438000.xml",
+      "gage_quote": "<p>Water-stage recorder. Datum of gage is 360.82 ft above NAVD of 1988, (Reference Frame NAD_83 (2011) (EPOCH:2010.0000) GEOID18).</p>\n<p>Prior to April 11, 2023, the datum of gage is 360.50 ft. above NGVD of 1929. (Levels by U.S. Army Corps of Engineers). July 7, 1953 to July 10, 1954, nonrecording gage at site 300 ft upstream at same datum.</p>",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-02438000:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02438000.xml#sha256=a46f7ccc3d9efc91d6cf7f787989977d66d73752238f7fbb6b9e7801c83d79bf"
+        }
+      ]
+    },
+    {
+      "station_id": "02443500",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/02443500.xml",
+      "snapshot_sha256": "9a92d902801cad87c1e3a1e8b0b354fd850b492ea326c188861bee752c9265fd",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02443500.xml",
+      "gage_quote": "<p>Water-stage recorder.  Datum of gage is&nbsp;<span style=\"color: black; font-size: 11pt; font-family: 'Segoe UI Light', sans-serif; line-height: 107%;\">142.31 ft above NAVD of 1988,&nbsp;<span style=\"color: black; font-size: 11pt; font-family: 'Segoe UI Light', sans-serif; line-height: 107%;\">(Reference Frame NAD_83 (2011) (EPOCH:2010.0000), (GEOID18).</span>&nbsp;</span></p>\n<p>&nbsp;</p>\n<p>Prior to August 23, 2022, the Datum of Gage was 142.23 ft above NGVD of 1929.  Prior to Nov. 3, 1974, nonrecording gage at same site.  September 1928 to September 1930 at undetermined datum, but believed to be same as present datum.</p>",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-02443500:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02443500.xml#sha256=9a92d902801cad87c1e3a1e8b0b354fd850b492ea326c188861bee752c9265fd"
+        }
+      ]
+    },
+    {
+      "station_id": "02446500",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/02446500.xml",
+      "snapshot_sha256": "3da7efe099b227bbb0e21060805c9df5e76c1c0deafd74a7449f0f4a267553d3",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02446500.xml",
+      "gage_quote": "<p>Water-stage recorder.&nbsp;&nbsp;<span style=\"font-family: 'Segoe UI', sans-serif;\">Datum of gage is 198.16 ft above NAVD of 1988, (Reference Frame NAD_83 (2011) (EPOCH:2010.0000) GEOID18).&nbsp; </span></p>\n<p><span style=\"font-family: 'Segoe UI', sans-serif;\">Prior to February 18, 2025, the datum of gage was 197.81 ft above mean sea level, run from U.S.C. and G.S.B.M. \"W99, 1935\" (levels by the Alabama Highway Department).</span>&nbsp;</p>\n<p>Prior to Mar. 31, 1932, nonrecording gage at railroad bridge 0.2 mi downstream from present site at datum 1.93 ft higher. Nov. 1 to Dec. 11, 1939, nonrecording gage at present site and datum.</p>",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-02446500:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02446500.xml#sha256=3da7efe099b227bbb0e21060805c9df5e76c1c0deafd74a7449f0f4a267553d3"
+        }
+      ]
+    },
+    {
+      "station_id": "02450000",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/02450000.xml",
+      "snapshot_sha256": "f6d1ce7bbbf949aabe57f9faf15c043e053cf9b091b25226c17ed63faf318e5f",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02450000.xml",
+      "gage_quote": "<p>Water-stage recorder. Datum of gage is 392.85 ft above NAVD of 1988, (Reference Frame NAD_83 (2011) (EPOCH:2010'0000) GEOID18.</p>\n<p>Prior to 07/13/2023 the datum of gage was 475 ft above NGVD of 1929(from topographic map).  Prior to November 2, 2012, recording gage 1.8 mi downstream at datum of 380.54 ft above NGVD of 1929. Prior to Dec. 5, 1939, nonrecording gage at same site and datum.</p>",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-02450000:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02450000.xml#sha256=f6d1ce7bbbf949aabe57f9faf15c043e053cf9b091b25226c17ed63faf318e5f"
+        }
+      ]
+    },
+    {
+      "station_id": "02450250",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/第三轮基准/manuscripts/02450250.xml",
+      "snapshot_sha256": "1cd690c492abd3a18cf558c6d2f18f40addce9c4d79833c975eca0b08c74b277",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02450250.xml",
+      "gage_quote": "Water-stage recorder. Elevation of gage is 540 ft above NGVD of 1929, from topographic map. Prior to June 29, 1984, at site 400 ft downstream at same datum.",
+      "review_rationale": "历史稿给出1984年迁站但同一基准，任务区间采用稿件当前水尺时期；仅为文献支持的开发期审查，不宣称测地复测。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2021-10-01",
+          "datum_id": "USGS-02450250:540ft_NGVD1929",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02450250.xml#sha256=1cd690c492abd3a18cf558c6d2f18f40addce9c4d79833c975eca0b08c74b277"
+        }
+      ]
+    },
+    {
+      "station_id": "02450825",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/02450825.xml",
+      "snapshot_sha256": "e4e9f47221b3577251d22ff402a99a60d92275d106b5260d7b12d3bd1f8dac9e",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02450825.xml",
+      "gage_quote": "<p>Water-stage recorder. Datum of gage is 565.87 ft above NAVD of 1988, (Reference Frame NAD_83 (2011) (EPOCH:2010.0000) GEOID18).</p>\n<p>Prior to April 11, 2023, the datum of gage was 565 ft above NGVD of 1929, from topographic map.  Prior to Mar. 30, 2010 recording gage 150 ft downstream at same datum.</p>",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-02450825:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02450825.xml#sha256=e4e9f47221b3577251d22ff402a99a60d92275d106b5260d7b12d3bd1f8dac9e"
+        }
+      ]
+    },
+    {
+      "station_id": "02455000",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/02455000.xml",
+      "snapshot_sha256": "780abe04d7b0c42bca64e96ad233cff9ae18500e0da03ee28b587298e29876e7",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02455000.xml",
+      "gage_quote": "Water-stage recorder. Datum of gage is 536.94 ft above NGVD of 1929 (U.S. Army Corps of Engineers benchmark). Prior to Apr. 19, 1940, nonrecording gage at present site and datum. Apr. 20, 1940 to Apr. 11, 1945, nonrecording gage and April 12, 1945 to Sept. 30, 1972, water-stage recorder at site 200 ft downstream at same datum.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-02455000:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02455000.xml#sha256=780abe04d7b0c42bca64e96ad233cff9ae18500e0da03ee28b587298e29876e7"
+        }
+      ]
+    },
+    {
+      "station_id": "02461500",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/02461500.xml",
+      "snapshot_sha256": "af04a1c7d32a511cc2bd86e4221affa928fd3e76413cdc8ea42eac8b3ab6c557",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02461500.xml",
+      "gage_quote": "Water-stage recorder. Datum of gage is 438.64 ft above NGVD of 1929 (levels by Jefferson County Highway Department). May 2, 1974 to May 14, 1975, rainfall-runoff site at same site and datum.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-02461500:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02461500.xml#sha256=af04a1c7d32a511cc2bd86e4221affa928fd3e76413cdc8ea42eac8b3ab6c557"
+        }
+      ]
+    },
+    {
+      "station_id": "02462000",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/02462000.xml",
+      "snapshot_sha256": "957b3c4c7cf2edcff2daf3536198088596081ae034e25a01df408107a5c0a110",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02462000.xml",
+      "gage_quote": "Water-stage recorder. Datum of gage is 294.87 ft above NGVD of 1929 (levels by Jefferson County Highway Department). May 16 to July 12, 1936, chain gage at site 500 ft downstream at same datum. August 1953 to September 1958, water-stage recorder, October 1958 to September 1964 and October 1965 to June 1978, crest-stage gage, at present site and datum.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-02462000:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02462000.xml#sha256=957b3c4c7cf2edcff2daf3536198088596081ae034e25a01df408107a5c0a110"
+        }
+      ]
+    },
+    {
+      "station_id": "02464000",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/02464000.xml",
+      "snapshot_sha256": "1a0ad0cc50c5eed2f542c9b69ee01811c6822b94015f28f1a117d4203c37557f",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02464000.xml",
+      "gage_quote": "Water-stage recorder. Datum of gage is 232.39 ft above NGVD of 1929. Prior to Jan. 25, 1939, nonrecording gage 40 ft downstream at same datum.  Prior to Apr. 20, 2007 recording gage 200 ft downstream at same datum.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-02464000:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02464000.xml#sha256=1a0ad0cc50c5eed2f542c9b69ee01811c6822b94015f28f1a117d4203c37557f"
+        }
+      ]
+    },
+    {
+      "station_id": "02467500",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/02467500.xml",
+      "snapshot_sha256": "7295157a2689f03bfc81f56f02f14d23259a468f574aabedb40dca4543b925af",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02467500.xml",
+      "gage_quote": "<p>Water-stage recorder.&nbsp;&nbsp;<span style=\"font-family: 'Segoe UI', sans-serif;\">Datum of gage is 90.40 ft above NAVD of 1988, (Reference Frame NAD_83 (2011) (EPOCH:2010.0000) GEOID18).&nbsp;</span></p>\n<p><span style=\"font-family: 'Segoe UI', sans-serif;\">Prior to February 19, 2025, the datum of gage was 90.04 ft NGVD of 1929.</span></p>\n<p>Prior to Jan. 12, 1939, nonrecording gage at same site and datum.</p>",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-02467500:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_02467500.xml#sha256=7295157a2689f03bfc81f56f02f14d23259a468f574aabedb40dca4543b925af"
+        }
+      ]
+    },
+    {
+      "station_id": "05116500",
+      "review_status": "current_datum_only_history_unknown",
+      "snapshot": "../本地参考资料/sources/第三轮基准/manuscripts/05116500.xml",
+      "snapshot_sha256": "74709289e845a15b48de52d388ff994f450390a7df625fd7f10abb3857ad6ac9",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_05116500.xml",
+      "gage_quote": "<p>Datum of the gage is 1,634.23feet above North American Vertical Datum of 1988 (NAVD88) and 1,632.98 feet above National Geodetic Vertical Datum of 1929 (NGVD29).<br />\n<br />\nFor a detailed gage datum history, please use the blue &lsquo;questions or comments&rsquo; tab on the bottom of the site&rsquo;s monitoring location page.</p>",
+      "review_rationale": "只有现行标高或历史需要另行索取，未建立研究期水尺时期；不自动放行。",
+      "epochs": []
+    },
+    {
+      "station_id": "07375000",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/07375000.xml",
+      "snapshot_sha256": "c23536c0e83960228797be28623604b8d0088bf701b84abff8920161e7575695",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_07375000.xml",
+      "gage_quote": "Water-stage recorder. Datum of gage is 61.13 feet above NAVD88 GEOID12b EPOCH2010.0000. Prior to June 9, 1944, non-recording gage at same site and datum.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-07375000:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_07375000.xml#sha256=c23536c0e83960228797be28623604b8d0088bf701b84abff8920161e7575695"
+        }
+      ]
+    },
+    {
+      "station_id": "07375500",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/07375500.xml",
+      "snapshot_sha256": "b6b3e3380fc43e069d7cfef9c32cba505966e70969122848948fea5987d4ea0d",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_07375500.xml",
+      "gage_quote": "Water-stage recorder. Datum of gage is 6.60 ft above NAVD 88. Prior to Oct. 1, 2001, datum of gage is 6.87 ft, above NGVD of 1929. Prior to Nov. 25, 1939, nonrecording gage at same site and datum.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-07375500:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_07375500.xml#sha256=b6b3e3380fc43e069d7cfef9c32cba505966e70969122848948fea5987d4ea0d"
+        }
+      ]
+    },
+    {
+      "station_id": "07375800",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/07375800.xml",
+      "snapshot_sha256": "8cf505e8b5af9225829794b6b33c0f56d93783858ff50e5110610e086081cc5b",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_07375800.xml",
+      "gage_quote": "Datum of gage is 203.80 feet above NAVD88 GEOID12b EPOCH 2010.0000.&nbsp; Mar. 9, 1956, to Sept. 30, 1968, at site 0.2 mi west at same datum. Oct. 1, 1963, to Aug. 9, 1979, nonrecording gage and crest-stage indicator at same site 0.2 mi west at same datum.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-07375800:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_07375800.xml#sha256=8cf505e8b5af9225829794b6b33c0f56d93783858ff50e5110610e086081cc5b"
+        }
+      ]
+    },
+    {
+      "station_id": "07375960",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/第三轮基准/manuscripts/07375960.xml",
+      "snapshot_sha256": "222a7e827a4dba3e88db0bab20ec6c4888019c4bf16ff3a5506c13f9cde913d1",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_07375960.xml",
+      "gage_quote": "Water-stage recorder. Datum of gage is 86.88 ft above NAVD 88.  Prior to May 2001 datum of gage is sea level(levels provided by USACOE).",
+      "review_rationale": "历史稿明确2001年5月以前另一基准；研究期采用之后的86.88ft时期。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2021-10-01",
+          "datum_id": "USGS-07375960:86.88ft_NAVD1988_after2001",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_07375960.xml#sha256=222a7e827a4dba3e88db0bab20ec6c4888019c4bf16ff3a5506c13f9cde913d1"
+        }
+      ]
+    },
+    {
+      "station_id": "07376000",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/07376000.xml",
+      "snapshot_sha256": "31b50191aefe1ce385287452fc8941fa559e10b8d348468dab68a7bfc9e34e7c",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_07376000.xml",
+      "gage_quote": "Water-stage recorder. Datum of gage is 18.65 ft above NAVD 88. Prior to Sept. 13, 1944, nonrecording gage; Sept. 14, 1944 to June 14, 1948, water-stage recorder; June 15, 1949 to Dec. 9, 1949, nonrecording gage at same site and datum.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-07376000:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_07376000.xml#sha256=31b50191aefe1ce385287452fc8941fa559e10b8d348468dab68a7bfc9e34e7c"
+        }
+      ]
+    },
+    {
+      "station_id": "07376500",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/07376500.xml",
+      "snapshot_sha256": "770db9f4f812a33d85c4678ca7ca143f0659a294f97762cab634570e4d54a4c3",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_07376500.xml",
+      "gage_quote": "Water-stage recorder. Datum of gage is 10.79 ft above NAVD 88 GEOID99.&nbsp; Prior to June 4, 1948, non-recording gage, June 4, 1948, to Apr. 13, 1950, water-stage recorder at old highway bridge 100 ft upstream at same datum.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-07376500:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_07376500.xml#sha256=770db9f4f812a33d85c4678ca7ca143f0659a294f97762cab634570e4d54a4c3"
+        }
+      ]
+    },
+    {
+      "station_id": "07378500",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/07378500.xml",
+      "snapshot_sha256": "9e3110112303e27ad8e3e08d7713ce060f0efc56ebe9d110e8c140cc97f6f2af",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_07378500.xml",
+      "gage_quote": "Water-stage recorder. Datum of Gage is 1.35 feet below NAVD88 GEOID12b EPOCH 2010.0000. Prior to Oct. 1, 1977, at datum 3.87 ft higher. Sept. 1, 1938, to Aug. 8, 1939, nonrecording gage at same site. Water-stage recorder for Amite River at 4-H Camp, near Denham Springs (station 07378510) used as auxiliary gage for this station from October 1945 to September 1983.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-07378500:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_07378500.xml#sha256=9e3110112303e27ad8e3e08d7713ce060f0efc56ebe9d110e8c140cc97f6f2af"
+        }
+      ]
+    },
+    {
+      "station_id": "08013000",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/08013000.xml",
+      "snapshot_sha256": "8fb47f13ed574f81b69d9ed2e82bf1aafbbb24558d9b57126ce8b2f3691e0a16",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_08013000.xml",
+      "gage_quote": "Water-stage recorder. Datum of gage is 110.77 ft above NGVD of 1929. Prior to Nov. 19, 1949, nonrecording gage at same site and datum.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-08013000:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_08013000.xml#sha256=8fb47f13ed574f81b69d9ed2e82bf1aafbbb24558d9b57126ce8b2f3691e0a16"
+        }
+      ]
+    },
+    {
+      "station_id": "08013500",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/08013500.xml",
+      "snapshot_sha256": "c0de153db0ed2910587a06149dfe56d92260884c38a173e2bb1fe401157d2f94",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_08013500.xml",
+      "gage_quote": "Water-stage recorder. Datum of gage is 39.43 ft above NGVD of 1929. Prior to February 1925 at datum about 2.5 ft higher. September 1938 to Aug. 7, 1939, nonrecording gage at same site and datum.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-08013500:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_08013500.xml#sha256=c0de153db0ed2910587a06149dfe56d92260884c38a173e2bb1fe401157d2f94"
+        }
+      ]
+    },
+    {
+      "station_id": "08014500",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/08014500.xml",
+      "snapshot_sha256": "c645e4e5091507cb2cf8831c222feac5be2bd3baf8a1e9debc7d9689e6da3298",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_08014500.xml",
+      "gage_quote": "Water-stage recorder. Datum of gage is 46.24 ft above NGVD 1929. Prior to October 19, 1944, nonrecording gage at same site and datum.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-08014500:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_08014500.xml#sha256=c645e4e5091507cb2cf8831c222feac5be2bd3baf8a1e9debc7d9689e6da3298"
+        }
+      ]
+    },
+    {
+      "station_id": "08017300",
+      "review_status": "current_datum_only_history_unknown",
+      "snapshot": "../本地参考资料/sources/第三轮基准/manuscripts/08017300.xml",
+      "snapshot_sha256": "bfdc581bc861ee06d72b12b0ce222fb4c6bdc70d74d3e1f4d03f6a0e902f96b8",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_08017300.xml",
+      "gage_quote": "Water-stage recorder. Datum of gage is 461.40 ft above NGVD of 1929, 461.48 ft above NAVD of 1988. Satellite telemeter at station.",
+      "review_rationale": "只有现行标高或历史需要另行索取，未建立研究期水尺时期；不自动放行。",
+      "epochs": []
+    },
+    {
+      "station_id": "08064100",
+      "review_status": "current_datum_only_history_unknown",
+      "snapshot": "../本地参考资料/sources/第三轮基准/manuscripts/08064100.xml",
+      "snapshot_sha256": "13380d24339b42bf8c8b9596e26af5bb2b75f2eebe73de5b4dfcbd1549d95a2c",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_08064100.xml",
+      "gage_quote": "Water-stage recorder. Datum of gage is 340.00 ft above NGVD of 1929 and 330.59 ft above NAVD of 1988. Satellite telemeter at station.",
+      "review_rationale": "只有现行标高或历史需要另行索取，未建立研究期水尺时期；不自动放行。",
+      "epochs": []
+    },
+    {
+      "station_id": "08084800",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/08084800.xml",
+      "snapshot_sha256": "9d390b96335c4c1db23f4f1a634d04e2c1e1160933e3891f97cafd978f70e50a",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_08084800.xml",
+      "gage_quote": "Water-stage recorder.&nbsp;Datum of gage Jul. 27, 2023, to current date is 1467.16 ft above NAVD88 from GNSS level II survey at gage location. Oct. 12, 1962, to Jul. 26, 2023, datum of gage 1,470 ft. above NGVD of 1929 (from topographic map). Satellite telemeter at station.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-08084800:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_08084800.xml#sha256=9d390b96335c4c1db23f4f1a634d04e2c1e1160933e3891f97cafd978f70e50a"
+        }
+      ]
+    },
+    {
+      "station_id": "08093360",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/第三轮基准/manuscripts/08093360.xml",
+      "snapshot_sha256": "45329a8f7c2cbc4a5f9e7135be008bf90b11f2df7d292491c5dcd7a1ddbd38bc",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_08093360.xml",
+      "gage_quote": "Water-stage recorder and concrete weir with sharp-crested, 90 degree v-notch weir section for low flows. Datum of gage is 478.71 ft above NGVD of 1929 (levels by U.S. Army Corps of Engineers), 479.15 ft above NAVD of 1988. Prior to Mar. 15, 1982, at site 0.2 mi downstream at same datum. Satellite telemeter at station.",
+      "review_rationale": "历史稿给出1982迁站同基准，研究期位于其后；NGVD/NAVD双标高为同零点的参考表达，不作水位偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2021-10-01",
+          "datum_id": "USGS-08093360:478.71ft_NGVD1929",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_08093360.xml#sha256=45329a8f7c2cbc4a5f9e7135be008bf90b11f2df7d292491c5dcd7a1ddbd38bc"
+        }
+      ]
+    },
+    {
+      "station_id": "08094800",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/08094800.xml",
+      "snapshot_sha256": "4aba0854ecc9655d2799eabf8a701ada0987983f205a9473694235f72e74cacc",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_08094800.xml",
+      "gage_quote": "Water-stage recorder and crest-stage gage. Datum of gage is 977.46 ft above NGVD of 1929; 977.41 ft above NAVD of 1988. Prior to Jan. 20, 2000, at datum of 982.46 ft above NGVD of 1929. Prior to Aug. 9, 2006, water-stage recorder and crest-stage gage located 700 ft upstream on downstream side of U.S. Highway 281 bridge at same datum. Satellite telemeter at station.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-08094800:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_08094800.xml#sha256=4aba0854ecc9655d2799eabf8a701ada0987983f205a9473694235f72e74cacc"
+        }
+      ]
+    },
+    {
+      "station_id": "08095000",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/08095000.xml",
+      "snapshot_sha256": "7c9535bebce39b5d08f53c6672ac1bbca1f7a8b2537ed571d466b4e689b35279",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_08095000.xml",
+      "gage_quote": "<p>Water-stage recorder.&nbsp;Satellite telemetry at station.</p>\n<p>Datum of the gage:&nbsp;<strong>605.11 ft NAVD88</strong>&nbsp;based on a Level 2 Static GNSS survey processed through OPUS, Ref Frame: NAD83 (2011)(EPOCH:2010.0000) ITRF2014 (EPOCH:2024.0268) and Geoid 18. The survey was completed January 10th, 2024 while occupying a TRM that was referenced to local gage datum via differential levels.</p>\n<p>Prior to 1/10/2024, the Datum of the gage was 605.43 ft above NGVD of 1929. Prior to Oct. 1, 1955, and from Apr. 23, 1957 to Mar. 26, 1958, nonrecording gage at site 1.1 mi upstream at datum 17.02 ft higher; Oct. 1, 1955 to Apr. 22, 1957; Mar. 27, 1958 to Sept. 30, 1959 and Jan 2, 1961 to current year, water-stage recorder at present site and datum; Oct. 1, 1959 to Jan. 1, 1961, nonrecording gage at present site and datum.&nbsp;</p>",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-08095000:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_08095000.xml#sha256=7c9535bebce39b5d08f53c6672ac1bbca1f7a8b2537ed571d466b4e689b35279"
+        }
+      ]
+    },
+    {
+      "station_id": "08095300",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/08095300.xml",
+      "snapshot_sha256": "7da6a5d8cd760e3506510b78d96a963e580efb8dc0154ace167027cc5230d949",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_08095300.xml",
+      "gage_quote": "<p>Water-stage recorder and concrete control.&nbsp;Satellite telemetry at station.</p>\n<p>Datum of the gage:&nbsp;<strong>529.57 ft NAVD88</strong>&nbsp;based on a Level 2 Static GNSS survey processed through OPUS, Ref Frame: NAD83 (2011)(EPOCH:2010.0000) ITFR2014 (EPOCH:2024.0294) and Geoid 18.&nbsp; The survey was completed on January 11th, 2024, while occupying the gage Origin RM4.</p>\n<p>Prior to 1/11/2024, the Datum of the gage was 530.51 ft above NGVD of 1929. Prior to Oct. 27, 1959, nonrecording gage at same site and datum.&nbsp;</p>",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-08095300:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_08095300.xml#sha256=7da6a5d8cd760e3506510b78d96a963e580efb8dc0154ace167027cc5230d949"
+        }
+      ]
+    },
+    {
+      "station_id": "08098300",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/08098300.xml",
+      "snapshot_sha256": "467cf38ac39067c8b755f4c596ae86634082235bcfd3a4c8fa4b85659d9a6181",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_08098300.xml",
+      "gage_quote": "<p>Water-stage recorder and concrete control. Satellite telemetry at station.</p>\n<p>Datum of the gage:&nbsp;<strong>389.092 ft NAVD88</strong>&nbsp;based on a Level 2 Static GNSS survey processed through OPUS, Ref Frame NAD83 (2011)(EPOCH:2010.0000) ITFR2014 (EPOCH:2024.6768) and Geoid 18. The survey was completed on September 4th, 2024 while occupying a TRM referenced to local gage datum via differential levels.&nbsp;</p>\n<p>Prior to 9/4/2024, the datum of the gage was 388.51 ft NGVD29 from differential levels USC&amp;GS BM J 326 1935 in Burlington, TX.&nbsp;</p>",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-08098300:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_08098300.xml#sha256=467cf38ac39067c8b755f4c596ae86634082235bcfd3a4c8fa4b85659d9a6181"
+        }
+      ]
+    },
+    {
+      "station_id": "08099100",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/08099100.xml",
+      "snapshot_sha256": "029dd680324b502d2c0d40f5cb2e759dd4488001dc841b5d36d42abb2facb467",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_08099100.xml",
+      "gage_quote": "Water-stage recorder. Datum of gage is 1,210.48 ft. above NAVD88 as determined by GNSS survey. Prior to December 12, 2023, the datum of gage was 1,209.93 ft. above NGVD of 1929. Prior to Nov. 22, 1960, non-recording gage at same site and datum. Satellite telemeter at station.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-08099100:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_08099100.xml#sha256=029dd680324b502d2c0d40f5cb2e759dd4488001dc841b5d36d42abb2facb467"
+        }
+      ]
+    },
+    {
+      "station_id": "08100000",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/08100000.xml",
+      "snapshot_sha256": "b6c72ee1227ad8cf54b430aa8660b1afcb53df4e0a3bf768ad6e8815c14d3db3",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_08100000.xml",
+      "gage_quote": "<p>Water-stage recorder.&nbsp;Satellite telemetry at station.</p>\n<p>Datum of the gage:&nbsp;<strong>955.376 ft NAVD88&nbsp;</strong>based on a Level 2 Static GNSS survey processed through OPUS, Ref Frame NAD83 (2011)(EPOCH:2010.0000) ITRF2014 (EPOCH:2024.2234) and Geoid18. The survey was completed March 22nd, 2024, while occupying a TRM the was referenced to local datum via differential levels.&nbsp;</p>\n<p>Prior to 3/22/2024, the datum of the gage was 955.38 ft NGVD29. Jan. 7, 1925, to Sept. 30, 1931, nonrecording gage 1.4 mi downstream at datum 1.87 ft higher. Sept. 1 to Nov. 22, 1960, nonrecording gage at same site and at 5.00 ft higher datum. Nov. 22, 1960, to Sept. 30, 1972, recording gage at same site and at 5.00 ft higher datum.&nbsp;</p>",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-08100000:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_08100000.xml#sha256=b6c72ee1227ad8cf54b430aa8660b1afcb53df4e0a3bf768ad6e8815c14d3db3"
+        }
+      ]
+    },
+    {
+      "station_id": "08105095",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/08105095.xml",
+      "snapshot_sha256": "d151318f959426cb07cb0d7f000d0421165dd84e7780fd161ad2ce7deb1639c6",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_08105095.xml",
+      "gage_quote": "<p>Water-stage recorder.&nbsp; Satellite telemetry at station.</p>\n<p>Datum of gage:&nbsp;&nbsp;<strong>670.827 ft NAVD88</strong>&nbsp;based on a Level 2 Static GNSS survey processed through OPUS with Ref Frame NAD83 (2011)(EPOCH:2010.0000) ITRF2014 (EPOCH:2021.1912) and Geoid 18. The survey was completed 3/11/2021 while occupying a TRM that was referenced to local datum via differential levels.&nbsp;</p>\n<p>Prior to 3/11/2021, the datum of the gage was incorrectly listed in the manuscript as 655 ft NGVD29 because of a typo. The datum listed should have been 665 ft NGVD 29 as determined from a topographic map from the period of gage establishment until 3/11/2021.&nbsp;</p>",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-08105095:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_08105095.xml#sha256=d151318f959426cb07cb0d7f000d0421165dd84e7780fd161ad2ce7deb1639c6"
+        }
+      ]
+    },
+    {
+      "station_id": "08134250",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/第三轮基准/manuscripts/08134250.xml",
+      "snapshot_sha256": "9d9ced8d64fc7572fe3431ee2bcfd6eaa1e74be12aa1031f5564c7de5d8c6d7f",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_08134250.xml",
+      "gage_quote": "Water-stage recorder. Datum of gage is 1,895.98 ft. above NAVD88. Prior to Mar. 1, 2021 recording gage at same site and different datum (Datum of gage previously listed as 1,895.83 ft. from Texas Department of Transportation benchmark, vertical control datum unknown). Satellite telemeter at station.",
+      "review_rationale": "2021-03-01明确不同基准且旧垂直控制未知；变更当天时区/时刻未知，留一天空档；禁止跨期比较或由标高差推算校正。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2021-03-01",
+          "datum_id": "USGS-08134250:1895.83ft_vertical_control_unknown",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_08134250.xml#sha256=9d9ced8d64fc7572fe3431ee2bcfd6eaa1e74be12aa1031f5564c7de5d8c6d7f"
+        },
+        {
+          "start": "2021-03-02",
+          "end": "2021-10-01",
+          "datum_id": "USGS-08134250:1895.98ft_NAVD1988",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_08134250.xml#sha256=9d9ced8d64fc7572fe3431ee2bcfd6eaa1e74be12aa1031f5564c7de5d8c6d7f"
+        }
+      ]
+    },
+    {
+      "station_id": "08167500",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/第三轮基准/manuscripts/08167500.xml",
+      "snapshot_sha256": "6ded8b30b6c9b749097fbd28123d3b9b13784192fe3824eb5f29a15878f8bf6e",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_08167500.xml",
+      "gage_quote": "Water-stage recorder and crest-stage gage. <strong>Datum of gage is 948.43 ft&nbsp;above NAVD88 from 08/14/23 to current</strong>. Datum was 948.10 ft above NGVD of 1929 from Jan. 14, 1981 to 08/14/23. Prior to Jan. 14 1981 the site was 220 ft downstream at same datum. Satellite telemeter at station.",
+      "review_rationale": "历史稿明确给出1981-01-14至2023-08-14同一基准时期，覆盖全部研究期。",
+      "epochs": [
+        {
+          "start": "1981-01-14",
+          "end": "2023-08-14",
+          "datum_id": "USGS-08167500:948.10ft_NGVD1929",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_08167500.xml#sha256=6ded8b30b6c9b749097fbd28123d3b9b13784192fe3824eb5f29a15878f8bf6e"
+        }
+      ]
+    },
+    {
+      "station_id": "08180500",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/08180500.xml",
+      "snapshot_sha256": "7dc95d159401b980aa459cb5f5541e16048b10d759a2f9b1b415887be302cb59",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_08180500.xml",
+      "gage_quote": "Water-stage recorder and crest-stage gage. Datum of gage is 858.44 ft above NAVD of 1988 from Oct 06, 2020 to present. Prior to Oct 06, 2020, datum reported as 857.28 ft above NGVD of 1929. Prior to Sept. 30, 1934, water- stage recorder at upstream side of Medina Diversion Dam 0.9 mi upstream at different datum. Jan. 1953 to July 15, 1973, water-stage recorder on left bank 233 ft upstream from bridge at Haby's Crossing at different datum. July 27, 1973 to Sept. 30, 1973, nonrecording gage on left bank 233 ft upstream from bridge at Haby's Crossing at different datum. Satellite telemeter at station.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-08180500:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_08180500.xml#sha256=7dc95d159401b980aa459cb5f5541e16048b10d759a2f9b1b415887be302cb59"
+        }
+      ]
+    },
+    {
+      "station_id": "08186000",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/08186000.xml",
+      "snapshot_sha256": "6c7825fa67cbbc0ab951570f925a621fa3eb67cd683f6bbe111912be6523ed1d",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_08186000.xml",
+      "gage_quote": "Water-stage recorder. <strong>Datum of gage is 264.040 ft. above NAVD of 1988. The NAVD of 1988 datum was determined by a level 2 GNSS survey (Reference Frame NAD_83 (2011) (EPOCH:2010.0000). (GEOID18) by USGS on November 01, 2024, and tied to RM14. </strong>Prior to November 01, 2024, Datum of gage is 264.280 ft. above NGVD of 1929. Done by Topo map<strong>. </strong> Nov. 4, 1930, to Aug. 4, 1940, water-stage recorder at site 1,600 ft upstream at datum 0.56 ft higher. Aug. 5 to Sept. 13, 1940, nonrecording gage at site 150 ft to the left at same datum. Sept. 14, 1940, to Mar. 15, 1990, water-stage recorder at site 150 ft to the left at same datum. Mar. 16, 1990, to July 15, 1993, water-stage recorder at site 50 ft downstream at same datum. Satellite telemeter at station.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-08186000:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_08186000.xml#sha256=6c7825fa67cbbc0ab951570f925a621fa3eb67cd683f6bbe111912be6523ed1d"
+        }
+      ]
+    },
+    {
+      "station_id": "08378500",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/第三轮基准/manuscripts/08378500.xml",
+      "snapshot_sha256": "b78499c08bcadb36b9aa30c0cbe54f4e870d31ab16b2b1690968bc9b334667b7",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_08378500.xml",
+      "gage_quote": "Water-stage recorder with satellite telemetry and crest-stage gage. Datum of gage is 7,502.94 ft above NGVD of 1929. Prior to Oct. 27, 1977, at site 30 ft upstream at same datum.",
+      "review_rationale": "历史稿明确1977迁站保持相同基准，研究期位于其后。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2021-10-01",
+          "datum_id": "USGS-08378500:7502.94ft_NGVD1929",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_08378500.xml#sha256=b78499c08bcadb36b9aa30c0cbe54f4e870d31ab16b2b1690968bc9b334667b7"
+        }
+      ]
+    },
+    {
+      "station_id": "10026500",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/10026500.xml",
+      "snapshot_sha256": "b507a993ba53e998832408f354d164fe58ab2bb95e5b9cbe3bb5c9b114fec4ed",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_10026500.xml",
+      "gage_quote": "Water-stage recorder. Elevation of gage is 6,200 ft above NGVD of 1929, from river profile map. Prior to August 17, 1971, 0.2 mile upstream at different datum. August 17, 1971 to September 30, 1986 at datum 10.0 ft lower. ",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-10026500:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_10026500.xml#sha256=b507a993ba53e998832408f354d164fe58ab2bb95e5b9cbe3bb5c9b114fec4ed"
+        }
+      ]
+    },
+    {
+      "station_id": "10243260",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/多流域扩展/来源历史稿/10243260.xml",
+      "snapshot_sha256": "b37e61f3d06b552d24fd05ad868a6490df11dbda12e4bb9fd06d29ee46e30ab1",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_10243260.xml",
+      "gage_quote": "Datum of gage is 6,687.97 ft above NAVD of 1988. The NAVD of 1988 datum was determined by a level 2 GNSS survey (Reference Frame NAD_83 (2011) (EPOCH:2010.0000), GEOID18) by USGS on January 30, 2020, and tied to RM2. Prior to January 30, 2020, the gage datum was 6,700 ft above NGVD of 1929 as determined via topographic map by USGS on August 27, 1987. Prior to Oct. 03, 1953, at site 45 ft downstream at same datum.",
+      "review_rationale": "本轮逐条复核GAGE原文中的历史日期、同基准迁站或研究期之后的明确变更；只放行2013-10至2019-10来源区间，不把当前垂直标高改换自动解释为H偏移。",
+      "epochs": [
+        {
+          "start": "2013-10-01",
+          "end": "2019-10-01",
+          "datum_id": "USGS-10243260:documented_source_epoch_2013_2019",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_10243260.xml#sha256=b37e61f3d06b552d24fd05ad868a6490df11dbda12e4bb9fd06d29ee46e30ab1"
+        }
+      ]
+    },
+    {
+      "station_id": "11465200",
+      "review_status": "historical_epoch_reviewed",
+      "snapshot": "../本地参考资料/sources/第三轮基准/manuscripts/11465200.xml",
+      "snapshot_sha256": "77467806eae462d234465a2e9eae42d51cad3462e04cc96a8ae24f89246cc47b",
+      "source_url": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_11465200.xml",
+      "gage_quote": "Water-stage recorder. Datum of gage is 156.40 ft above NGVD of 1929. Prior to Oct. 1, 1964, at datum 4.00 ft higher. Oct. 1, 1964, to Apr. 8, 1976, at datum 3.00 ft higher; Apr. 9, 1976, to Sept. 30, 1982, at datum 2.00 ft higher.",
+      "review_rationale": "历史稿明确1982-09-30以前较现基准高2ft；研究期在其后。",
+      "epochs": [
+        {
+          "start": "1982-10-02",
+          "end": "2021-10-01",
+          "datum_id": "USGS-11465200:156.40ft_NGVD1929",
+          "evidence": "https://sims-manuscripts-bucket.s3.us-west-2.amazonaws.com/sims_USGS_11465200.xml#sha256=77467806eae462d234465a2e9eae42d51cad3462e04cc96a8ae24f89246cc47b"
+        }
+      ]
+    }
+  ],
+  "expansion_note": "新增来源期复核，旧目标记录保持；新记录的时期上界2019-10是本轮来源使用上界，不宣称此日发生变更。"
+}

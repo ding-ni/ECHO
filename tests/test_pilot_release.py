@@ -5,6 +5,7 @@ import pandas as pd
 import pytest
 import torch
 
+from echo.data.pilot import build_pilot
 from echo.data.prepare import prepare
 from echo.data.splits import build_splits, freeze_system_roles
 from echo.data.usgs_q_evidence import _assert_response_station, _hourly_q, audit_source_q
@@ -82,6 +83,48 @@ def test_q_audit_cannot_request_target_or_failed_topology(tmp_path, monkeypatch)
     monkeypatch.setattr(module, "_station", capture)
     audit_source_q(manifest, roles_path, tmp_path / "audit.json", tmp_path / "snapshots")
     assert requested == ["R1"]
+
+
+def test_all_station_audit_keeps_multiple_sources_per_system(tmp_path, monkeypatch):
+    import echo.data.usgs_q_evidence as module
+
+    manifest, roles = tmp_path / "manifest.csv", tmp_path / "roles.json"
+    frame = _manifest()
+    frame.to_csv(manifest, index=False)
+    write_json(roles, {"systems": [{"terminal_system_id": "R1", "system_split": "train"},
+                                   {"terminal_system_id": "R2", "system_split": "validation"}]})
+    requested = []
+
+    def capture(row, snapshots):
+        requested.append(row.station_id)
+        return {"station_id": row.station_id, "time_support_verified": True,
+                "source_h_time_support_verified": True}
+
+    monkeypatch.setattr(module, "_station", capture)
+    audit_source_q(manifest, roles, tmp_path / "audit.json", tmp_path / "snapshots", per_system=False)
+    assert set(requested) == {"00000002", "00000003"}
+
+
+def test_source_release_does_not_require_target_support_height_audit(tmp_path, monkeypatch):
+    manifest, roles_path = tmp_path / "manifest.csv", tmp_path / "roles.json"
+    frame = _manifest().iloc[[0, 2, 4, 6, 8]].copy()
+    frame.to_csv(manifest, index=False)
+    roles = {"manifest_sha256": digest(manifest), "systems": [
+        {"terminal_system_id": f"R{i}", "system_split": "train" if i < 3 else
+         "validation" if i == 3 else "development_test", "crossfit_fold": i if i < 3 else -1}
+        for i in range(5)]}
+    write_json(roles_path, roles)
+    heights, sources = tmp_path / "heights.json", tmp_path / "sources.json"
+    write_json(heights, {"stations": [{"station_id": f"{i:08}", "time_support_verified": True}
+                                      for i in [6, 8]]})
+    write_json(sources, {"roles_sha256": digest(roles_path), "stations": [
+        {"station_id": f"{i:08}", "time_support_verified": True, "source_h_time_support_verified": True}
+        for i in [0, 2, 4]]})
+    registry = tmp_path / "registry.json"
+    write_json(registry, {})
+    monkeypatch.setattr("echo.data.pilot.validate_registry_station", lambda *a: "fixture_epoch")
+    result = build_pilot(manifest, roles_path, registry, heights, sources, tmp_path / "pilot.csv")
+    assert result["split_counts"] == {"train": 3, "validation": 1, "development_test": 1}
 
 
 def test_official_q_requires_correct_parameter_station_and_exact_hour():

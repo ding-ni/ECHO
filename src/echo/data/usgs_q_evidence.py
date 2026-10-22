@@ -159,7 +159,7 @@ def validate_source_evidence(report_path, row, roles_path):
     return True
 
 
-def audit_source_q(manifest, roles_path, output, snapshots, limit=None, seed=20261019):
+def audit_source_q(manifest, roles_path, output, snapshots, limit=None, seed=20261019, per_system=True):
     frame = pd.read_csv(manifest, dtype={"station_id": str, "terminal_system_id": str})
     roles = json.loads(Path(roles_path).read_text(encoding="utf-8"))
     train_systems = {
@@ -169,11 +169,14 @@ def audit_source_q(manifest, roles_path, output, snapshots, limit=None, seed=202
         frame.terminal_system_id.isin(train_systems)
         & frame.weather_available.eq(True)
         & frame.topology_verified.eq(True)
-        & frame.support_coverage.ge(0.8)
         & frame.area_km2.between(20, 5000)
     ].copy()
+    if per_system:
+        pool = pool[pool.support_coverage.ge(.8)]
     pool["order"] = pool.station_id.map(lambda value: group_key(value, seed))
-    pool = pool.sort_values("order").drop_duplicates("terminal_system_id")
+    pool = pool.sort_values("order")
+    if per_system:
+        pool = pool.drop_duplicates("terminal_system_id")
     if limit is not None:
         pool = pool.head(limit)
     snapshots = Path(snapshots)
@@ -194,6 +197,7 @@ def audit_source_q(manifest, roles_path, output, snapshots, limit=None, seed=202
             "observed_Q_requested": True,
             "target_and_blind_Q_requested": False,
             "source_windows": SOURCE_WINDOWS,
+            "all_stations_in_fixed_source_systems": not per_system,
             "stations": records,
         },
     )

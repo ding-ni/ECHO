@@ -26,9 +26,10 @@ def build_pilot(manifest, roles_path, datum_registry, height_report, source_repo
     frame["datum_id"] = "unknown"
     frame["datum_evidence"] = ""
     frame["release_reason"] = "not_in_fixed_H_review"
-    for i, row in frame[frame.station_id.isin(height)].iterrows():
+    # 来源已有来源期Q/H对照就足够，不再额外要求进入旧的20站目标支持H清单。
+    for i, row in frame[frame.station_id.isin(set(height) | set(sources))].iterrows():
         sid, role = row.station_id, by_system.get(row.terminal_system_id, "excluded")
-        h_ok = height[sid].get("time_support_verified") is True
+        h_ok = height.get(sid, {}).get("time_support_verified") is True
         source = sources.get(sid, {})
         qh_ok = (source.get("time_support_verified") is True
                  and source.get("source_h_time_support_verified") is True)

@@ -1,0 +1,12 @@
+seed: 20261019
+epochs: 30
+basin_batch_size: 32
+blocks_per_epoch: 8
+query_hours: 168
+learning_rate: 0.002
+validate_every: 5
+cpu_threads: 2
+device: cpu
+folds: [null, 0, 1, 2]
+loss: equal_station_logQ_MSE
+purpose: expanded_source_only_regional_pretraining

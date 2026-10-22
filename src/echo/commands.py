@@ -136,8 +136,10 @@ def dispatch(command, argv):
         p.add_argument("--output", required=True, type=Path)
         p.add_argument("--snapshots", required=True, type=Path)
         p.add_argument("--limit", type=int)
+        p.add_argument("--all-stations", action="store_true", help="核验来源水系内所有候选站，不限每水系一站")
         a = p.parse_args(argv)
-        result = audit_source_q(a.manifest, a.roles, a.output, a.snapshots, a.limit)
+        result = audit_source_q(a.manifest, a.roles, a.output, a.snapshots, a.limit,
+                                per_system=not a.all_stations)
     elif command == "reference-audit":
         from echo.hydro.reference import audit_references
 
