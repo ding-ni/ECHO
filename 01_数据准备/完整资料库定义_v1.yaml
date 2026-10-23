@@ -1,0 +1,86 @@
+protocol: ECHO_NatureWater_main_v1
+definition_version: 1
+scope: full_architecture_same_science_local_and_server
+time:
+  timezone: UTC
+  forcing_time_label: interval_end
+  original_grid_start: '2011-10-01T00:00:00Z'
+  original_grid_end_exclusive: '2021-10-01T00:00:00Z'
+  source_train_start: '2013-10-01T00:00:00Z'
+  source_train_end_exclusive: '2018-10-01T00:00:00Z'
+  source_validation_end_exclusive: '2019-10-01T00:00:00Z'
+  target_support_start: '2019-10-01T00:00:00Z'
+  target_support_end_exclusive: '2020-10-01T00:00:00Z'
+  target_query_end_exclusive: '2021-10-01T00:00:00Z'
+  hydrology_warmup: two_calendar_years_before_each_support_start
+  dynamic_warmup_hours: 2160
+local_station_ids: ['01081500', '02365470', '02401000', '08084800', '11465200', '01017000', '01122500', '02371500']
+data_groups:
+  hydrometric:
+    source: CAMELSH_Hourly2_and_USGS_independent_metadata
+    source_Q: supervised_training_in_permitted_river_systems_only
+    target_H: support_budget_only
+    future_H: separate_scoring_store
+    target_Q: prohibited
+    checks: [datum_periods, units, UTC, instantaneous_or_mean, flags, gaps, role_and_system]
+  original_grid_weather:
+    source: NASA_NLDAS_FORA0125_H
+    version: '2.0'
+    collection: C2033151148-GES_DISC
+    spatial_resolution_degrees: 0.125
+    variables: [Rainf, Tair, PotEvap, Qair, PSurf, Wind_E, Wind_N, LWdown, SWdown, CRainf_frac, CAPE]
+    primary_channels: [P_mm_per_hour, T_C_at_interval_end, PET_demand_mm_per_hour]
+    accumulation_support: previous_one_hour
+    signed_PET: preserve_original_and_record_explicit_nonnegative_demand_transform
+    spatial_operation: original_grid_incremental_polygon_equal_area_intersection
+    clone_basin_mean_to_nodes: prohibited_for_full_model
+  basin_geometry:
+    sources: [CAMELSH_catchment_boundaries, HydroBASINS_L12, MERIT_Hydro]
+    graph: true_downstream_connections_connected_contraction
+    default_nodes: 8
+    maximum_nodes: 32
+    areas: nonoverlapping_incremental_area
+    unmatched_geometry: quantify_and_resolve_without_area_fabrication
+    edge_attributes: [path_length_km, elevation_drop_m, slope]
+  node_environment:
+    sources: [HydroATLAS_subbasin_attributes, independent_terrain_soil_geology_landcover_maps]
+    categories: [terrain_distribution, soils, lithology, landcover, preorigin_climate]
+    require_declared_geographic_scope: true
+    station_aggregates_are_incremental_attributes: false
+    prohibit_Q_derived_attributes: true
+  valley_terrain:
+    source: USGS_3DEP_10m_or_30m
+    centre_source: georeferenced_mapped_river_upstream_downstream_positions
+    token_count: 16
+    radii_km: [1, 5, 10]
+    attributes: [elevation_quantiles, relative_river_elevation, slope, valley_confinement_proxy,
+                 along_river_position, spatial_position, DEM_coverage]
+    horizontal_and_vertical_reference: must_be_recorded
+    DEM_is_underwater_channel_cross_section: false
+  historical_climate:
+    dimension: 64
+    source: verified_historical_P_T_PET_before_episode_origin
+    future_weather_allowed: false
+    padded_fake_features_allowed: false
+  snow:
+    model_process: HBV_snow_store_rain_snow_partition_temperature_index_melt
+    required_primary_forcing: [P, T]
+    external_SWE_or_snowcover: optional_independent_process_validation
+    archived_snow_climatology: diagnostic_only_until_epoch_and_origin_are_verified
+    river_ice: separate_challenge_period_flag_not_equivalent_to_basin_snow
+  glacier:
+    mandatory_dynamic_process_in_original_protocol: false
+    archived_extent: HydroATLAS_gla_pc_use_GLIMS
+    purpose: applicability_audit_before_training_and_evaluation
+    archived_zero_extent_is_current_field_survey: false
+    glacier_mass_balance_module: absent_in_current_HBV
+    substantial_glacier_catchments: flag_for_explicit_protocol_extension_not_silent_relabeling
+  optional_later:
+    datasets: [observed_SWE, snow_cover, glacier_inventory_and_mass_balance, operational_weather_forecasts,
+               finer_rainfall_subset, independent_field_discharge, external_mountain_validation]
+    not_required_to_start_current_non_glaciated_local_main_model: true
+readiness:
+  separate: [source_catalogued, raw_download_verified, derived_input_verified, full_training_ready]
+  scientific_capacity_reduced_locally: false
+  reduce_locally: [station_count, batch_size, loader_workers, optimizer_steps, repetitions]
+  ablations_after: main_model_data_version_and_reference_run_are_frozen

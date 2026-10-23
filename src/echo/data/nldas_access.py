@@ -21,7 +21,7 @@ SIGNED_DATA_HOST = "d2b3c3wh8s6en5.cloudfront.net"
 MAX_BYTES = 64 * 1024 * 1024
 
 
-def _allowed(url, *, signed_data=False):
+def _allowed(url, *, signed_data=False, granule_url=SAMPLE_URL):
     parts = urlsplit(url)
     hosts = {SIGNED_DATA_HOST} if signed_data else ALLOWED_HOSTS
     if (
@@ -33,7 +33,7 @@ def _allowed(url, *, signed_data=False):
     if signed_data:
         expected_suffix = (
             "/gesdisc-cumulus-prod-protected.s3.us-west-2.amazonaws.com"
-            + urlsplit(SAMPLE_URL).path.removeprefix("/data")
+            + urlsplit(granule_url).path.removeprefix("/data")
         )
         if not parts.path.endswith(expected_suffix) or not {
             "Expires", "Signature", "Key-Pair-Id"
@@ -41,7 +41,8 @@ def _allowed(url, *, signed_data=False):
             raise ValueError("下载签名或固定样例路径不匹配")
 
 
-def verify_access(token, output, *, session=None):
+def verify_access(token, output, *, session=None, granule_url=SAMPLE_URL,
+                  receipt_name="NLDAS_认证验证.json"):
     """Use a caller-supplied token in headers only; return a public-safe receipt.
 
     Success checks the complete NetCDF and inventories its schema. It does not
@@ -52,11 +53,18 @@ def verify_access(token, output, *, session=None):
         raise ValueError("未提供有效的本机令牌；请通过本机隐藏输入录入")
     output = Path(output)
     output.mkdir(parents=True, exist_ok=True)
-    receipt_path = output / "NLDAS_认证验证.json"
-    target = output / Path(urlsplit(SAMPLE_URL).path).name
+    _allowed(granule_url)
+    if not granule_url.startswith(
+        "https://data.gesdisc.earthdata.nasa.gov/data/NLDAS/NLDAS_FORA0125_H.2.0/"
+    ) or not granule_url.endswith(".020.nc"):
+        raise ValueError("只允许固定产品的NLDAS小时NetCDF地址")
+    if Path(receipt_name).name != receipt_name or "/" in receipt_name or "\\" in receipt_name:
+        raise ValueError("收据必须为当前目录内单一文件名")
+    receipt_path = output / receipt_name
+    target = output / Path(urlsplit(granule_url).path).name
     part = target.with_suffix(target.suffix + ".part")
     receipt = {
-        "schema_version": 1, "checked_utc": utc_now(), "url": SAMPLE_URL,
+        "schema_version": 1, "checked_utc": utc_now(), "url": granule_url,
         "status": "not_verified", "schema_mapping_verified": False,
         "training_ready": False, "credential_saved_in_receipt": False,
     }
@@ -64,10 +72,10 @@ def verify_access(token, output, *, session=None):
     session = requests.Session() if owned else session
     response = None
     try:
-        url = SAMPLE_URL
+        url = granule_url
         signed_data = False
         for _ in range(6):
-            _allowed(url, signed_data=signed_data)
+            _allowed(url, signed_data=signed_data, granule_url=granule_url)
             response = session.get(
                 url, headers={} if signed_data else {"Authorization": f"Bearer {token}"},
                 allow_redirects=False, stream=True, timeout=(20, 60),
@@ -82,7 +90,7 @@ def verify_access(token, output, *, session=None):
                     if urlsplit(url).hostname != "data.gesdisc.earthdata.nasa.gov":
                         raise ValueError("签名地址并非由GES DISC数据端点返回")
                     signed_data = True
-                _allowed(next_url, signed_data=signed_data)
+                _allowed(next_url, signed_data=signed_data, granule_url=granule_url)
                 receipt["signed_data_redirect_used"] = signed_data
                 url = next_url
                 continue

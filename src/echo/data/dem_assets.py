@@ -63,6 +63,7 @@ def download_asset(spec, root):
     if curl is None:
         raise OSError("范围下载需要curl；不回退到无总时限的整瓦片连接")
     chunk_path, header_path = root / (name + ".chunk"), root / (name + ".headers")
+    failures_at_offset = 0
     while offset < expected:
         # Small bounded ranges also make progress on slow institutional proxies.
         stop = min(expected, offset + 256 * 1024) - 1
@@ -73,17 +74,25 @@ def download_asset(spec, root):
             "--range", f"{offset}-{stop}", "--header", f'If-Match: "{etag}"',
             "--dump-header", str(header_path), "--output", str(chunk_path), spec["url"],
         ], capture_output=True, text=True, timeout=70, creationflags=flags)
-        if result.returncode:
-            raise OSError(f"DEM有界范围下载失败: {result.stderr.strip()}")
-        ranges = re.findall(r"Content-Range:\s*bytes (\d+)-(\d+)/(\d+)",
-                            header_path.read_text(encoding="latin-1"), re.I)
-        if not ranges or tuple(map(int, ranges[-1])) != (offset, stop, expected):
-            raise ValueError("DEM范围响应不匹配，不拼接错误内容")
-        if chunk_path.stat().st_size != stop - offset + 1:
-            raise ValueError("DEM范围分块长度不匹配")
+        headers = header_path.read_text(encoding="latin-1") if header_path.exists() else ""
+        ranges = re.findall(r"Content-Range:\s*bytes (\d+)-(\d+)/(\d+)", headers, re.I)
+        received = chunk_path.stat().st_size if chunk_path.exists() else 0
+        # curl timeout can leave a valid contiguous prefix. Keep it only after
+        # the exact Range response and pinned If-Match identity were checked.
+        valid_prefix = (bool(ranges) and tuple(map(int, ranges[-1])) == (offset, stop, expected)
+                        and 0 < received <= stop - offset + 1 and result.returncode in {0, 18, 28})
+        if not valid_prefix:
+            failures_at_offset += 1
+            if failures_at_offset < 4:
+                print(f"DEM retry {name} offset={offset} attempt={failures_at_offset}", flush=True)
+                continue
+            raise OSError(f"DEM范围响应或长度核验失败；curl状态={result.returncode}")
+        if result.returncode == 0 and received != stop - offset + 1:
+            raise ValueError("DEM完成响应的分块长度不匹配")
         with part.open("ab") as stream, chunk_path.open("rb") as block:
             shutil.copyfileobj(block, stream)
-        offset = stop + 1
+        offset += received
+        failures_at_offset = 0
         write_json(root / (name + ".status.json"), {
             "status": "downloading", "verified_contiguous_bytes": offset,
             "expected_bytes": expected, "updated_utc": utc_now()})
