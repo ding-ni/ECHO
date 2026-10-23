@@ -1,0 +1,34 @@
+model: formal_echo_local_reduced
+seed: 20261023
+device: cpu
+cpu_threads: 2
+
+# 保留正式模块类型与信息流，缩小宽度、层数和后验成员以适配 6 GB 笔记本。
+width: 64
+state_dim: 16
+head_dim: 16
+mimo_rank: 2
+mamba_blocks: 2
+pooling_queries: 16
+pooling_heads: 4
+posterior_layers: 4
+spline_bins: 8
+posterior_hidden: 32
+curve_segments: 32
+dynamic_blocks: 8
+
+training_station_ids: ['01081500', '02365470', '02401000', '08084800']
+prediction_splits: ['validation', 'development_test']
+train_start: '2013-10-01'
+train_end: '2018-10-01'
+support_days: 7
+query_hours: 168
+hydro_warmup_days: 7
+train_members: 2
+prediction_members: 4
+epochs: 1
+learning_rate: 0.0001
+gradient_clip: 1.0
+q_loss_weight: 0.1
+kl_weight: 0.00001
+hydrology_run: '本地运行/扩展水位训练_v2/区域水文_多流域'
