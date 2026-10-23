@@ -45,7 +45,20 @@
 
 浏览器登录成功不等于 Python 或下载器已经认证。后续需要单独配置本机下载认证，再验证一个小文件的状态、格式、变量、单位和时间语义，随后生成批量下载清单。凭据不得进入项目代码、配置快照、日志或 Git；不得把未认证返回的 HTML 登录页当作 NetCDF 数据。
 
-## 5. 对 ECHO 数据与模型的作用
+## 5. 生成 Bearer 令牌
+
+按 NASA 官方《User Token Management》（页面更新日期 2026-07-01，本地于 2026-10-23 核验）：
+
+1. 在自己的浏览器登录 <https://urs.earthdata.nasa.gov/>。
+2. 在个人资料页面的导航中点击 `Generate Token`。
+3. 在令牌生成页面底部点击 `Generate Token` 按钮。
+4. 新令牌默认隐藏；点击 `Show Token` 后自行保存到个人密码管理器，不要粘贴到聊天、项目说明或 Git。
+
+官方当前规定：令牌有效期为 60 天，每个账号最多同时持有两个有效令牌。如已经存在可用令牌，可直接复用，不必重复生成；不要为了本项目擅自撤销其他正在使用的令牌。
+
+用户名、姓名和邮箱不足以代为生成令牌，需要已经认证的会话或账号凭据。项目不收集聊天中的密码。令牌生成后还需单独配置下载器认证并测试 GES DISC 对该认证方式的支持；不能仅凭令牌存在就宣称 NLDAS 下载已打通。
+
+## 6. 对 ECHO 数据与模型的作用
 
 本次申请用于原网格 `NLDAS_FORA0125_H` v`2.0`，以真实格点气象按节点区域加权，保留降雨空间位置。它是完整空间模型的数据准备步骤。已有流域平均气象仍可用于基线和相应核查，但不能复制到不同节点后宣称已经保留空间降雨信息。
 
@@ -57,6 +70,7 @@ USGS DEM 下载不依赖 Earthdata 账号。账号开通也不代表完整主模
 - 注册及邮件激活说明：<https://urs.earthdata.nasa.gov/documentation/for_users/how_to_register>
 - 应用授权说明：<https://urs.earthdata.nasa.gov/documentation/for_users/what_is_app_auth>
 - 预授权操作说明：<https://urs.earthdata.nasa.gov/documentation/for_users/how_to_preauth_app>
+- 令牌生成与管理：<https://urs.earthdata.nasa.gov/documentation/for_users/user_token>
 - NLDAS 产品页：<https://disc.gsfc.nasa.gov/datacollection/NLDAS_FORA0125_H_2.0.html>
 
 本次官方注册页和授权文档核验快照保存在本地忽略目录 `本地参考资料/sources/earthdata_registration_20261023/`。GES DISC 介绍页为动态页面，本次静态请求只取得页面外壳；授权步骤依据上列实际读取成功的 Earthdata 官方文档。
