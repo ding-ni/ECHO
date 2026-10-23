@@ -3,7 +3,7 @@ import json
 import pytest
 import xarray as xr
 
-from echo.data.nldas_access import verify_access
+from echo.data.nldas_access import SAMPLE_URL, SIGNED_DATA_HOST, verify_access
 
 
 class Response:
@@ -55,6 +55,29 @@ def test_redirect_never_forwards_credentials_to_unapproved_url(tmp_path, url):
     assert len(session.calls) == 1
     receipt = (tmp_path / "NLDAS_认证验证.json").read_text(encoding="utf-8")
     assert "do-not-log" not in receipt and "local-test-secret" not in receipt
+
+
+def test_official_signed_cdn_receives_no_bearer_and_signature_is_not_logged(tmp_path):
+    data_path = SAMPLE_URL.split("/data/", 1)[1]
+    redirect = (
+        f"https://{SIGNED_DATA_HOST}/storage/gesdisc-cumulus-prod-protected.s3.us-west-2.amazonaws.com/"
+        f"{data_path}?Expires=123&Signature=private-signature&Key-Pair-Id=key"
+    )
+    payload = xr.Dataset({"Rainf": ("time", [1.0])}).to_netcdf(engine="scipy")
+    session = Session(Response(status=303, headers={"Location": redirect}), Response(payload))
+    receipt = verify_access("local-test-secret", tmp_path, session=session)
+    assert receipt["status"] == "downloaded_netcdf_verified"
+    assert receipt["signed_data_redirect_used"]
+    assert session.calls[1][1]["headers"] == {}
+    assert "private-signature" not in json.dumps(receipt)
+
+
+@pytest.mark.parametrize("suffix", ["other-file.nc?Signature=x&Expires=1&Key-Pair-Id=k", "file.nc"])
+def test_cdn_redirect_requires_exact_sample_path_and_signature(tmp_path, suffix):
+    session = Session(Response(status=303, headers={"Location": f"https://{SIGNED_DATA_HOST}/{suffix}"}))
+    with pytest.raises(RuntimeError):
+        verify_access("local-test-secret", tmp_path, session=session)
+    assert len(session.calls) == 1
 
 
 @pytest.mark.parametrize("response", [

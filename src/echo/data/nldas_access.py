@@ -3,7 +3,7 @@
 import argparse
 import os
 from pathlib import Path
-from urllib.parse import urljoin, urlsplit
+from urllib.parse import parse_qs, urljoin, urlsplit
 
 import requests
 import xarray as xr
@@ -15,17 +15,30 @@ SAMPLE_URL = (
     "2011/274/NLDAS_FORA0125_H.A20111001.0000.020.nc"
 )
 ALLOWED_HOSTS = {"data.gesdisc.earthdata.nasa.gov", "urs.earthdata.nasa.gov"}
+# Observed in an authenticated redirect from the official GES DISC endpoint.
+# Never send the Earthdata bearer to this CDN or persist its signed URL.
+SIGNED_DATA_HOST = "d2b3c3wh8s6en5.cloudfront.net"
 MAX_BYTES = 64 * 1024 * 1024
 
 
-def _allowed(url):
+def _allowed(url, *, signed_data=False):
     parts = urlsplit(url)
+    hosts = {SIGNED_DATA_HOST} if signed_data else ALLOWED_HOSTS
     if (
-        parts.scheme != "https" or parts.hostname not in ALLOWED_HOSTS
+        parts.scheme != "https" or parts.hostname not in hosts
         or parts.port not in {None, 443} or parts.username or parts.password
-        or parts.query or parts.fragment
+        or (parts.query and not signed_data) or parts.fragment
     ):
         raise ValueError("拒绝将认证发送到非许可地址或带参数的重定向；需另行核验认证流程")
+    if signed_data:
+        expected_suffix = (
+            "/gesdisc-cumulus-prod-protected.s3.us-west-2.amazonaws.com"
+            + urlsplit(SAMPLE_URL).path.removeprefix("/data")
+        )
+        if not parts.path.endswith(expected_suffix) or not {
+            "Expires", "Signature", "Key-Pair-Id"
+        }.issubset(parse_qs(parts.query)):
+            raise ValueError("下载签名或固定样例路径不匹配")
 
 
 def verify_access(token, output, *, session=None):
@@ -52,17 +65,25 @@ def verify_access(token, output, *, session=None):
     response = None
     try:
         url = SAMPLE_URL
+        signed_data = False
         for _ in range(6):
-            _allowed(url)
+            _allowed(url, signed_data=signed_data)
             response = session.get(
-                url, headers={"Authorization": f"Bearer {token}"},
+                url, headers={} if signed_data else {"Authorization": f"Bearer {token}"},
                 allow_redirects=False, stream=True, timeout=(20, 60),
             )
             receipt["http_status"] = response.status_code
             if response.status_code in {301, 302, 303, 307, 308}:
                 next_url = urljoin(url, response.headers.get("Location", ""))
                 response.close()
-                _allowed(next_url)
+                if signed_data:
+                    raise ValueError("签名下载端再次重定向，需重新核验")
+                if urlsplit(next_url).hostname == SIGNED_DATA_HOST:
+                    if urlsplit(url).hostname != "data.gesdisc.earthdata.nasa.gov":
+                        raise ValueError("签名地址并非由GES DISC数据端点返回")
+                    signed_data = True
+                _allowed(next_url, signed_data=signed_data)
+                receipt["signed_data_redirect_used"] = signed_data
                 url = next_url
                 continue
             break
