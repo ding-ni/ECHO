@@ -23,6 +23,7 @@ def main():
             "system-roles",
             "pilot-manifest",
             "reference-audit",
+            "import-multibasin-hydro",
             "prepare",
             "train",
             "predict",

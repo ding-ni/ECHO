@@ -148,6 +148,15 @@ def dispatch(command, argv):
         p.add_argument("--replay", action="store_true")
         a = p.parse_args(argv)
         result = audit_references(a.index, a.hydro_run, a.replay)
+    elif command == "import-multibasin-hydro":
+        from echo.hydro.import_multibasin import import_and_generate
+
+        p.add_argument("--q-index", type=Path, required=True)
+        p.add_argument("--h-index", type=Path, required=True)
+        p.add_argument("--source-run", type=Path, required=True)
+        p.add_argument("--output", type=Path, required=True)
+        a = p.parse_args(argv)
+        result = import_and_generate(a.q_index, a.h_index, a.source_run, a.output)
     elif command == "pilot-manifest":
         from echo.data.pilot import build_pilot
 

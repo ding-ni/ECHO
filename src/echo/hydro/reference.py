@@ -18,15 +18,37 @@ def inspect_references(index, index_hash, root):
     if source_systems & forbidden:
         raise ValueError("目标水系进入来源训练清单")
     checkpoints = {}
+    imported = None
+    import_path = root / "pretrained_import.json"
+    if import_path.is_file():
+        imported = read_json(import_path)
+        if imported.get("target_index_sha256") != index_hash:
+            raise ValueError("多流域预训练导入记录与水位数据清单不一致")
     for fold in [None, 0, 1, 2]:
         name = "hydro_full.pt" if fold is None else f"hydro_fold{fold}.pt"
         checkpoint = torch.load(root / name, map_location="cpu", weights_only=False)
         held = {row["terminal_system_id"] for row in sources if row["crossfit_fold"] == fold}
         expected = source_systems - held
         trained = set(checkpoint["trained_systems"])
-        if checkpoint.get("index_hash") != index_hash or trained != expected:
+        provenance = checkpoint.get("pretrained_import")
+        if provenance:
+            if imported is None or provenance != imported["checkpoints"][name]:
+                raise ValueError(f"{name} 的多流域导入来源记录不匹配")
+            source_path = Path(provenance["source_path"])
+            if not source_path.is_file() or digest(source_path) != provenance["source_sha256"]:
+                raise ValueError(f"{name} 的原始多流域检查点缺失或哈希改变")
+            source_trained = set(provenance["trained_systems"])
+            source_forbidden = set(provenance["forbidden_systems"])
+            source_held = set(provenance["source_fold_systems"].get(str(fold), [])) if fold is not None else set()
+            if (checkpoint.get("index_hash") != index_hash or trained != source_trained
+                    or source_trained & (source_forbidden | source_held)
+                    or not (forbidden | held).issubset(checkpoint["forbidden_systems"])):
+                raise ValueError(f"{name} 未通过来源Q水系和目标水系双重隔离核验")
+            if fold is not None and not held.issubset(source_held):
+                raise ValueError(f"{name} 的来源Q折分未排除当前水位训练水系")
+        elif checkpoint.get("index_hash") != index_hash or trained != expected:
             raise ValueError(f"{name} 与冻结数据版本或来源折分不一致")
-        if trained & (forbidden | held) or not (forbidden | held).issubset(checkpoint["forbidden_systems"]):
+        elif trained & (forbidden | held) or not (forbidden | held).issubset(checkpoint["forbidden_systems"]):
             raise ValueError(f"{name} 未正确排除目标及本折来源水系")
         checkpoints[name] = {"sha256": digest(root / name), "trained_systems": sorted(trained),
                              "forbidden_systems": sorted(checkpoint["forbidden_systems"])}
@@ -49,7 +71,10 @@ def inspect_references(index, index_hash, root):
         records.append({"station_id": row["station_id"], "terminal_system_id": row["terminal_system_id"],
                         "split": row["split"], "checkpoint": name, "sha256": digest(path),
                         "hours": len(q)})
-    return {"index_sha256": index_hash, "checkpoints": checkpoints, "stations": records}
+    result = {"index_sha256": index_hash, "checkpoints": checkpoints, "stations": records}
+    if imported is not None:
+        result["pretrained_import_sha256"] = digest(import_path)
+    return result
 
 
 def seal_references(index, index_hash, root):
