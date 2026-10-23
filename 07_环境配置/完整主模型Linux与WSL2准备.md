@@ -15,6 +15,8 @@ cd 'F:\博士课题研究\ECHO'
 
 ## 2. Windows平台（管理员PowerShell）
 
+入口脚本以UTF-8 BOM保存，兼容Windows PowerShell5.1和PowerShell7。中文乱码解析错误的修复已在两个版本中通过语法、中文参数识别和实际只读检查；平台安装仍需要管理员窗口执行。
+
 Windows启用系统组件需要真正的管理员令牌，代理工具的沙箱授权不提供该权限。在“以管理员身份运行”的PowerShell执行：
 
 ```powershell

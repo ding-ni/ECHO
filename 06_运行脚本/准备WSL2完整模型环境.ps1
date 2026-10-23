@@ -1,4 +1,4 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [ValidateSet('检查', '平台', '发行版')][string]$步骤 = '检查',
     [string]$安装位置 = 'F:\博士课题研究\ECHO_WSL\Ubuntu2404'
@@ -8,13 +8,15 @@ $projectRoot = Split-Path $PSScriptRoot -Parent
 $distribution = 'Ubuntu-24.04'
 
 function Read-WslOutput {
-    param([string[]]$Arguments)
+    param([ValidateSet('--status','--help')][string]$Argument)
     # The not-yet-installed Windows shim emits UTF-16LE through a redirected pipe.
     $info = [Diagnostics.ProcessStartInfo]::new('wsl.exe')
     $info.UseShellExecute = $false
     $info.RedirectStandardOutput = $true
     $info.RedirectStandardError = $true
-    foreach ($argument in $Arguments) { $info.ArgumentList.Add($argument) }
+    # .NET Framework in Windows PowerShell 5.1 has no ArgumentList property.
+    # Only the two literal read-only switches above are allowed here.
+    $info.Arguments = $Argument
     $process = [Diagnostics.Process]::new()
     $process.StartInfo = $info
     $outBytes = [IO.MemoryStream]::new()
@@ -53,7 +55,7 @@ if ($步骤 -eq '检查') {
         [Security.Principal.WindowsBuiltInRole]::Administrator)
     $drives = @(Get-PSDrive -PSProvider FileSystem | Where-Object Name -in @('C','F') |
         Select-Object Name, Free, Used)
-    $wslStatus = Read-WslOutput -Arguments @('--status')
+    $wslStatus = Read-WslOutput -Argument '--status'
     $result = [ordered]@{
         checked_utc = [DateTime]::UtcNow.ToString('o')
         windows = $os.Caption
@@ -95,7 +97,7 @@ if ($步骤 -eq '平台') {
 
 $resolvedLocation = [IO.Path]::GetFullPath($安装位置)
 if ([IO.Path]::GetPathRoot($resolvedLocation) -ne 'F:\') { throw '本机 C 盘空间不足，本脚本要求发行版安装在 F 盘。' }
-$helpResult = Read-WslOutput -Arguments @('--help')
+$helpResult = Read-WslOutput -Argument '--help'
 if ($helpResult.ExitCode -ne 0 -or $helpResult.Text -notmatch '--location') {
     throw '当前 WSL 尚未支持 --location。请先完成平台步骤、按提示重启并运行 wsl --update，再重试。'
 }
