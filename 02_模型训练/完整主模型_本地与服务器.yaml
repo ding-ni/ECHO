@@ -45,6 +45,9 @@ local_runtime:
   # 修改站点数、批量、优化步数；架构和资料语义保持不变。
 server_runtime:
   station_selection: all_eligible_sites_by_frozen_river_roles
+  # 计算预算上限；B/C/D仍按来源验证停止，不是已验证的充分训练量。
+  optimizer_steps_per_stage: {A: 20000, B: 20000, C: 20000, D: 50000}
+  cpu_threads: 4
   loader_workers: benchmark
   stopping: source_validation_plateau
   seeds: [20261019, 20261020, 20261021]

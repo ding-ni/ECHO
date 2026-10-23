@@ -1,4 +1,4 @@
-"""Small-sample end-to-end runner for the complete ECHO architecture."""
+"""Legacy substitute-architecture smoke runner; use protocol_pipeline for the full protocol."""
 
 from __future__ import annotations
 

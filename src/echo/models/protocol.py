@@ -40,16 +40,36 @@ class TwoLayerConditioner(nn.Module):
         return self.net(torch.cat([inputs, context], -1))
 
 
-class ProtocolECHO(nn.Module):
-    def __init__(self, node_feature_dim, terrain_feature_dim, knot_width, edge_feature_dim=6):
+class ProtocolHydrology(nn.Module):
+    """The exact full-model environment/HBV frontend, executable without Mamba.
+
+    Stage A does not encode H; it can run on Windows without installing the
+    history backbone. State keys match the corresponding ProtocolECHO subtree.
+    """
+
+    def __init__(self, node_feature_dim, terrain_feature_dim, edge_feature_dim=6):
         super().__init__()
         self.environment_encoder = SpatialEnvironmentEncoder(
             node_feature_dim, terrain_feature_dim, 64, width=128, heads=4, terrain_layers=2,
             edge_feature_dim=edge_feature_dim)
+        self.hydrology = SemiDistributedHBV(node_feature_dim, hidden=128, environment_dim=256)
+
+    def forward(self, weather, geography, state=None, routing_state=None):
+        environment = self.environment_encoder(geography)
+        return self.hydrology(weather, geography["node_features"], geography["node_areas"],
+                              geography["downstream_parent"], environment=environment,
+                              state=state, routing_state=routing_state)
+
+
+class ProtocolECHO(nn.Module):
+    def __init__(self, node_feature_dim, terrain_feature_dim, knot_width, edge_feature_dim=6):
+        super().__init__()
+        frontend = ProtocolHydrology(node_feature_dim, terrain_feature_dim, edge_feature_dim)
+        self.environment_encoder = frontend.environment_encoder
         self.history_encoder = OfficialHistoryEncoder()
         self.posterior = ConditionalJointSplinePosterior(
             256, 256, 32, 8, 8, 128, conditioner_factory=TwoLayerConditioner)
-        self.hydrology = SemiDistributedHBV(node_feature_dim, hidden=128, environment_dim=256)
+        self.hydrology = frontend.hydrology
         self.curve = ProtocolCurve(knot_width)
         self.dynamic = LocalDynamics(256, blocks=8)
         self.stage = None

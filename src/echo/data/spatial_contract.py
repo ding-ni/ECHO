@@ -7,10 +7,13 @@ PROHIBITED = {"observed_target_Q_quantiles", "observed_runoff_ratio", "observed_
               "q", "h", "future_h", "target_q", "rating_curve"}
 
 
-def validate_protocol_inputs(data, provenance, support_start, support_end, query_end, target=True):
+def validate_protocol_inputs(data, provenance, support_start, support_end, query_end, target=True,
+                             require_reference=True):
     required = {"weather_nodes", "time_ns", "node_features", "node_areas", "downstream_parent",
                 "edge_index", "edge_attr", "edge_attr_mask", "terrain_tokens", "terrain_padding_mask",
-                "climate_features", "support_h", "reference_q"}
+                "climate_features", "support_h"}
+    if require_reference:
+        required.add("reference_q")
     missing = required - data.keys()
     if missing:
         raise ValueError(f"完整主模型缺少输入字段: {sorted(missing)}")
@@ -25,7 +28,9 @@ def validate_protocol_inputs(data, provenance, support_start, support_end, query
     for key, value in expected.items():
         if provenance.get(key) != value:
             raise ValueError(f"{key}未满足定稿数据语义: {value}")
-    if not provenance.get("source_snapshots") or not provenance.get("reference_checkpoint_sha256"):
+    if not provenance.get("source_snapshots") or (
+        require_reference and not provenance.get("reference_checkpoint_sha256")
+    ):
         raise ValueError("缺少空间输入来源与参考流量检查点收据")
     times = np.asarray(data["time_ns"], dtype="int64")
     if len(times) < 2 or not np.all(np.diff(times) == 3600 * 10**9):
@@ -75,7 +80,9 @@ def validate_protocol_inputs(data, provenance, support_start, support_end, query
         raise ValueError("H仅应包含许可支持窗口，不得扩展到查询")
     if np.isfinite(data["support_h"]).mean() < .8:
         raise ValueError("支持H覆盖不足80%")
-    if data["reference_q"].shape != (len(times),) or not np.isfinite(data["reference_q"]).all():
+    if require_reference and (
+        data["reference_q"].shape != (len(times),) or not np.isfinite(data["reference_q"]).all()
+    ):
         raise ValueError("参考Q与气象长度或有限值不一致")
     return {"nodes": nodes, "support_hours": support_end - support_start,
             "query_hours": query_end - support_end,

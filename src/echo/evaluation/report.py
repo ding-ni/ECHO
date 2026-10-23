@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 
 from echo.evaluation.metrics import score_site, system_bootstrap
-from echo.utils import read_json, write_json
+from echo.utils import digest, read_json, write_json
 
 
 def evaluate(predictions, labels_root, output):
@@ -14,13 +14,16 @@ def evaluate(predictions, labels_root, output):
     scores, failures = [], list(pred_index.get("failures", []))
     for row in pred_index["stations"]:
         try:
+            if row.get("sha256") and digest(row["path"]) != row["sha256"]:
+                raise ValueError("预测文件与固定哈希不一致")
             with np.load(row["path"], allow_pickle=False) as z:
-                labels = pd.read_parquet(Path(labels_root) / (row["station_id"] + ".parquet"))
+                label_path = Path(labels_root) / (row["station_id"] + ".parquet")
+                labels = pd.read_parquet(label_path)
                 if labels.time_ns.duplicated().any():
                     raise ValueError("评分标签重复时间")
                 truth = labels.set_index("time_ns").reindex(z["time_ns"]).H.to_numpy()
-                metrics = score_site(truth, z["members"], z["support_h"])
-                scores.append({**row, **metrics})
+                metrics = score_site(truth, z[pred_index.get("member_field", "members")], z["support_h"])
+                scores.append({**row, **metrics, "labels_sha256": digest(label_path)})
         except Exception as exc:
             failures.append({"station_id": row["station_id"], "error": str(exc)})
     output = Path(output)
@@ -34,6 +37,8 @@ def evaluate(predictions, labels_root, output):
         "budget_days": pred_index["budget_days"],
         "sites": len(frame),
         "failures": failures,
+        "prediction_index_sha256": digest(Path(predictions) / "predictions.json"),
+        "architecture_status": pred_index.get("architecture_status", "development_implementation"),
     }
     if len(frame):
         summary["primary"] = system_bootstrap(frame)
@@ -92,9 +97,10 @@ def render_report(evaluation_root, predictions=None, labels_root=None):
                     end = min(720, len(truth))
                     fig, ax = plt.subplots(figsize=(9, 3))
                     ax.plot(truth[:end], color="black", lw=1.0, label="Observed")
-                    ax.plot(np.median(z["members"][:, :end], axis=0), color="#347F89", label="Median")
-                    if z["members"].shape[0] > 1:
-                        lo, hi = np.quantile(z["members"][:, :end], [0.05, 0.95], axis=0)
+                    members = z[idx.get("member_field", "members")]
+                    ax.plot(np.median(members[:, :end], axis=0), color="#347F89", label="Median")
+                    if members.shape[0] > 1:
+                        lo, hi = np.quantile(members[:, :end], [0.05, 0.95], axis=0)
                         ax.fill_between(np.arange(end), lo, hi, alpha=0.2)
                     ax.set(xlabel="Hours from origin", ylabel="Stage (m)", title=row["station_id"])
                     ax.legend()
@@ -108,7 +114,9 @@ def render_report(evaluation_root, predictions=None, labels_root=None):
         "",
         "- 以上只支持标注的证据范围。",
         "- 参考Q与曲线是有效模型解释，不等于唯一真实率定关系。",
-        "- 本阶段未运行正式Mamba-3、空间降雨、独立水动力机制和真实天气预报试验。",
+        ("- 完整模型执行以该运行的架构、输入与检查点收据为准；再分析条件模拟不能代替真实天气预报试验。"
+         if summary.get("architecture_status", "").startswith("ProtocolECHO_")
+         else "- 本阶段未运行正式Mamba-3、空间降雨、独立水动力机制和真实天气预报试验。"),
         "",
     ]
     (root / "阶段报告.md").write_text("\n".join(lines), encoding="utf-8")
