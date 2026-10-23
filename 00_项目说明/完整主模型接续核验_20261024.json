@@ -64,5 +64,15 @@
   ],
   "local_credentials_in_git": false,
   "target_Q_used": false,
-  "future_target_H_used_for_prediction": false
+  "future_target_H_used_for_prediction": false,
+  "cryosphere_source_verification": {
+    "BasinATLAS_Catalog_URL": "https://data.hydrosheds.org/file/technical-documentation/BasinATLAS_Catalog_v10.pdf",
+    "catalog_sha256": "c512796abee4cca0b41ee4b8700de5c95bbbbe32a66456189596e51c63ed5e47",
+    "snow_cover_source_period": "2002-07_to_2015-04",
+    "snow_cover_units": "percent_cover",
+    "glacier_extent_field": "gla_pc_use",
+    "glacier_extent_units": "percent_cover",
+    "snow_climatology_in_environment_g": false,
+    "reason": "long_term_snow_summary_extends_past_some_early_source_episode_origins"
+  }
 }
