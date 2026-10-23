@@ -38,6 +38,10 @@ def evaluate(predictions, labels_root, output):
     if len(frame):
         summary["primary"] = system_bootstrap(frame)
         summary["all_period"] = {k: float(frame[k].mean()) for k in ["MAE_m", "RMSE_m", "CRPS_m"]}
+        probability_fields = ["coverage_50", "coverage_90", "width_50_m", "width_90_m"]
+        if all(field in frame for field in probability_fields):
+            summary["probability"] = {field: float(frame[field].mean()) for field in probability_fields}
+            summary["uncertainty_scope"] = pred_index.get("uncertainty_scope", "not_recorded")
         summary["tolerance_pass_fraction"] = {
             str(v): float((frame.RMSE_m <= v).mean()) for v in [0.1, 0.2, 0.5]
         }

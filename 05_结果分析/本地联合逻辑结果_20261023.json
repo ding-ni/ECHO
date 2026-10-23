@@ -1,0 +1,76 @@
+{
+  "scope": "real_joint_logic_smoke_not_yearly_skill_comparison",
+  "training_source_sites": 6,
+  "completed_target_sites": 4,
+  "support_days": 7,
+  "query_hours": 24,
+  "prediction_members": 16,
+  "adapter_change_from_pretrained_norm": 0.0005765983951278031,
+  "complete": true,
+  "regional_HBV_frozen": true,
+  "created_utc": "2026-10-23T08:22:59.544529+00:00",
+  "source_training_epochs": 2,
+  "source_training_episodes": 12,
+  "source_validation_episodes_per_epoch": [
+    18,
+    18
+  ],
+  "source_validation_scores": [
+    0.26806053270896274,
+    0.2555898651480674
+  ],
+  "training_seconds": 836.8129999999946,
+  "training_base_commit": "2f749d096b666bffceee6925f22e0a6526324da3",
+  "training_working_tree_dirty": true,
+  "posterior": "32_dimensions_diagonal_plus_rank4_gaussian",
+  "minimum_covariance_eigenvalue": 0.13204479217529297,
+  "hydro_curve_cross_covariance_norms": [
+    0.0001480897917645052,
+    0.0001435078593203798,
+    0.00015066575724631548,
+    0.0001485893444623798
+  ],
+  "scores": {
+    "validation": {
+      "sites": 1,
+      "all_period": {
+        "MAE_m": 0.002385571599006653,
+        "RMSE_m": 0.0027815712838734938,
+        "CRPS_m": 0.005143088599046071
+      },
+      "probability": {
+        "coverage_50": 1.0,
+        "coverage_90": 1.0,
+        "width_50_m": 0.0246621978779633,
+        "width_90_m": 0.0616171170646945
+      }
+    },
+    "development_test": {
+      "sites": 3,
+      "all_period": {
+        "MAE_m": 0.01625345999168025,
+        "RMSE_m": 0.01820561027024153,
+        "CRPS_m": 0.013175012052266136
+      },
+      "probability": {
+        "coverage_50": 0.5,
+        "coverage_90": 1.0,
+        "width_50_m": 0.0463969924797614,
+        "width_90_m": 0.10745114931422799
+      }
+    }
+  },
+  "inputs": {
+    "本地运行\\扩展水位训练_v2\\ECHO联合推断_本地小样例_v1\\短查询评分\\validation\\逐站指标.csv": "44beb811962799018274e3953f0a35dca22f4849f28c7206794a5078d267aa52",
+    "本地运行\\扩展水位训练_v2\\ECHO联合推断_本地小样例_v1\\短查询评分\\validation\\summary.json": "85afb9ba0a65bfd309d690b58c362da47f302b560abf6fb235683e29ffddc77a",
+    "本地运行\\扩展水位训练_v2\\ECHO联合推断_本地小样例_v1\\短查询评分\\development_test\\逐站指标.csv": "26dd88890593d9f5df071e81d80b7859e17068c1625ba63b6eca93d9158fdae1",
+    "本地运行\\扩展水位训练_v2\\ECHO联合推断_本地小样例_v1\\短查询评分\\development_test\\summary.json": "42faf39e6946f8b73cbab4fb0d1ed8162be5fd71789022259007d1239aeeb3ec",
+    "本地运行\\扩展水位训练_v2\\ECHO联合推断_本地小样例_v1\\model.pt": "62559af1f3ea914ef5192dbe9fb8ba1bf07be2b6ab3b477edf062a25160e82a3",
+    "本地运行\\扩展水位训练_v2\\ECHO联合推断_本地小样例_v1\\metadata.json": "93313cb5607b10209f9f20020127ad493f9fa3c14cbe5df45dc91ba2f29c4e46",
+    "本地运行\\扩展水位训练_v2\\ECHO联合推断_本地小样例_v1\\history.json": "28dc3f03c3c904220be00335d5cef4a55e2b1ef69219f96f0360adf6c3029e5c",
+    "本地运行\\扩展水位训练_v2\\ECHO联合推断_本地小样例_v1\\地方后验与HBV适配诊断.json": "17e0d1c59ccfb8c40b721f7fc46c38c10fdf691bea61203f783247070ad2d8dd",
+    "本地运行\\扩展水位训练_v2\\ECHO联合推断_本地小样例_v1\\联合逻辑验证结果.json": "cffb8eec051f7a51942f429877101d6ec2992dc33d6fa1c105f125f9cb94ee5b"
+  },
+  "uncertainty_scope": "conditional_local_parameters_only_not_calibrated_full_predictive_uncertainty",
+  "caution": "仅未来首24小时；不同于完整支持年/未来年的确定性比较，不能据此宣称年度或洪水性能提升"
+}

@@ -18,6 +18,11 @@ def import_and_generate(q_index_path, h_index_path, source_run, output):
     q_index, h_index = read_json(q_index_path), read_json(h_index_path)
     if q_index.get("scope") != "real_source_Q_pretraining" or h_index.get("scope") != "real_development":
         raise ValueError("输入必须分别是来源Q预训练视图和真实水位开发视图")
+    if (h_index.get("geography_source_Q_index_sha256") != digest(q_index_path)
+            or h_index.get("features") != q_index.get("features")
+            or h_index.get("geo_center") != q_index.get("geo_center")
+            or h_index.get("geo_scale") != q_index.get("geo_scale")):
+        raise ValueError("水位视图必须使用同一来源Q地理统计，先显式对齐并记录版本")
     q_sources = [r for r in q_index["stations"] if r["split"] == "train"]
     h_sources = [r for r in h_index["stations"] if r["split"] == "train"]
     q_system_fold = {}

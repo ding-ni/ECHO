@@ -24,6 +24,12 @@ def inspect_references(index, index_hash, root):
         imported = read_json(import_path)
         if imported.get("target_index_sha256") != index_hash:
             raise ValueError("多流域预训练导入记录与水位数据清单不一致")
+        q_path = Path(imported["source_index_path"])
+        if not q_path.is_file() or digest(q_path) != imported["source_index_sha256"]:
+            raise ValueError("多流域预训练来源Q数据清单缺失或哈希改变")
+        q_index = read_json(q_path)
+        if q_index.get("scope") != "real_source_Q_pretraining":
+            raise ValueError("导入记录没有绑定来源Q专用数据清单")
     for fold in [None, 0, 1, 2]:
         name = "hydro_full.pt" if fold is None else f"hydro_fold{fold}.pt"
         checkpoint = torch.load(root / name, map_location="cpu", weights_only=False)
@@ -40,6 +46,17 @@ def inspect_references(index, index_hash, root):
             source_trained = set(provenance["trained_systems"])
             source_forbidden = set(provenance["forbidden_systems"])
             source_held = set(provenance["source_fold_systems"].get(str(fold), [])) if fold is not None else set()
+            q_sources = q_index["stations"]
+            expected_source = {r["terminal_system_id"] for r in q_sources
+                               if fold is None or r["crossfit_fold"] != fold}
+            original = torch.load(source_path, map_location="cpu", weights_only=False)
+            if (trained != expected_source or any(r["split"] != "train" for r in q_sources)
+                    or trained & set(q_index["forbidden_systems"])
+                    or original.get("index_hash") != imported["source_index_sha256"]
+                    or set(original["state"]) != set(checkpoint["state"])
+                    or any(not torch.equal(value, checkpoint["state"][key])
+                           for key, value in original["state"].items())):
+                raise ValueError("导入检查点权重或训练水系与原始来源Q预训练不一致")
             if (checkpoint.get("index_hash") != index_hash or trained != source_trained
                     or source_trained & (source_forbidden | source_held)
                     or not (forbidden | held).issubset(checkpoint["forbidden_systems"])):

@@ -75,16 +75,18 @@ class RegionalHBV(nn.Module):
         self.local_offset = nn.Linear(8, 9, bias=False)
         nn.init.normal_(self.local_offset.weight, std=0.01)
 
-    def parameters_for(self, geo, code=None):
+    def parameters_for(self, geo, code=None, parameter_delta=None):
         raw = self.regionalizer(geo)
-        if code is not None:
+        if parameter_delta is not None:
+            raw = raw + 0.5 * torch.tanh(parameter_delta)
+        elif code is not None:
             raw = raw + 0.5 * torch.tanh(self.local_offset(code))
         return bounded_parameters(raw)
 
-    def forward(self, weather, geo, area_km2, code=None, state=None):
+    def forward(self, weather, geo, area_km2, code=None, state=None, parameter_delta=None):
         if weather.ndim != 3 or weather.shape[-1] != 3:
             raise ValueError("weather形状应为[batch,time,3]；空间版另行实现")
-        params = self.parameters_for(geo, code)
+        params = self.parameters_for(geo, code, parameter_delta)
         if state is None:
             state = weather.new_zeros((weather.shape[0], 5))
         if not torch.is_grad_enabled():

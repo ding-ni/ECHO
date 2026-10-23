@@ -71,7 +71,8 @@ def test_reference_replay_respects_no_geo_checkpoint(tmp_path, monkeypatch):
     assert len(calls) == 3
 
 
-def test_real_prediction_entry_ignores_scoring_labels(tmp_path, monkeypatch):
+@pytest.mark.parametrize("probabilistic", [False, True])
+def test_real_prediction_entry_ignores_scoring_labels(tmp_path, monkeypatch, probabilistic):
     import pandas as pd
 
     torch.manual_seed(73)
@@ -88,24 +89,30 @@ def test_real_prediction_entry_ignores_scoring_labels(tmp_path, monkeypatch):
     stage.mkdir()
     torch.save({"state": RegionalHBV(2).state_dict(), "geo_dim": 2, "trained_systems": ["SOURCE"],
                 "config": {}, "index_hash": digest(index)}, hydro / "hydro_full.pt")
-    torch.save({"state": EchoStage(2, dynamic=True, hidden=8).state_dict(), "geo_dim": 2,
+    torch.save({"state": EchoStage(2, dynamic=True, hidden=8, probabilistic=probabilistic,
+                                    posterior_rank=2 if probabilistic else 0,
+                                    learn_hydro_adapter=probabilistic).state_dict(), "geo_dim": 2,
                 "trained_systems": ["SOURCE"], "index_hash": digest(index),
-                "config": {"model": "echo_dynamic", "dynamic": True, "hidden": 8}}, stage / "model.pt")
+                "config": {"model": "echo_gaussian" if probabilistic else "echo_dynamic", "dynamic": True,
+                           "hidden": 8, "probabilistic": probabilistic,
+                           "posterior_rank": 2 if probabilistic else 0,
+                           "learn_hydro_adapter": probabilistic}}, stage / "model.pt")
     labels = tmp_path / "评分标签"
     labels.mkdir()
     label_path = labels / "00000001.parquet"
     pd.DataFrame({"time_ns": np.arange(40, 80), "H": np.ones(40)}).to_parquet(label_path)
-    first = predict(index, hydro, tmp_path / "first", model_run=stage)
+    first = predict(index, hydro, tmp_path / "first", model_run=stage, members=4, query_hours=24)
     pd.DataFrame({"time_ns": np.arange(40, 80), "H": np.full(40, 99999.)}).to_parquet(label_path)
 
     def forbidden(*args, **kwargs):
         raise AssertionError("预测入口不得读取评分标签")
 
     monkeypatch.setattr(pd, "read_parquet", forbidden)
-    second = predict(index, hydro, tmp_path / "second", model_run=stage)
+    second = predict(index, hydro, tmp_path / "second", model_run=stage, members=4, query_hours=24)
     assert first == second == {"predicted": 1, "failures": []}
     with np.load(tmp_path / "first/00000001.npz") as a, np.load(tmp_path / "second/00000001.npz") as b:
         np.testing.assert_array_equal(a["members"], b["members"])
+        assert a["members"].shape[1] == 24
 
 
 @pytest.mark.parametrize("dynamic", [False, True])

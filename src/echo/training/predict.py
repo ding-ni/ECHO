@@ -1,5 +1,6 @@
 """预测入口只读取目标上下文及来源权重，不读取评分标签。"""
 
+from dataclasses import replace
 from pathlib import Path
 
 import numpy as np
@@ -43,6 +44,7 @@ def predict(
     members=64,
     device="cpu",
     seed=20261019,
+    query_hours=None,
 ):
     if split == "blind_holdout":
         raise ValueError("第一阶段不解封正式盲测")
@@ -83,6 +85,8 @@ def predict(
                 config.get("dynamic", False),
                 config.get("probabilistic", False),
                 config.get("hidden", 64),
+                config.get("posterior_rank", 0),
+                config.get("learn_hydro_adapter", False),
             )
         model.load_state_dict(checkpoint["state"])
         model.to(device).eval()
@@ -101,11 +105,15 @@ def predict(
             if config.get("no_geo"):
                 d["geo"] = np.zeros_like(d["geo"])
             inp = target_input(d, budget_days)
+            if query_hours is not None:
+                if query_hours < 1 or inp.query_start + query_hours > inp.query_end:
+                    raise ValueError("指定查询小时数超出目标气象覆盖")
+                inp = replace(inp, query_end=inp.query_start + query_hours)
             with torch.no_grad():
                 if baseline == "persistence":
                     pred = np.full((1, inp.query_end - inp.query_start), inp.support_h[inp.support_mask][-1])
                 elif needs_hydro:
-                    qref, _ = simulate_q(hydro, d, device)
+                    qref, _ = simulate_q(hydro, d, device, stop=inp.query_end)
                     q = qref[0].cpu().numpy()
                 else:
                     q = None
@@ -125,6 +133,12 @@ def predict(
                     pred, _, _ = stage_forward(model, inp, q, device, config, hydro)
                     pred = pred.cpu().numpy()
             path = output / (row["station_id"] + ".npz")
+            intervals = {"median": np.median(pred, axis=0)}
+            if len(pred) > 1:
+                for level in [.5, .9]:
+                    low, high = np.quantile(pred, [(1 - level) / 2, (1 + level) / 2], axis=0)
+                    intervals[f"lower_{int(level * 100)}"] = low
+                    intervals[f"upper_{int(level * 100)}"] = high
             np.savez_compressed(
                 path,
                 members=pred,
@@ -132,6 +146,7 @@ def predict(
                 support_h=inp.support_h,
                 station_id=np.array(row["station_id"]),
                 system=np.array(row["terminal_system_id"]),
+                **intervals,
             )
             records.append(
                 {
@@ -150,7 +165,10 @@ def predict(
             "failures": failures,
             "mode": "conditional_simulation_no_H_updates",
             "budget_days": budget_days or "complete_water_year",
+            "query_hours_requested": query_hours,
             "model": baseline or config.get("model"),
+            "uncertainty_scope": ("conditional_local_parameters_only_no_weather_or_residual_calibration"
+                                  if config.get("probabilistic") else "deterministic"),
             "metadata": run_metadata(config, [index_path]),
         },
     )

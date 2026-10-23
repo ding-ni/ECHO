@@ -9,10 +9,14 @@ from echo.models.dynamics import LocalDynamics
 
 
 class EchoStage(nn.Module):
-    def __init__(self, geo_dim, dynamic=False, probabilistic=False, hidden=64):
+    def __init__(self, geo_dim, dynamic=False, probabilistic=False, hidden=64,
+                 posterior_rank=0, learn_hydro_adapter=False):
         super().__init__()
         self.encoder = HistoryEncoder(geo_dim, hidden)
-        self.posterior = JointGaussian(geo_dim)
+        self.posterior = JointGaussian(geo_dim, posterior_rank)
+        self.hydro_adapter = nn.Linear(8, 9, bias=False) if learn_hydro_adapter else None
+        if self.hydro_adapter is not None:
+            nn.init.normal_(self.hydro_adapter.weight, std=0.01)
         self.curve = CurveGenerator(geo_dim)
         self.dynamic = LocalDynamics(geo_dim) if dynamic else None
         self.probabilistic = probabilistic

@@ -232,6 +232,7 @@ def dispatch(command, argv):
         p.add_argument("--split", choices=["validation", "development_test"], default="development_test")
         p.add_argument("--budget-days", type=int, choices=[7, 30, 90])
         p.add_argument("--members", type=int, default=64)
+        p.add_argument("--query-hours", type=int, help="仅用于明确标识的短查询工程验证；默认完整未来年")
         p.add_argument("--device", default="cpu")
         p.add_argument("--output", required=True, type=Path)
         a = p.parse_args(argv)
@@ -245,6 +246,7 @@ def dispatch(command, argv):
             a.budget_days,
             a.members,
             a.device,
+            query_hours=a.query_hours,
         )
     elif command == "evaluate":
         from echo.evaluation.report import evaluate

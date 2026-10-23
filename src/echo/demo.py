@@ -34,6 +34,7 @@ def run_demo(output):
         "SYN_TARGET", "SYN_HELD_SYSTEM", weather, geo, 100.0, h, np.isfinite(h), 72, 168, 168, 336
     )
     model = EchoStage(len(geo), dynamic=True, probabilistic=True)
+    hydro.requires_grad_(False)
     optimizer = torch.optim.Adam(model.parameters(), lr=0.002)
     source_geo = geo + 0.1
     source_weather = np.column_stack(
@@ -62,14 +63,14 @@ def run_demo(output):
     )
     losses = []
     for _ in range(4):
-        pred, kl, scale = local_prediction(model, source, source_q, "cpu", 2)
+        pred, kl, scale = local_prediction(model, source, source_q, "cpu", 2, hydro, gradients=True)
         loss = (pred - torch.tensor(source_truth[168:])[None]).square().mean() + 0.001 * kl
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
         losses.append(float(loss.detach()))
     with torch.no_grad():
-        pred, _, _ = local_prediction(model, inp, q, "cpu", 8)
+        pred, _, _ = local_prediction(model, inp, q, "cpu", 8, hydro)
     predictions, labels = root / "预测", root / "评分标签"
     predictions.mkdir(exist_ok=True)
     labels.mkdir(exist_ok=True)

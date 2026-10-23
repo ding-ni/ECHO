@@ -1,0 +1,64 @@
+{
+  "created_utc": "2026-10-23T08:09:39.891189+00:00",
+  "scope": "three_development_systems_single_seed_deterministic",
+  "same_station_support_and_future_time_verified": true,
+  "station_ids": [
+    "01017000",
+    "01122500",
+    "02371500"
+  ],
+  "models": [
+    {
+      "model": "持续性",
+      "sites": 3,
+      "MAE_m": 0.6941395310313238,
+      "RMSE_m": 0.8812641739853633,
+      "CRPS_m": 0.6941395310313238,
+      "event_RMSE_m": 1.959998858949202
+    },
+    {
+      "model": "直接水位LSTM",
+      "sites": 3,
+      "MAE_m": 0.5858289476014433,
+      "RMSE_m": 0.7084642825330988,
+      "CRPS_m": 0.5858289476014433,
+      "event_RMSE_m": 1.1102657810554397
+    },
+    {
+      "model": "ECHO静态",
+      "sites": 3,
+      "MAE_m": 0.4031894417498883,
+      "RMSE_m": 0.5492110500342731,
+      "CRPS_m": 0.4031894417498883,
+      "event_RMSE_m": 1.204717056777816
+    },
+    {
+      "model": "ECHO动态",
+      "sites": 3,
+      "MAE_m": 0.4260090446714466,
+      "RMSE_m": 0.6007559838369483,
+      "CRPS_m": 0.4260090446714466,
+      "event_RMSE_m": 1.2875221750579182
+    }
+  ],
+  "inputs": {
+    "本地运行\\扩展水位训练_v2\\评估\\persistence\\development_test\\summary.json": "8d535342bc720241a9e55fceb9e1205970b263bffa84564067297b2348b8614d",
+    "本地运行\\扩展水位训练_v2\\预测\\persistence\\development_test\\predictions.json": "c878fa2a2c47440d42602d48ce5bf41f5c59c9c71a854845629b176d24d4400c",
+    "本地运行\\扩展水位训练_v2\\评估\\direct_lstm\\development_test\\summary.json": "998e8367957038a0eb7f478c188fc7ccb32f58b105ebef5ac6da51ae514b7d21",
+    "本地运行\\扩展水位训练_v2\\预测\\direct_lstm\\development_test\\predictions.json": "de64164b747fe32e0171a1c0c50f939740f0307c56f2cfeddfa4afb8451f607c",
+    "本地运行\\扩展水位训练_v2\\评估\\ECHO_静态\\development_test\\summary.json": "b05178db1dda3697cd398aa542886e5af5cec32424bcdf9b7c914ba3829f74e1",
+    "本地运行\\扩展水位训练_v2\\预测\\ECHO_静态\\development_test\\predictions.json": "426450920970236a8d7d057d5f6ebbd0dc91af8ca99b41355199b5043c2763d0",
+    "本地运行\\扩展水位训练_v2\\评估\\ECHO_动态\\development_test\\summary.json": "173a3f7b6ba3ef7dfa8ef125b0592205e7b236f412f64884d0c84b248774474c",
+    "本地运行\\扩展水位训练_v2\\预测\\ECHO_动态\\development_test\\predictions.json": "8d0f03f71bb0adcfcdd830b53b6d242b2c8cc18550d6d008aca432fc5ca8dbe6"
+  },
+  "support_period_UTC": [
+    "2019-10-01",
+    "2020-10-01"
+  ],
+  "query_period_UTC": [
+    "2020-10-01",
+    "2021-10-01"
+  ],
+  "period_end_exclusive": true,
+  "joint_posterior_or_formal_architecture_tested": false
+}

@@ -1,0 +1,22 @@
+model: echo_gaussian
+seed: 20261023
+hydrology_run: 区域水文_多流域
+initialize_from_run: ECHO动态_多流域
+hidden: 64
+dynamic: true
+probabilistic: true
+posterior_rank: 4
+learn_hydro_adapter: true
+epochs: 2
+episodes_per_station: 1
+support_days: [7]
+query_hours: 24
+learning_rate: 0.00002
+train_members: 2
+cpu_threads: 2
+device: cpu
+validation_support_hours: 168
+validation_origins: ['2018-11-01', '2019-03-01', '2019-07-01']
+# 按原冻结来源水系/折号选择，覆盖6个不同来源水系；不按预测误差筛选。
+training_station_ids: ['01081500', '01208990', '02235200', '02401000', '02365470', '08084800']
+evidence_scope: real_joint_logic_smoke_six_source_systems_not_skill_acceptance

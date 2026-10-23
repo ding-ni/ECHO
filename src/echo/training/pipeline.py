@@ -219,6 +219,11 @@ def local_prediction(
     model, inputs, reference_q, device, members=1, hydro=None, gradients=False, return_support=False
 ):
     codes, kl, center, scale, uref = context_for(model, inputs, reference_q, device, members)
+    if model.probabilistic:
+        if hydro is None:
+            raise ValueError("概率ECHO需要水文前端，不能只用固定参考Q冒充地方水文适配")
+        return joint_member_prediction(model, inputs, codes, kl, center, scale, uref,
+                                      hydro, device, gradients, return_support)
     geo, area = tensor(inputs.geography[None], device), tensor([inputs.area_km2], device)
     predictions, support_predictions, support_flows = [], [], []
     warm_start = max(0, inputs.support_start - 90 * 24)
@@ -291,6 +296,52 @@ def local_prediction(
     )
 
 
+def joint_member_prediction(model, inputs, codes, kl, center, scale, uref,
+                            hydro, device, gradients=False, return_support=False):
+    """以概率成员为批量推进；同一成员的水文/曲线/动态代码始终保持配套。"""
+    code = codes[:, 0]
+    count = len(code)
+    geo = tensor(inputs.geography[None], device).expand(count, -1)
+    area = tensor([inputs.area_km2], device).expand(count)
+    weather = tensor(inputs.weather[None, :inputs.query_end], device).expand(count, -1, -1)
+    delta = model.hydro_adapter(code[:, :8]) if model.hydro_adapter is not None else None
+    warm = max(0, inputs.support_start - 90 * 24)
+    grad_start = max(inputs.support_start, inputs.support_end - 720) if gradients else inputs.support_start
+    state, history = None, []
+    # 许可历史只作状态预热；每个成员使用自己的参数从气象起点连续推进。
+    with torch.no_grad():
+        for start in range(0, grad_start, 720):
+            end = min(start + 720, grad_start)
+            q, state, _ = hydro(weather[:, start:end], geo, area, code[:, :8].detach(), state,
+                                parameter_delta=delta.detach() if delta is not None else None)
+            if end > warm:
+                history.append(q[:, max(0, warm - start):])
+    q, _, _ = hydro(weather[:, grad_start:], geo, area, code[:, :8], state, parameter_delta=delta)
+    if history:
+        q = torch.cat([*history, q], 1)
+    if not torch.isfinite(q).all():
+        raise FloatingPointError("地方水文成员出现非有限流量")
+    prefix = grad_start - warm
+    centers = code.new_full((count,), center)
+    scales = code.new_full((count,), scale)
+    refs = code.new_full((count,), uref)
+    response_state = None
+    if prefix:
+        with torch.no_grad():
+            prefix_h, response_state = model.generate(q[:, :prefix], area, geo, code.detach(),
+                                                      centers, scales, refs)
+    h, _ = model.generate(q[:, prefix:], area, geo, code, centers, scales, refs,
+                          detach_state(response_state))
+    support = h[:, :inputs.support_end - grad_start]
+    if grad_start > inputs.support_start:
+        support = torch.cat([prefix_h[:, inputs.support_start - warm:prefix], support], 1)
+    result = (h[:, inputs.query_start - grad_start:], kl, scale)
+    if return_support:
+        return (*result, {"stage": support,
+                          "flow": q[:, inputs.support_start - warm:inputs.support_end - warm]})
+    return result
+
+
 def fit_stage(index_path, config, root):
     root = Path(root)
     if root.exists() and any(root.iterdir()):
@@ -330,6 +381,8 @@ def fit_stage(index_path, config, root):
         )
         return
     needs_hydro = model_kind != "direct_lstm"
+    if config.get("learn_hydro_adapter") and (model_kind != "echo_gaussian" or not config.get("probabilistic")):
+        raise ValueError("可学习地方水文适配仅在显式概率ECHO阶段启用")
     hydro = None
     if needs_hydro:
         if not (hydro_root / "hydro_full.pt").exists():
@@ -344,6 +397,11 @@ def fit_stage(index_path, config, root):
         hydro.load_state_dict(hydro_ckpt["state"])
         hydro.requires_grad_(False)
     rows = [r for r in index["stations"] if r["split"] == "train"]
+    if config.get("training_station_ids"):
+        selected = set(config["training_station_ids"])
+        if not selected.issubset({r["station_id"] for r in rows}):
+            raise ValueError("小样例训练名单含非来源站点")
+        rows = [r for r in rows if r["station_id"] in selected]
     forbidden = set(index.get("forbidden_systems", [])) | {
         r["terminal_system_id"] for r in index["stations"] if r["split"] != "train"}
     assert_source_permissions({r["terminal_system_id"] for r in rows}, forbidden)
@@ -356,6 +414,8 @@ def fit_stage(index_path, config, root):
             config.get("dynamic", False),
             config.get("probabilistic", False),
             config.get("hidden", 64),
+            config.get("posterior_rank", 0),
+            config.get("learn_hydro_adapter", False),
         ).to(device)
     previous = config.get("initialize_from")
     if config.get("initialize_from_run"):
@@ -365,6 +425,10 @@ def fit_stage(index_path, config, root):
         if checkpoint["index_hash"] != digest(index_path):
             raise ValueError("初始化权重与当前数据划分不一致")
         model.load_state_dict(checkpoint["state"], strict=False)
+    if isinstance(model, EchoStage) and model.hydro_adapter is not None:
+        # 新增适配映射以来源前端原有偏移初始化，随后由来源H/Q损失学习。
+        if not previous or "hydro_adapter.weight" not in checkpoint["state"]:
+            model.hydro_adapter.weight.data.copy_(hydro.local_offset.weight.data)
     if config.get("freeze_static") and isinstance(model, EchoStage):
         model.curve.requires_grad_(False)
         model.encoder.requires_grad_(False)
@@ -394,6 +458,8 @@ def fit_stage(index_path, config, root):
                 > pd.Timestamp(periods["validation_end"], tz="UTC")):
                 raise ValueError("来源验证查询必须在冻结的来源验证水文年内")
     history, best_score, best, actual_hours = [], float("inf"), None, 0
+    start_metadata = run_metadata(config, [index_path, hydro_root / "reference_index.json"])
+    write_json(root / "start_metadata.json", start_metadata)
     for epoch in range(config.get("epochs", 10)):
         model.train()
         train_losses = []
@@ -462,6 +528,8 @@ def fit_stage(index_path, config, root):
                 beta = min(1.0, (epoch + 1) / max(1, config.get("epochs", 10)))
                 valid_labels = int(inp.support_mask.sum()) + int(mask.sum())
                 loss = loss + beta * 32.0 / max(valid_labels, 1) * kl
+                if not torch.isfinite(loss):
+                    raise FloatingPointError("训练损失非有限，停止保存该轮权重")
                 optimizer.zero_grad()
                 loss.backward()
                 nn.utils.clip_grad_norm_(model.parameters(), 1.0)
@@ -517,6 +585,14 @@ def fit_stage(index_path, config, root):
         print(f"{model_kind} epoch={epoch + 1} source_validation={score:.6f}", flush=True)
         if score < best_score:
             best_score, best = score, copy.deepcopy(model.state_dict())
+        from echo.training.multibasin import save_checkpoint
+
+        save_checkpoint(root / "latest.pt", {
+            "state": model.state_dict(), "optimizer": optimizer.state_dict(), "config": config,
+            "index_hash": digest(index_path), "completed_epochs": epoch + 1,
+            "best_score": best_score, "best_state": best,
+            "note": "恢复加载尚未接入fit_stage，保留检查点用于诊断和后续显式恢复",
+        })
     if best is None:
         raise ValueError("没有合格训练与验证episode")
     torch.save(
@@ -534,7 +610,7 @@ def fit_stage(index_path, config, root):
     write_json(
         root / "metadata.json",
         {
-            **run_metadata(config, [index_path, hydro_root / "reference_index.json"]),
+            **start_metadata,
             "scope": scope,
             "actual_seconds": time.monotonic() - begin,
             "actual_effective_hours": actual_hours,
@@ -543,6 +619,11 @@ def fit_stage(index_path, config, root):
             "torch": torch.__version__,
             "device": str(device),
             "parameters": sum(p.numel() for p in model.parameters()),
+            "training_station_ids": [r["station_id"] for r in rows],
+            "training_systems": sorted({r["terminal_system_id"] for r in rows}),
+            "joint_posterior_rank": config.get("posterior_rank", 0),
+            "learned_hydro_adapter": config.get("learn_hydro_adapter", False),
+            "HBV_regionalizer_frozen": needs_hydro,
             "truncated_history_gradient_hours": 720 if isinstance(model, EchoStage) else None,
         },
     )
