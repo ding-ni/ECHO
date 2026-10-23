@@ -10,17 +10,25 @@ from echo.hydro.routing import route_network
 class SemiDistributedHBV(nn.Module):
     """Shared regional HBV parameters, node-specific geography, local latent offsets."""
 
-    def __init__(self, node_feature_dim=8, hidden=32, local_code_dim=8):
+    def __init__(self, node_feature_dim=8, hidden=32, local_code_dim=8, environment_dim=0):
         super().__init__()
         self.node_feature_dim = node_feature_dim
-        self.regionalizer = nn.Sequential(nn.Linear(node_feature_dim, hidden), nn.Tanh(), nn.Linear(hidden, 9))
+        self.environment_dim = environment_dim
+        self.regionalizer = nn.Sequential(nn.Linear(node_feature_dim + environment_dim, hidden),
+                                         nn.Tanh(), nn.Linear(hidden, 9))
         self.local_offset = nn.Linear(local_code_dim, 9, bias=False)
         nn.init.normal_(self.local_offset.weight, std=0.01)
         self.register_buffer("lower", torch.tensor(LOWER))
         self.register_buffer("upper", torch.tensor(UPPER))
 
-    def parameter_values(self, node_features, code=None, parameter_delta=None):
-        raw = self.regionalizer(node_features)
+    def parameter_values(self, node_features, code=None, parameter_delta=None, environment=None):
+        regional_input = node_features
+        if self.environment_dim:
+            if environment is None or environment.shape != (len(node_features), self.environment_dim):
+                raise ValueError("半分布式HBV需要融合环境g生成共享参数先验")
+            regional_input = torch.cat([node_features, environment[:, None].expand(
+                -1, node_features.shape[1], -1)], -1)
+        raw = self.regionalizer(regional_input)
         if code is not None:
             raw = raw + 0.5 * torch.tanh(self.local_offset(code[:, None].expand(-1, node_features.shape[1], -1)))
         if parameter_delta is not None:
@@ -28,7 +36,7 @@ class SemiDistributedHBV(nn.Module):
         return self.lower + (self.upper - self.lower) * raw.sigmoid()
 
     def forward(self, weather, node_features, node_areas, downstream_parent, code=None,
-                parameter_delta=None, state=None, routing_state=None):
+                parameter_delta=None, state=None, routing_state=None, environment=None):
         """weather[B,N,T,3], incremental areas[km2], parent index points downstream or -1."""
         if weather.ndim != 4 or weather.shape[-1] != 3:
             raise ValueError("空间HBV气象必须为[B,N,T,3]")
@@ -40,7 +48,7 @@ class SemiDistributedHBV(nn.Module):
         outlet_ids = [i for i, parent in enumerate(downstream_parent) if parent == -1]
         if not outlet_ids or any(parent != -1 and parent <= i for i, parent in enumerate(downstream_parent)):
             raise ValueError("节点须按上游到下游拓扑排序，并至少含一个出口")
-        params = self.parameter_values(node_features, code, parameter_delta)
+        params = self.parameter_values(node_features, code, parameter_delta, environment)
         hydro_state = weather.new_zeros((batch, nodes, 5)) if state is None else state
         route_storage = weather.new_zeros((batch, nodes)) if routing_state is None else routing_state
         tau_seconds = params[..., 8] * 3600.0

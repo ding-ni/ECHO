@@ -57,12 +57,14 @@ class LocalTerrainSetEncoder(nn.Module):
 class BasinGATv2Encoder(nn.Module):
     """Three-layer area-aware GATv2 encoder over incremental subbasin graphs."""
 
-    def __init__(self, node_feature_dim=8, width=128, layers=3, heads=4):
+    def __init__(self, node_feature_dim=8, width=128, layers=3, heads=4, edge_feature_dim=None):
         super().__init__()
         self.input = nn.Linear(node_feature_dim, width)
         self.convs = nn.ModuleList(
-            GATv2Conv(width, width, heads=heads, concat=False, add_self_loops=True) for _ in range(layers)
+            GATv2Conv(width, width, heads=heads, concat=False, add_self_loops=True,
+                      edge_dim=edge_feature_dim) for _ in range(layers)
         )
+        self.edge_feature_dim = edge_feature_dim
         self.norms = nn.ModuleList(nn.LayerNorm(width) for _ in range(layers))
         self.output = nn.Sequential(nn.Linear(width * 2, width), nn.GELU(), nn.LayerNorm(width))
 
@@ -80,7 +82,7 @@ class BasinGATv2Encoder(nn.Module):
         target = edges[:, 1] + offsets[:, 0]
         return torch.stack([source[valid], target[valid]], 0)
 
-    def forward(self, node_features, node_areas, edge_index, node_mask=None):
+    def forward(self, node_features, node_areas, edge_index, node_mask=None, edge_attr=None):
         if node_features.ndim != 3:
             raise ValueError("流域节点特征必须为[B,N,F]")
         batch, nodes, _ = node_features.shape
@@ -90,9 +92,18 @@ class BasinGATv2Encoder(nn.Module):
         if not mask.any(1).all() or (node_areas[mask] <= 0).any():
             raise ValueError("每个河网至少有一个正面积增量节点")
         edge = self._batch_edges(edge_index, batch, nodes, node_features.device)
+        attributes = None
+        if self.edge_feature_dim is not None:
+            if edge_attr is None or edge_attr.shape[-1] != self.edge_feature_dim:
+                raise ValueError("边条件化GATv2需要匹配的真实边属性与缺测标记")
+            if edge_index.ndim == 2:
+                attributes = edge_attr[None].expand(batch, -1, -1).reshape(-1, self.edge_feature_dim)
+            else:
+                attributes = edge_attr[(edge_index >= 0).all(1)]
+            attributes = attributes.to(node_features.device)
         x = self.input(node_features.reshape(batch * nodes, -1))
         for conv, norm in zip(self.convs, self.norms, strict=True):
-            update = F.elu(conv(x, edge))
+            update = F.elu(conv(x, edge, edge_attr=attributes))
             x = norm(x + update)
         x = x.reshape(batch, nodes, -1)
         weight = torch.where(mask, node_areas.clamp_min(0), torch.zeros_like(node_areas))
@@ -104,16 +115,17 @@ class BasinGATv2Encoder(nn.Module):
 
 class SpatialEnvironmentEncoder(nn.Module):
     def __init__(self, node_feature_dim=8, terrain_feature_dim=10, climate_dim=64,
-                 width=128, heads=4, terrain_layers=2):
+                 width=128, heads=4, terrain_layers=2, edge_feature_dim=None):
         super().__init__()
-        self.basin = BasinGATv2Encoder(node_feature_dim, width, layers=3, heads=heads)
+        self.basin = BasinGATv2Encoder(node_feature_dim, width, layers=3, heads=heads,
+                                      edge_feature_dim=edge_feature_dim)
         self.local = LocalTerrainSetEncoder(terrain_feature_dim, width, heads, terrain_layers)
         self.climate = nn.Sequential(nn.Linear(climate_dim, 128), nn.GELU(), nn.Linear(128, 64), nn.LayerNorm(64))
         self.fusion = nn.Sequential(nn.Linear(width * 2 + 64, 256), nn.GELU(), nn.Linear(256, 256), nn.LayerNorm(256))
 
     def forward(self, geography):
         basin = self.basin(geography["node_features"], geography["node_areas"],
-                           geography["edge_index"], geography.get("node_mask"))
+                           geography["edge_index"], geography.get("node_mask"), geography.get("edge_attr"))
         local = self.local(geography["terrain_tokens"], geography.get("terrain_padding_mask"))
         climate = self.climate(geography["climate_features"])
         return self.fusion(torch.cat([basin, local, climate], -1))
@@ -209,7 +221,7 @@ class ConditionalJointSplinePosterior(nn.Module):
     """32-D conditional RQ-spline flow posterior with mixed inter-group permutations."""
 
     def __init__(self, context_dim=256, environment_dim=256, code_dim=32,
-                 layers=8, bins=8, hidden=128, tail_bound=5.0):
+                 layers=8, bins=8, hidden=128, tail_bound=5.0, conditioner_factory=ResidualNet):
         super().__init__()
         self.code_dim = code_dim
         condition_dim = context_dim + environment_dim
@@ -220,7 +232,7 @@ class ConditionalJointSplinePosterior(nn.Module):
             mask = (torch.arange(code_dim) + layer) % 2
             transforms.append(PiecewiseRationalQuadraticCouplingTransform(
                 mask=mask,
-                transform_net_create_fn=lambda in_features, out_features: ResidualNet(
+                transform_net_create_fn=lambda in_features, out_features: conditioner_factory(
                     in_features=in_features, out_features=out_features, hidden_features=hidden,
                     context_features=condition_dim, num_blocks=2, use_batch_norm=False),
                 num_bins=bins, tails="linear", tail_bound=tail_bound))

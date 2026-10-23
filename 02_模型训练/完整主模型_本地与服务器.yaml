@@ -1,0 +1,50 @@
+# 唯一正式结构；本地与服务器不改变本段模型容量与数据语义。
+protocol: ECHO_NatureWater_main_v1
+status: implementation_in_progress_not_training_ready
+model:
+  class: echo.models.protocol.ProtocolECHO
+  backbone: official_mamba3
+  official_commit: e9594ce1c732d97440f0332fdc43170a2294dbfa
+  history: {blocks: 6, width: 256, state: 128, head_dim: 64, mimo_rank: 4, chunk_size: 16}
+  basin: {layers: 3, width: 128, edge_conditioned: true, max_nodes: 32, default_nodes: 8}
+  local: {layers: 2, width: 128, heads: 4, tokens: 16, scales_km: [1, 5, 10]}
+  climate_code_dim: 64
+  environment_dim: 256
+  posterior: {code_dim: 32, groups: [8, 16, 8], layers: 8, bins: 8, hidden: [128, 128]}
+  curve: {segments: 32, hidden: [128, 128, 128], knots: source_training_reference_Q}
+  dynamics: {blocks: 8, states: 16, tau_hours: [0.25, 720], warmup_days: 90}
+data:
+  graph: real_downstream_connected_contraction
+  weather: incremental_area_weighted_original_grid
+  terrain: DEM_local_valley_multiscale
+  hydrology_spinup_calendar_years: 2
+  target_Q_allowed: false
+  future_H: scoring_only
+training:
+  order: [A, B, C, D, E]
+  support_days: [7, 30, 90, complete_water_year]
+  query_hours: 168
+  learning_rate: 0.0002
+  joint_learning_rate: 0.00002
+  members_start: 4
+  members_full: 8
+  query_score: CRPS
+  source_Q_weight: 0.2
+  regularizer_weight: 0.001
+  KL_beta: linear_0_to_1
+  source_validation_only: true
+inference:
+  members: 64
+  convergence_members: 128
+  shared_weights_frozen: true
+local_runtime:
+  station_ids: ['01081500', '02365470', '02401000', '08084800', '11465200', '01017000', '01122500', '02371500']
+  batch_size: 1
+  loader_workers: 0
+  optimizer_steps_per_stage: 2
+  # 修改站点数、批量、优化步数；架构和资料语义保持不变。
+server_runtime:
+  station_selection: all_eligible_sites_by_frozen_river_roles
+  loader_workers: benchmark
+  stopping: source_validation_plateau
+  seeds: [20261019, 20261020, 20261021]

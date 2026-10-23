@@ -1,0 +1,5 @@
+# Official upstream source metadata acquired 2026-10-23.
+# MIMO requires Linux + compatible NVIDIA CUDA + Triton + TileLang.
+# Exact auxiliary runtime versions still require a real Linux GPU forward/backward test.
+# This file pins source identity, not a claim of validated server environment.
+git+https://github.com/state-spaces/mamba.git@e9594ce1c732d97440f0332fdc43170a2294dbfa
