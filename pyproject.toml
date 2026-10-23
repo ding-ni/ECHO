@@ -9,7 +9,7 @@ description = "无当地测流条件下的跨河流水位预测研究开发版"
 requires-python = ">=3.11,<3.13"
 dependencies = [
   "numpy>=1.26,<3", "pandas>=2.2,<3", "scipy>=1.13,<2",
-  "torch>=2.8,<2.9", "xarray>=2024.6", "netCDF4>=1.7", "h5netcdf>=1.3", "h5py>=3.11",
+  "torch>=2.8,<2.10", "xarray>=2024.6", "netCDF4>=1.7", "h5netcdf>=1.3", "h5py>=3.11",
   "pyarrow>=17", "PyYAML>=6", "requests>=2.32", "py7zr>=1",
   "geopandas>=1", "torch-geometric>=2.8,<3", "nflows>=0.14,<1",
   "matplotlib>=3.9", "psutil>=6",

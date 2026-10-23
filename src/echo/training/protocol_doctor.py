@@ -4,6 +4,7 @@ import argparse
 import importlib.util
 import platform
 import shutil
+from importlib.metadata import PackageNotFoundError, version
 
 import torch
 
@@ -21,6 +22,17 @@ def inspect(exercise=False):
               "official_module_sha256_required": OFFICIAL_MODULE_SHA256,
               "official_backbone_forward_backward_passed": False,
               "synthetic_runtime_test_is_real_hydrological_training": False}
+    result["auxiliary_versions"] = {}
+    for package in ("triton", "tilelang", "apache-tvm-ffi", "quack-kernels"):
+        try:
+            result["auxiliary_versions"][package] = version(package)
+        except PackageNotFoundError:
+            result["auxiliary_versions"][package] = None
+    if torch.cuda.is_available():
+        result.update(gpu_name=torch.cuda.get_device_name(),
+                      gpu_compute_capability=list(torch.cuda.get_device_capability()),
+                      gpu_memory_bytes=torch.cuda.get_device_properties(0).total_memory,
+                      bf16_supported=torch.cuda.is_bf16_supported())
     if not exercise:
         return result
     if platform.system() != "Linux" or not present or not torch.cuda.is_available():
@@ -44,12 +56,29 @@ def inspect(exercise=False):
     return result
 
 
-if __name__ == "__main__":
+def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--exercise", action="store_true")
     parser.add_argument("--output")
-    args = parser.parse_args()
-    result = inspect(args.exercise)
+    args = parser.parse_args(argv)
+    # Preserve failure evidence as well as successful GPU acceptance.
+    result = inspect(False)
+    result["exercise_requested"] = args.exercise
+    try:
+        if args.exercise:
+            result.update(inspect(True))
+    except Exception as exc:
+        result.update(official_backbone_forward_backward_passed=False,
+                      error_type=type(exc).__name__, error=str(exc))
+        if args.output:
+            write_json(args.output, result)
+        print(result)
+        return 1
     if args.output:
         write_json(args.output, result)
     print(result)
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

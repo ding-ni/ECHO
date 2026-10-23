@@ -5,4 +5,5 @@ dependencies:
   - pip
   - pip:
       - -e .[dev]
-# CUDA版torch先按官方环境安装。Mamba-3在目标Linux GPU冒烟通过后固定提交号，开发版不自动安装。
+# 完整主模型先安装官方torch==2.9.1+cu126及Triton3.5.1，再按linux完整模型约束.txt安装。
+# 官方Mamba固定提交已经记录；依赖候选需经Linux GPU验收后导出实际锁文件。

@@ -1,0 +1,6 @@
+# Installation candidate, not a validated runtime lock. Export the actual lock after GPU acceptance.
+# Official Mamba requires Triton >=3.5; torch 2.8 + Triton 3.4 is incompatible.
+torch==2.9.1+cu126
+triton==3.5.1
+tilelang==0.1.8
+apache-tvm-ffi<=0.1.12

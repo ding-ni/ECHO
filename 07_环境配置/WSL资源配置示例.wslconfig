@@ -1,0 +1,7 @@
+# Optional template: merge into %UserProfile%\.wslconfig only after reviewing existing settings.
+# Applies to all WSL2 distributions. This project never copies it automatically.
+[wsl2]
+memory=8GB
+processors=4
+swap=4GB
+swapFile=F:\\博士课题研究\\ECHO_WSL\\swap.vhdx
