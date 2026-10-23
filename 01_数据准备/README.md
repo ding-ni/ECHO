@@ -1,5 +1,7 @@
 # 数据准备
 
+原网格 NLDAS 下载需要 Earthdata 账号，见 [NASA Earthdata 注册与 NLDAS 授权指引](NASA_Earthdata注册与NLDAS授权指引.md)。
+
 先 `echo download --list`，再 `echo download`。默认五项约26GB；额外气象需要显式指定。
 下载器保留固定记录、官方校验值和许可证元数据；重复运行校验已有文件并恢复未完成下载。
 
