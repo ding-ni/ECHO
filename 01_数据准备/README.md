@@ -2,6 +2,8 @@
 
 原网格 NLDAS 下载需要 Earthdata 账号，见 [NASA Earthdata 注册与 NLDAS 授权指引](NASA_Earthdata注册与NLDAS授权指引.md)。
 
+完整资料范围与冰川/积雪角色以[完整资料库定义](完整资料库定义_v1.yaml)和[最新实施对照](../00_项目说明/全套资料与完整模型实施对照_20261024.md)为准。`下载原网格历史气象.ps1`逐小时核验与恢复；`echo.geo.nldas_inputs`按真实增量多边形聚合原网格；`echo.data.environment_inventory`提取独立站点属性与历史气候，`echo.data.project_inventory`生成逐站缺项总账。站点汇总属性不会自动成为节点属性，原始瓦片不会自动成为河谷token。
+
 先 `echo download --list`，再 `echo download`。默认五项约26GB；额外气象需要显式指定。
 下载器保留固定记录、官方校验值和许可证元数据；重复运行校验已有文件并恢复未完成下载。
 

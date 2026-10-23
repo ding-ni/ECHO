@@ -1,0 +1,68 @@
+{
+  "checked_utc": "2026-10-23T16:25:33.363493+00:00",
+  "scope": "implementation_and_data_preparation_not_real_full_model_training_acceptance",
+  "source_protocol_sha256": "92deeb5d9ce107b031a4c2b29bae3ce7e80f286e8766cd323c8b7595c584fc6c",
+  "saved_original_plan_sha256": "5844e0a79a3e32d297601e350ed16d8ac7da4cfe38fc1b3a14364fe17eebd5cf",
+  "full_test_suite": {
+    "passed": 118,
+    "failed": 0,
+    "duration_seconds": 46.43,
+    "warnings": "two_rasterio_upstream_pending_deprecation_warnings"
+  },
+  "ruff": "passed",
+  "changed_powershell_scripts_parse": "passed",
+  "real_data_snapshot": {
+    "H_view_sites": 42,
+    "terminal_river_systems": 14,
+    "true_graph_sites": 42,
+    "independent_basin_attribute_and_64D_climate_sites": 42,
+    "archived_glacier_extent_positive_sites": 0,
+    "archived_glacier_extent_is_current_field_survey": false,
+    "verified_original_grid_hour_files_at_snapshot": 381,
+    "real_incremental_weather_sites": 8,
+    "hours_per_site_in_first_derived_version": 24,
+    "effective_original_cells_range": [
+      8,
+      50
+    ],
+    "DEM_complete_tiles_at_snapshot": 4,
+    "DEM_selected_tiles": 11,
+    "full_protocol_input_ready_sites": 0
+  },
+  "acquisition_in_progress": {
+    "NLDAS_start_utc_inclusive": "2011-10-01T00:00:00Z",
+    "NLDAS_end_utc_exclusive": "2021-10-01T00:00:00Z",
+    "total_hours": 87672,
+    "compressed_bytes_estimate": 162174525864,
+    "DEM_contiguous_prefix_recovery": true
+  },
+  "model_code": {
+    "main": "echo.models.protocol.ProtocolECHO",
+    "frontend": "echo.models.protocol.ProtocolHydrology",
+    "orchestrator": "echo.training.protocol_pipeline",
+    "stages": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "official_backbone_cuda_test_passed": false,
+    "real_full_model_A_to_E_run_completed": false,
+    "control_test_doubles_are_not_official_Mamba_runtime_evidence": true,
+    "member_disagreement_and_source_AR1_total_intervals_separate": true,
+    "server_random_episode_loader_and_automatic_resume_accepted": false
+  },
+  "remaining": [
+    "incremental_node_soil_geology_landcover_inputs",
+    "real_mapped_river_patch_centres",
+    "DEM_vertical_metadata_and_16_valley_tokens",
+    "unmapped_catchment_geometry_reconciliation",
+    "full_calendar_weather_preparation",
+    "Linux_official_Mamba3_GPU_verification",
+    "real_complete_small_sample_A_to_E_training_prediction_and_report"
+  ],
+  "local_credentials_in_git": false,
+  "target_Q_used": false,
+  "future_target_H_used_for_prediction": false
+}
