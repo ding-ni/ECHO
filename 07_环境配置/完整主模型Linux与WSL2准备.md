@@ -1,6 +1,6 @@
 # 完整主模型：本机 WSL2 与 RTX 3060
 
-2026-10-24用户已选择本机WSL2，共用笔记本GPU。当前实测Windows 11家庭中文版25H2、虚拟化已开启、RTX 3060 Laptop 6GB、驱动610.62、内存16GB。WSL尚未安装，当前代理终端没有Windows管理员令牌；尚未启用系统组件、安装发行版或执行重启。
+2026-10-24用户已选择本机WSL2，共用笔记本GPU。实测Windows 11家庭中文版25H2、虚拟化已开启、RTX 3060 Laptop 6GB、驱动610.62、内存16GB。用户已安装WSL3.0.3并于09:57重启；两项Windows组件已启用，待重启标记已清除。Ubuntu24.04已安装，`wsl -l -v`正常列出Ubuntu-24.04、VERSION=2；注册表BasePath与实际ext4.vhdx均位于指定F盘目录。首次Linux用户设置、Linux依赖和官方GPU运行尚待验收。
 
 C盘剩余约18GiB，F盘约3.18TiB。Ubuntu的VHDX放在`F:\博士课题研究\ECHO_WSL\Ubuntu2404`，Python环境、编译及包缓存在该Linux文件系统中；原始资料继续复用F盘项目目录。WSL程序本身仍可能占用少量系统盘空间。WSL提供Linux运行环境，使用的仍是同一块6GB GPU。
 
@@ -31,12 +31,21 @@ Windows启用系统组件需要真正的管理员令牌，代理工具的沙箱�
 
 ```powershell
 cd 'F:\博士课题研究\ECHO'
+# 可先查看命令与F盘目标位置，不启动安装：
+.\06_运行脚本\准备WSL2完整模型环境.ps1 -步骤 发行版 -仅预览
+# 仅在当前没有同一发行版安装作业时执行：
 .\06_运行脚本\准备WSL2完整模型环境.ps1 -步骤 发行版
 wsl -l -v
 wsl -d Ubuntu-24.04
 ```
 
-脚本使用Microsoft已公开的`--location`、`--web-download`、`--no-launch`选项，拒绝覆盖非空目录。若当前版本缺少`--location`，先`wsl --update`，不要改用占满C盘的默认安装。新安装默认WSL2；请在`wsl -l -v`中确认VERSION=2。首次进入Ubuntu时自行创建普通Linux用户名、密码，无需发送到聊天。
+脚本默认从Canonical官方下载固定Ubuntu24.04 amd64安装包，经大小和SHA-256校验后，以`--from-file`、`--name Ubuntu-24.04`、`--location`、`--version 2`、`--no-launch`安装，拒绝覆盖非空目录。固定清单见[Ubuntu2404官方安装包](Ubuntu2404官方安装包.json)，校验值已与Microsoft官方目录和Ubuntu官方SHA256SUMS交叉核对。安装包及.part放在忽略目录`本地缓存/WSL`，复用项目续传下载器，并用文件锁防止两个下载者同时写入。
+
+这种方式避免本机`raw.githubusercontent.com`连接重置导致WSL无法提取在线发行版目录的问题。需要测试WSL自带在线目录时可显式传入`-安装源 WSL在线目录`，平常使用默认安装源即可。请在`wsl -l -v`中确认VERSION=2和Ubuntu名称；首次进入Ubuntu时自行创建普通Linux用户名、密码，无需发送到聊天。
+
+WSL3.0.3的`--help`即使完整列出`--location`，也会返回-1；入口已按“帮助中是否声明选项”判断能力，不再仅凭帮助退出码误报版本不支持。该情况已在PowerShell5.1和7中通过实际预览及回归检查。成功安装日志为`本地运行/WSL2准备/Ubuntu安装_stdout_v3.log`与`Ubuntu安装_stderr_v3.log`，进程记录为`Ubuntu安装_进程_v3.json`。旧日志保留在线目录连接失败和后台PowerShell模块加载失败现场；v3改用.NET直接核验SHA-256，复用已下载缓存安装成功。
+
+本机当前从首次用户设置继续，无需再执行发行版安装：在PowerShell运行`wsl -d Ubuntu-24.04`，按Ubuntu提示创建普通Linux用户名和密码，再进入下一节执行初始化。密码输入时不显示字符属于正常终端行为。
 
 可选资源模板见[WSL资源配置示例](WSL资源配置示例.wslconfig)：8GB内存、4核、4GB交换文件在F盘。它对全部WSL2发行版生效，需核对已有`%UserProfile%\.wslconfig`后手动合并；脚本不会覆盖全局设置，也不会执行`wsl --shutdown`。模板生效通常需要全部WSL实例停止后重新启动。
 

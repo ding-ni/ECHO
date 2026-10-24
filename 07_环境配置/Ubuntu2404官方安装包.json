@@ -1,0 +1,12 @@
+{
+  "distribution": "Ubuntu-24.04",
+  "architecture": "amd64",
+  "filename": "ubuntu-24.04.5-wsl-amd64.wsl",
+  "url": "https://releases.ubuntu.com/24.04.5/ubuntu-24.04.5-wsl-amd64.wsl",
+  "bytes": 388975696,
+  "sha256": "bb415d824822c4b878125729af451a5d18fb13d1cf5cbed9a7393ad64ac6039e",
+  "microsoft_catalogue_api": "https://api.github.com/repos/microsoft/WSL/contents/distributions/DistributionInfo.json?ref=master",
+  "microsoft_catalogue_sha256": "cf81b7b35b213a9568f4cfeb11c90dc6f5e96065b22a1559c29631d432a39739",
+  "ubuntu_checksums_url": "https://releases.ubuntu.com/24.04.5/SHA256SUMS",
+  "checked_date": "2026-10-24"
+}

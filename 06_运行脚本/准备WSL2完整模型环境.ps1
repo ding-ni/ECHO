@@ -1,7 +1,9 @@
 ﻿[CmdletBinding()]
 param(
     [ValidateSet('检查', '平台', '发行版')][string]$步骤 = '检查',
-    [string]$安装位置 = 'F:\博士课题研究\ECHO_WSL\Ubuntu2404'
+    [string]$安装位置 = 'F:\博士课题研究\ECHO_WSL\Ubuntu2404',
+    [ValidateSet('官方安装包','WSL在线目录')][string]$安装源 = '官方安装包',
+    [switch]$仅预览
 )
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path $PSScriptRoot -Parent
@@ -46,6 +48,17 @@ function Invoke-WslChecked {
         throw "WSL 命令失败（退出码 $LASTEXITCODE）；请保留屏幕信息，不继续后续安装。"
     }
 }
+
+function Assert-WslLocationCapability {
+    param($HelpResult)
+    # WSL 3.0.3 returns -1 even when --help successfully prints every option.
+    # A declared option is the capability evidence; help's exit code alone is not.
+    if ($HelpResult.Text -notmatch '(?m)^\s*--location(?:\s|,|$)') {
+        throw "WSL 帮助未声明 --location（帮助退出码 $($HelpResult.ExitCode)）。请先核对 wsl --version 与 wsl --help；此检查没有启动安装。"
+    }
+}
+
+if ($仅预览 -and $步骤 -ne '发行版') { throw '-仅预览只适用于 -步骤 发行版；默认检查步骤本来就是只读。' }
 
 if ($步骤 -eq '检查') {
     $os = Get-CimInstance Win32_OperatingSystem
@@ -98,9 +111,7 @@ if ($步骤 -eq '平台') {
 $resolvedLocation = [IO.Path]::GetFullPath($安装位置)
 if ([IO.Path]::GetPathRoot($resolvedLocation) -ne 'F:\') { throw '本机 C 盘空间不足，本脚本要求发行版安装在 F 盘。' }
 $helpResult = Read-WslOutput -Argument '--help'
-if ($helpResult.ExitCode -ne 0 -or $helpResult.Text -notmatch '--location') {
-    throw '当前 WSL 尚未支持 --location。请先完成平台步骤、按提示重启并运行 wsl --update，再重试。'
-}
+Assert-WslLocationCapability -HelpResult $helpResult
 $registered = @()
 $registryRoot = 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Lxss'
 if (Test-Path -LiteralPath $registryRoot) {
@@ -119,8 +130,57 @@ if ((Test-Path -LiteralPath $resolvedLocation) -and
 }
 $drive = Get-PSDrive -Name F
 if ($drive.Free -lt 80GB) { throw 'F 盘可用空间低于环境预留的 80 GiB，请先检查容量。' }
+$installArguments = @('--install','-d',$distribution,'--location',$resolvedLocation,'--web-download','--no-launch')
+$packageSpec = $null
+if ($安装源 -eq '官方安装包') {
+    if ($helpResult.Text -notmatch '(?m)^\s*--from-file(?:\s|,|$)') {
+        throw '当前帮助未声明 --from-file，请核对WSL版本；尚未启动下载或安装。'
+    }
+    $manifestPath = Join-Path $projectRoot '07_环境配置/Ubuntu2404官方安装包.json'
+    $packageSpec = Get-Content -LiteralPath $manifestPath -Raw -Encoding utf8 | ConvertFrom-Json
+    if ($packageSpec.distribution -ne $distribution -or $packageSpec.architecture -ne 'amd64') {
+        throw '固定安装包清单与Ubuntu24.04 amd64不一致。'
+    }
+    $cacheRoot = Join-Path $projectRoot '本地缓存/WSL'
+    $packagePath = Join-Path $cacheRoot $packageSpec.filename
+    $installArguments = @('--install','--from-file',$packagePath,'--name',$distribution,
+        '--location',$resolvedLocation,'--version','2','--no-launch')
+}
+if ($仅预览) {
+    [ordered]@{ distribution=$distribution; install_location=$resolvedLocation; command='wsl.exe';
+        arguments=$installArguments; wsl_help_exit_code=$helpResult.ExitCode;
+        location_option_verified=$true; install_source=$安装源; package=$packageSpec;
+        changes_system=$false } | ConvertTo-Json -Depth 5 | Write-Output
+    return
+}
+if ($安装源 -eq '官方安装包') {
+    $python = Join-Path $projectRoot '本地环境/python.exe'
+    if (-not (Test-Path -LiteralPath $python)) { throw '固定安装包下载需要项目已有的Windows Python环境。' }
+    # Reuse the project's resumable SHA-256 downloader; this is not a Zenodo asset.
+    $downloadCode = @'
+import json, sys
+from pathlib import Path
+from filelock import FileLock
+from echo.data.download import fetch
+spec = json.loads(Path(sys.argv[1]).read_text(encoding='utf-8-sig'))
+root = Path(sys.argv[2])
+root.mkdir(parents=True, exist_ok=True)
+with FileLock(str(root / '.ubuntu-package.lock'), timeout=0):
+    fetch(spec, root, snapshot=False)
+'@
+    & $python -c $downloadCode $manifestPath $cacheRoot
+    if ($LASTEXITCODE -ne 0) { throw '官方Ubuntu安装包下载或校验未完成；保留.part以便重试，未启动安装。' }
+    # Avoid depending on Get-FileHash module autoload when 5.1 inherits a PowerShell 7 environment.
+    $hasher = [Security.Cryptography.SHA256]::Create()
+    $packageStream = [IO.File]::OpenRead($packagePath)
+    try { $actualHash = [BitConverter]::ToString($hasher.ComputeHash($packageStream)).Replace('-', '').ToLowerInvariant() }
+    finally { $packageStream.Dispose(); $hasher.Dispose() }
+    if ($actualHash -ne $packageSpec.sha256) {
+        throw 'Ubuntu安装包SHA-256不一致，未启动安装。'
+    }
+}
 $parent = Split-Path $resolvedLocation -Parent
 New-Item -ItemType Directory -Path $parent -Force | Out-Null
-Invoke-WslChecked -Arguments @('--install','-d',$distribution,'--location',$resolvedLocation,'--web-download','--no-launch')
+Invoke-WslChecked -Arguments $installArguments
 Write-Host "发行版安装命令已完成。请运行：wsl -d $distribution，完成首次 Linux 用户设置。"
 Write-Host '随后在 Ubuntu 内执行文档列出的 Linux 初始化命令。本脚本不会自动启动、关机或重启。'
